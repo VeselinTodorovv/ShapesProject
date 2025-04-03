@@ -1,0 +1,46 @@
+﻿namespace ShapesProject.Models;
+
+public class Rectangle : Shape
+{
+    public int Width { get; protected set; }
+
+    public int Height { get; protected set; }
+
+    public Rectangle(int x, int y, int width, int height) : base(x, y)
+    {
+        if (width <= 0 || height <= 0)
+            throw new ArgumentException("Width and Height must be positive.");
+
+        Width = width;
+        Height = height;
+    }
+
+    public override double CalculateArea() => Width * Height;
+
+    public override void Draw(Graphics g)
+    {
+        using Pen pen = new(BorderColor);
+        using SolidBrush brush = new(FillColor);
+
+        g.FillRectangle(brush, X, Y, Width, Height);
+        g.DrawRectangle(pen, X, Y, Width, Height);
+    }
+
+    public override void EditSize(params int[] parameters)
+    {
+        if (parameters.Length == 2 && parameters[0] > 0 && parameters[1] > 0)
+        {
+            Width = parameters[0];
+            Height = parameters[1];
+        }
+        else
+        {
+            throw new ArgumentException("Width and Height must be positive.");
+        }
+    }
+
+    public override bool Contains(Point p)
+    {
+        return p.X >= X && p.X <= X + Width && p.Y >= Y && p.Y <= Y + Height;
+    }
+}
