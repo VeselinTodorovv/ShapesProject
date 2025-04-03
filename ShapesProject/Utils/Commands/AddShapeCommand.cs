@@ -19,7 +19,10 @@ namespace ShapesProject.Utils.Commands
 
         public override void Execute()
         {
-            if (_executed) return;
+            if (_executed)
+            {
+                return;
+            }
 
             _manager.AddShape(_shape);
             _executed = true;
@@ -28,6 +31,7 @@ namespace ShapesProject.Utils.Commands
         public override void Undo()
         {
             EnsureState(_executed, "Cannot undo unexecuted command");
+
             _manager.DeleteShape(_shape);
             _executed = false;
         }

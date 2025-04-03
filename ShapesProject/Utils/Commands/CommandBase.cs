@@ -7,7 +7,7 @@
 
         public virtual void Redo() => Execute();
 
-        protected void EnsureState(bool condition, string message)
+        protected static void EnsureState(bool condition, string message)
         {
             if (!condition) throw new InvalidOperationException(message);
         }

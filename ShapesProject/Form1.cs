@@ -11,7 +11,6 @@ namespace ShapesProject
         private readonly ShapeManager _shapeManager;
         private readonly Scene _scene;
 
-        private Shape? _selectedShape;
         private Point _dragStartPosition;
 
         public Form1()
@@ -29,14 +28,18 @@ namespace ShapesProject
             _scene = new Scene(_shapeManager);
 
             scenePanel.Paint += panel1_Paint;
-            scenePanel.MouseDown += scenePanel_MouseDown;
+            scenePanel.MouseDown += ScenePanel_MouseDown;
             scenePanel.MouseMove += scenePanel_MouseMove;
             scenePanel.MouseUp += scenePanel_MouseUp;
+
+            _shapeManager.SelectionChanged += (s, e) =>
+            {
+                scenePanel.Invalidate();
+            };
 
             _shapeManager.CommandExecuted += (s, e) => scenePanel.Invalidate();
             _shapeManager.ShapeAdded += (s, e) => scenePanel.Invalidate();
             _shapeManager.ShapeDeleted += (s, e) => scenePanel.Invalidate();
-            _shapeManager.ShapeSelected += (s, e) => scenePanel.Invalidate();
 
             editToolStripButton.Click += new EventHandler(editToolStripButton_Click);
         }
@@ -45,6 +48,7 @@ namespace ShapesProject
         {
             e.Graphics.Clear(scenePanel.BackColor);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
             _scene.DrawShapes(e.Graphics);
         }
 
@@ -124,40 +128,44 @@ namespace ShapesProject
 
         private void scenePanel_MouseDown(object sender, MouseEventArgs e)
         {
-            foreach (var shape in _shapeManager.GetShapes())
+            _shapeManager.ClearSelection();
+
+            // Create deselection commands
+            var newSelection = _shapeManager.GetShapes()
+                .Reverse()
+                .FirstOrDefault(shape => shape.Contains(e.Location));
+
+            if (newSelection != null)
             {
-                if (shape.Contains(e.Location))
-                {
-                    _selectedShape = shape;
-                    _shapeManager.SelectShape(shape);
-                    _dragStartPosition = e.Location;
+                var selectCommand = new SelectCommand(newSelection, true);
 
-                    break;
-                }
-            }
-        }
-
-        private void scenePanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (_selectedShape != null && e.Button == MouseButtons.Left)
-            {
-                var dx = e.X - _dragStartPosition.X;
-                var dy = e.Y - _dragStartPosition.Y;
-
-                _shapeManager.MoveShape(_selectedShape, dx, dy);
-
+                _shapeManager.ExecuteCommand(selectCommand);
                 _dragStartPosition = e.Location;
-
-                scenePanel.Invalidate();
+            }
+            else
+            {
+                _shapeManager.ClearSelection();
             }
         }
 
         private void scenePanel_MouseUp(object sender, MouseEventArgs e)
         {
-            if (_selectedShape != null && !_selectedShape.Contains(e.Location))
+            _dragStartPosition = Point.Empty;
+        }
+
+        private void scenePanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_shapeManager.SelectedShape != null && e.Button == MouseButtons.Left)
             {
-                _selectedShape = null;
-                _shapeManager.DeselectShape();
+                var dx = e.X - _dragStartPosition.X;
+                var dy = e.Y - _dragStartPosition.Y;
+
+                if (dx != 0 || dy != 0)
+                {
+                    var moveCommand = new MoveCommand(_shapeManager.SelectedShape, dx, dy);
+                    _shapeManager.ExecuteCommand(moveCommand);
+                    _dragStartPosition = e.Location;
+                }
             }
         }
 

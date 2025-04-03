@@ -9,6 +9,7 @@ public abstract class Shape
     public Color FillColor { get; set; } = Color.White;
 
     public Color BorderColor { get; set; } = Color.Black;
+    public bool IsSelected { get; set; }
 
     protected Shape(int x, int y)
     {
@@ -29,4 +30,7 @@ public abstract class Shape
     public abstract void EditSize(params int[] parameters);
 
     public abstract bool Contains(Point p);
+
+    // TODO: Implement Selection outline for all shapes
+    protected virtual int SelectionBorderWidth => 2;
 }
