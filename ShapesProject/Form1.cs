@@ -1,5 +1,6 @@
 using ShapesProject.Models;
 using ShapesProject.Utils;
+using ShapesProject.Utils.Commands;
 using System.Drawing.Drawing2D;
 using System.Reflection;
 
@@ -32,9 +33,9 @@ namespace ShapesProject
             scenePanel.MouseMove += scenePanel_MouseMove;
             scenePanel.MouseUp += scenePanel_MouseUp;
 
+            _shapeManager.CommandExecuted += (s, e) => scenePanel.Invalidate();
             _shapeManager.ShapeAdded += (s, e) => scenePanel.Invalidate();
             _shapeManager.ShapeDeleted += (s, e) => scenePanel.Invalidate();
-            _shapeManager.ShapeMoved += (s, e) => scenePanel.Invalidate();
             _shapeManager.ShapeSelected += (s, e) => scenePanel.Invalidate();
 
             editToolStripButton.Click += new EventHandler(editToolStripButton_Click);
@@ -75,43 +76,50 @@ namespace ShapesProject
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var rectangle = new RectangleShape(50, 50, 100, 50);
-            _shapeManager.AddShape(rectangle);
-            scenePanel.Invalidate();
+
+            var command = new AddShapeCommand(_shapeManager, rectangle);
+            _shapeManager.ExecuteCommand(command);
         }
 
         private void circleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var circle = new Circle(200, 200, 50);
-            _shapeManager.AddShape(circle);
-            scenePanel.Invalidate();
+
+            var command = new AddShapeCommand(_shapeManager, circle);
+            _shapeManager.ExecuteCommand(command);
         }
 
         private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var triangle = new Triangle(new Point(300, 300), new Point(350, 350), new Point(250, 350));
-            _shapeManager.AddShape(triangle);
-            scenePanel.Invalidate();
+
+            var command = new AddShapeCommand(_shapeManager, triangle);
+            _shapeManager.ExecuteCommand(command);
+
         }
 
         private void rhombusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var rhombus = new Rhombus(250, 250, 120, 120);
-            _shapeManager.AddShape(rhombus);
-            scenePanel.Invalidate();
+
+            var command = new AddShapeCommand(_shapeManager, rhombus);
+            _shapeManager.ExecuteCommand(command);
         }
 
         private void parallelogramToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var parallelogram = new Parallelogram(150, 150, 120, 120, 30);
-            _shapeManager.AddShape(parallelogram);
-            scenePanel.Invalidate();
+
+            var command = new AddShapeCommand(_shapeManager, parallelogram);
+            _shapeManager.ExecuteCommand(command);
         }
 
         private void trapezoidToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var trapezoid = new Trapezoid(150, 250, 220, 180, 100);
-            _shapeManager.AddShape(trapezoid);
-            scenePanel.Invalidate();
+
+            var command = new AddShapeCommand(_shapeManager, trapezoid);
+            _shapeManager.ExecuteCommand(command);
         }
 
         private void scenePanel_MouseDown(object sender, MouseEventArgs e)

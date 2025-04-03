@@ -1,0 +1,15 @@
+﻿namespace ShapesProject.Utils.Commands
+{
+    abstract class CommandBase : ICommand
+    {
+        public abstract void Execute();
+        public abstract void Undo();
+
+        public virtual void Redo() => Execute();
+
+        protected void EnsureState(bool condition, string message)
+        {
+            if (!condition) throw new InvalidOperationException(message);
+        }
+    }
+}
