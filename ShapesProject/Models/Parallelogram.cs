@@ -56,14 +56,8 @@ namespace ShapesProject.Models
         public override bool Contains(Point p)
         {
             // Check if the point is within the bounding rectangle of the parallelogram
-            if (p.X >= X && p.X <= X + Base && p.Y >= Y - Height && p.Y <= Y)
-            {
-                // Further check if the point is within the parallelogram shape
-                double slope = (double)Height / Side;
-                double yAtX = Y - slope * (p.X - X);
-                return p.Y <= yAtX;
-            }
-            return false;
+            return p.X >= X - Side && p.X <= X + Base &&
+                   p.Y >= Y - Height && p.Y <= Y;
         }
     }
 }
