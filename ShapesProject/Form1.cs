@@ -1,13 +1,12 @@
 using ShapesProject.Models;
 using ShapesProject.Utils;
-using Rectangle = ShapesProject.Models.Rectangle;
 
 namespace ShapesProject
 {
     public partial class Form1 : Form
     {
         private readonly ShapeManager _shapeManager;
-        private Scene _scene;
+        private readonly Scene _scene;
 
         private Shape? _selectedShape;
         private Point _dragStartPosition;
@@ -28,6 +27,8 @@ namespace ShapesProject
             _shapeManager.ShapeDeleted += (s, e) => scenePanel.Invalidate();
             _shapeManager.ShapeMoved += (s, e) => scenePanel.Invalidate();
             _shapeManager.ShapeSelected += (s, e) => scenePanel.Invalidate();
+
+            editToolStripButton.Click += new EventHandler(editToolStripButton_Click);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -62,7 +63,7 @@ namespace ShapesProject
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var rectangle = new Rectangle(50, 50, 100, 50);
+            var rectangle = new RectangleShape(50, 50, 100, 50);
             _shapeManager.AddShape(rectangle);
             scenePanel.Invalidate();
         }
@@ -127,17 +128,22 @@ namespace ShapesProject
                 _shapeManager.MoveShape(_selectedShape, dx, dy);
 
                 _dragStartPosition = e.Location;
-                
+
                 scenePanel.Invalidate();
             }
         }
 
         private void scenePanel_MouseUp(object sender, MouseEventArgs e)
         {
-            if (_selectedShape != null)
+            if (_selectedShape != null && !_selectedShape.Contains(e.Location))
             {
                 _selectedShape = null;
+                _shapeManager.DeselectShape();
             }
+        }
+
+        private void editToolStripButton_Click(object sender, EventArgs e)
+        {
         }
     }
 }

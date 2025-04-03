@@ -5,6 +5,7 @@ namespace ShapesProject.Utils;
 public class ShapeManager
 {
     private readonly List<Shape> _shapes = new();
+    private Shape? _selectedShape;
 
     public event EventHandler<ShapeEventArgs>? ShapeSelected;
     public event EventHandler<ShapeEventArgs>? ShapeMoved;
@@ -36,5 +37,16 @@ public class ShapeManager
     {
         shape.Move(x, y);
         ShapeMoved?.Invoke(this, new ShapeEventArgs(shape));
+    }
+
+    internal void DeselectShape()
+    {
+        if (_selectedShape != null)
+        {
+            var deselectedShape = _selectedShape;
+            _selectedShape = null;
+
+            ShapeSelected?.Invoke(this, new ShapeEventArgs(deselectedShape));
+        }
     }
 }

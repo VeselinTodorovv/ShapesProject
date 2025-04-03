@@ -26,7 +26,6 @@ namespace ShapesProject.Models
             using Pen pen = new(BorderColor);
             using SolidBrush brush = new(FillColor);
 
-            // Correctly calculate the points for the trapezoid
             Point[] points = {
                 new(X, Y),  // Top-left corner
                 new(X + Base1, Y),  // Top-right corner

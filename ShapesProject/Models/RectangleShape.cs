@@ -1,12 +1,12 @@
 ﻿namespace ShapesProject.Models;
 
-public class Rectangle : Shape
+public class RectangleShape : Shape
 {
     public int Width { get; protected set; }
 
     public int Height { get; protected set; }
 
-    public Rectangle(int x, int y, int width, int height) : base(x, y)
+    public RectangleShape(int x, int y, int width, int height) : base(x, y)
     {
         if (width <= 0 || height <= 0)
             throw new ArgumentException("Width and Height must be positive.");
