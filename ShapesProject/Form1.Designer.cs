@@ -309,6 +309,7 @@
             toolStripButton3.Name = "toolStripButton3";
             toolStripButton3.Size = new Size(56, 22);
             toolStripButton3.Text = "Undo";
+            toolStripButton3.Click += toolStripButton3_Click;
             // 
             // toolStripSeparator7
             // 

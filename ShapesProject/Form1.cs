@@ -1,5 +1,7 @@
 using ShapesProject.Models;
 using ShapesProject.Utils;
+using System.Drawing.Drawing2D;
+using System.Reflection;
 
 namespace ShapesProject
 {
@@ -14,6 +16,13 @@ namespace ShapesProject
         public Form1()
         {
             InitializeComponent();
+
+            typeof(Panel).InvokeMember("DoubleBuffered",
+                BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                null,
+                scenePanel,
+                new object[] { true });
+
 
             _shapeManager = new ShapeManager();
             _scene = new Scene(_shapeManager);
@@ -33,6 +42,8 @@ namespace ShapesProject
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.Clear(scenePanel.BackColor);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             _scene.DrawShapes(e.Graphics);
         }
 
@@ -144,6 +155,11 @@ namespace ShapesProject
 
         private void editToolStripButton_Click(object sender, EventArgs e)
         {
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
