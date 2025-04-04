@@ -1,4 +1,6 @@
 ﻿
+using System.Drawing.Drawing2D;
+
 namespace ShapesProject.Models;
 
 public class Circle : Shape
@@ -25,6 +27,14 @@ public class Circle : Shape
 
         g.FillEllipse(brush, X - Radius, Y - Radius, diameter, diameter);
         g.DrawEllipse(pen, X - Radius, Y - Radius, diameter, diameter);
+
+        if (IsSelected)
+        {
+            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth) { DashStyle = DashStyle.Dash };
+
+            g.DrawEllipse(selectionPen, X - Radius - SelectionBorderWidth, Y - Radius - SelectionBorderWidth,
+                          diameter + 2 * SelectionBorderWidth, diameter + 2 * SelectionBorderWidth);
+        }
     }
 
     public override void EditSize(params int[] parameters)

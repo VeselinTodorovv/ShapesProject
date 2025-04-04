@@ -1,4 +1,6 @@
-﻿namespace ShapesProject.Models;
+﻿using System.Drawing.Drawing2D;
+
+namespace ShapesProject.Models;
 
 class Rhombus : Shape
 {
@@ -23,7 +25,8 @@ class Rhombus : Shape
         using Pen pen = new(BorderColor);
         using SolidBrush brush = new(FillColor);
 
-        Point[] points = {
+        Point[] points =
+        {
             new(X, Y - Diagonal1 / 2),
             new(X + Diagonal2 / 2, Y),
             new(X, Y + Diagonal1 / 2),
@@ -32,6 +35,12 @@ class Rhombus : Shape
 
         g.FillPolygon(brush, points);
         g.DrawPolygon(pen, points);
+
+        if (IsSelected)
+        {
+            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth) { DashStyle = DashStyle.Dash };
+            g.DrawPolygon(selectionPen, points);
+        }
     }
 
     public override void EditSize(params int[] parameters)

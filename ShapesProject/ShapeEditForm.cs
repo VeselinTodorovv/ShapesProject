@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace ShapesProject
+﻿namespace ShapesProject
 {
-    public partial class ShapeEditForm: Form
+    public partial class ShapeEditForm : Form
     {
         public ShapeEditForm()
         {
             InitializeComponent();
+        }
+
+        private void ShapeEditForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }

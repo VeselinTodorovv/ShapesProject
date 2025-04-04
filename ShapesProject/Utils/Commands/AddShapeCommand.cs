@@ -7,7 +7,7 @@ namespace ShapesProject.Utils.Commands
         private readonly ShapeManager _manager;
         private readonly Shape _shape;
 
-        private bool _executed = false;
+        private bool _executed;
 
         public AddShapeCommand(ShapeManager manager, Shape shape)
         {

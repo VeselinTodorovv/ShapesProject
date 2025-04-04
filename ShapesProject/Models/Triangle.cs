@@ -1,4 +1,6 @@
-﻿namespace ShapesProject.Models;
+﻿using System.Drawing.Drawing2D;
+
+namespace ShapesProject.Models;
 
 public class Triangle : Shape
 {
@@ -28,6 +30,12 @@ public class Triangle : Shape
 
         g.FillPolygon(brush, points);
         g.DrawPolygon(pen, points);
+
+        if (IsSelected)
+        {
+            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth) { DashStyle = DashStyle.Dash };
+            g.DrawPolygon(selectionPen, points);
+        }
     }
 
     public override void Move(int x, int y)

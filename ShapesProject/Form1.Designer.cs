@@ -231,42 +231,42 @@
             rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
             rectangleToolStripMenuItem.Size = new Size(147, 22);
             rectangleToolStripMenuItem.Text = "Rectangle";
-            rectangleToolStripMenuItem.Click += RectangleToolStripMenuItem_Click;
+            rectangleToolStripMenuItem.Click += rectangleToolStripMenuItem_Click;
             // 
             // circleToolStripMenuItem
             // 
             circleToolStripMenuItem.Name = "circleToolStripMenuItem";
             circleToolStripMenuItem.Size = new Size(147, 22);
             circleToolStripMenuItem.Text = "Circle";
-            circleToolStripMenuItem.Click += CircleToolStripMenuItem_Click;
+            circleToolStripMenuItem.Click += circleToolStripMenuItem_Click;
             // 
             // triangleToolStripMenuItem
             // 
             triangleToolStripMenuItem.Name = "triangleToolStripMenuItem";
             triangleToolStripMenuItem.Size = new Size(147, 22);
             triangleToolStripMenuItem.Text = "Triangle";
-            triangleToolStripMenuItem.Click += TriangleToolStripMenuItem_Click;
+            triangleToolStripMenuItem.Click += triangleToolStripMenuItem_Click;
             // 
             // rhombusToolStripMenuItem
             // 
             rhombusToolStripMenuItem.Name = "rhombusToolStripMenuItem";
             rhombusToolStripMenuItem.Size = new Size(147, 22);
             rhombusToolStripMenuItem.Text = "Rhombus";
-            rhombusToolStripMenuItem.Click += RhombusToolStripMenuItem_Click;
+            rhombusToolStripMenuItem.Click += rhombusToolStripMenuItem_Click;
             // 
             // parallelogramToolStripMenuItem
             // 
             parallelogramToolStripMenuItem.Name = "parallelogramToolStripMenuItem";
             parallelogramToolStripMenuItem.Size = new Size(147, 22);
             parallelogramToolStripMenuItem.Text = "Parallelogram";
-            parallelogramToolStripMenuItem.Click += ParallelogramToolStripMenuItem_Click;
+            parallelogramToolStripMenuItem.Click += parallelogramToolStripMenuItem_Click;
             // 
             // trapezoidToolStripMenuItem
             // 
             trapezoidToolStripMenuItem.Name = "trapezoidToolStripMenuItem";
             trapezoidToolStripMenuItem.Size = new Size(147, 22);
             trapezoidToolStripMenuItem.Text = "Trapezoid";
-            trapezoidToolStripMenuItem.Click += TrapezoidToolStripMenuItem_Click;
+            trapezoidToolStripMenuItem.Click += trapezoidToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 

@@ -1,4 +1,6 @@
 ﻿
+using System.Drawing.Drawing2D;
+
 namespace ShapesProject.Models
 {
     class Trapezoid : Shape
@@ -26,7 +28,8 @@ namespace ShapesProject.Models
             using Pen pen = new(BorderColor);
             using SolidBrush brush = new(FillColor);
 
-            Point[] points = {
+            Point[] points =
+            {
                 new(X, Y),  // Top-left corner
                 new(X + Base1, Y),  // Top-right corner
                 new(X + Base1 - Base2 + (Base1 - Base2) / 2, Y + Height),  // Bottom-right corner
@@ -35,6 +38,12 @@ namespace ShapesProject.Models
 
             g.FillPolygon(brush, points);
             g.DrawPolygon(pen, points);
+
+            if (IsSelected)
+            {
+                using var selectionPen = new Pen(Color.Red, SelectionBorderWidth) { DashStyle = DashStyle.Dash };
+                g.DrawPolygon(selectionPen, points);
+            }
         }
 
         public override void EditSize(params int[] parameters)

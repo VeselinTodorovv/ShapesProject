@@ -28,18 +28,14 @@ namespace ShapesProject
             _scene = new Scene(_shapeManager);
 
             scenePanel.Paint += panel1_Paint;
-            scenePanel.MouseDown += ScenePanel_MouseDown;
+            scenePanel.MouseDown += scenePanel_MouseDown;
             scenePanel.MouseMove += scenePanel_MouseMove;
             scenePanel.MouseUp += scenePanel_MouseUp;
 
-            _shapeManager.SelectionChanged += (s, e) =>
-            {
-                scenePanel.Invalidate();
-            };
-
-            _shapeManager.CommandExecuted += (s, e) => scenePanel.Invalidate();
             _shapeManager.ShapeAdded += (s, e) => scenePanel.Invalidate();
             _shapeManager.ShapeDeleted += (s, e) => scenePanel.Invalidate();
+            _shapeManager.SelectionChanged += (s, e) => scenePanel.Invalidate();
+            _shapeManager.CommandExecuted += (s, e) => scenePanel.Invalidate();
 
             editToolStripButton.Click += new EventHandler(editToolStripButton_Click);
         }
@@ -130,9 +126,7 @@ namespace ShapesProject
         {
             _shapeManager.ClearSelection();
 
-            // Create deselection commands
             var newSelection = _shapeManager.GetShapes()
-                .Reverse()
                 .FirstOrDefault(shape => shape.Contains(e.Location));
 
             if (newSelection != null)
