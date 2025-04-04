@@ -24,7 +24,11 @@ public class ShapeManager
         _commandHistory.Push(command);
         _redoStack.Clear();
 
-        OnSelectionChanged(SelectedShape);
+        if (SelectedShape != null)
+        {
+            OnSelectionChanged(SelectedShape);
+        }
+        
         CommandExecuted?.Invoke(this, EventArgs.Empty);
     }
 
@@ -71,7 +75,7 @@ public class ShapeManager
         }
     }
 
-    private void OnSelectionChanged(Shape? shape)
+    private void OnSelectionChanged(Shape shape)
     {
         SelectionChanged?.Invoke(this, new ShapeEventArgs(shape));
     }

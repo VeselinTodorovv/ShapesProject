@@ -1,72 +1,71 @@
 ﻿
 using System.Drawing.Drawing2D;
 
-namespace ShapesProject.Models
+namespace ShapesProject.Models;
+
+class Parallelogram : Shape
 {
-    class Parallelogram : Shape
+    public int Base { get; protected set; }
+    public int Height { get; protected set; }
+    public int Side { get; protected set; }
+
+    public Parallelogram(int x, int y, int baseLength, int height, int side) : base(x, y)
     {
-        public int Base { get; protected set; }
-        public int Height { get; protected set; }
-        public int Side { get; protected set; }
-
-        public Parallelogram(int x, int y, int baseLength, int height, int side) : base(x, y)
+        if (baseLength <= 0 || height <= 0 || side <= 0)
         {
-            if (baseLength <= 0 || height <= 0 || side <= 0)
-            {
-                throw new ArgumentException("Base, height, and side length must be positive.");
-            }
-
-            Base = baseLength;
-            Height = height;
-            Side = side;
+            throw new ArgumentException("Base, height, and side length must be positive.");
         }
 
-        public override double CalculateArea() => Base * Height;
+        Base = baseLength;
+        Height = height;
+        Side = side;
+    }
 
-        public override void Draw(Graphics g)
+    public override double CalculateArea() => Base * Height;
+
+    public override void Draw(Graphics g)
+    {
+        using Pen pen = new(BorderColor);
+        using SolidBrush brush = new(FillColor);
+
+        Point[] points =
         {
-            using Pen pen = new(BorderColor);
-            using SolidBrush brush = new(FillColor);
+            new(X, Y),
+            new(X + Base, Y),
+            new(X + Base - Side, Y - Height),
+            new(X - Side, Y - Height)
+        };
 
-            Point[] points =
-            {
-                new(X, Y),
-                new(X + Base, Y),
-                new(X + Base - Side, Y - Height),
-                new(X - Side, Y - Height)
-            };
+        g.FillPolygon(brush, points);
+        g.DrawPolygon(pen, points);
 
-            g.FillPolygon(brush, points);
-            g.DrawPolygon(pen, points);
-
-            if (IsSelected)
-            {
-                using var selectionPen = new Pen(Color.Red, SelectionBorderWidth) { DashStyle = DashStyle.Dash };
-
-                // Option 1: Draw the same polygon as the selection outline
-                g.DrawPolygon(selectionPen, points);
-            }
-        }
-
-        public override void EditSize(params int[] parameters)
+        if (IsSelected)
         {
-            if (parameters.Length == 3 && parameters[0] > 0 && parameters[1] > 0 && parameters[2] > 0)
-            {
-                Base = parameters[0];
-                Height = parameters[1];
-                Side = parameters[2];
-            }
-            else
-            {
-                throw new ArgumentException("Invalid parameters for parallelogram. Provide base, height, and side length.");
-            }
-        }
+            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+            selectionPen.DashStyle = DashStyle.Dash;
 
-        public override bool Contains(Point p)
-        {
-            // Check if the point is within the bounding rectangle of the parallelogram
-            return p.X >= X - Side && p.X <= X + Base &&
-                   p.Y >= Y - Height && p.Y <= Y;
+            // Option 1: Draw the same polygon as the selection outline
+            g.DrawPolygon(selectionPen, points);
         }
+    }
+
+    public override void EditSize(params int[] parameters)
+    {
+        if (parameters.Length == 3 && parameters[0] > 0 && parameters[1] > 0 && parameters[2] > 0)
+        {
+            Base = parameters[0];
+            Height = parameters[1];
+            Side = parameters[2];
+        }
+        else
+        {
+            throw new ArgumentException("Invalid parameters for parallelogram. Provide base, height, and side length.");
+        }
+    }
+
+    public override bool Contains(Point p)
+    {
+        return p.X >= X - Side && p.X <= X + Base &&
+               p.Y >= Y - Height && p.Y <= Y;
     }
 }

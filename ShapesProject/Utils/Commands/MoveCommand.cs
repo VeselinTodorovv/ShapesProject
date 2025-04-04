@@ -4,7 +4,7 @@ namespace ShapesProject.Utils.Commands
 {
     class MoveCommand : CommandBase
     {
-        private readonly Shape _shape;
+        private readonly Shape? _shape;
         private readonly int _dx, _dy;
         private bool _executed;
 
@@ -22,20 +22,24 @@ namespace ShapesProject.Utils.Commands
                 return;
             }
 
-            if (!_executed)
+            if (_executed)
             {
-                _shape.Move(_dx, _dy);
-                _executed = true;
+                return;
             }
+            
+            _shape.Move(_dx, _dy);
+            _executed = true;
         }
 
         public override void Undo()
         {
-            if (_executed)
+            if (!_executed)
             {
-                _shape.Move(-_dx, -_dy);
-                _executed = false;
+                return;
             }
+            
+            _shape?.Move(-_dx, -_dy);
+            _executed = false;
         }
     }
 }

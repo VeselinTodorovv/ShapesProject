@@ -17,12 +17,12 @@ namespace ShapesProject
         {
             InitializeComponent();
 
+            // Fix for flickering while moving shapes
             typeof(Panel).InvokeMember("DoubleBuffered",
                 BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
                 null,
                 scenePanel,
                 new object[] { true });
-
 
             _shapeManager = new ShapeManager();
             _scene = new Scene(_shapeManager);
@@ -32,15 +32,15 @@ namespace ShapesProject
             scenePanel.MouseMove += scenePanel_MouseMove;
             scenePanel.MouseUp += scenePanel_MouseUp;
 
-            _shapeManager.ShapeAdded += (s, e) => scenePanel.Invalidate();
-            _shapeManager.ShapeDeleted += (s, e) => scenePanel.Invalidate();
-            _shapeManager.SelectionChanged += (s, e) => scenePanel.Invalidate();
-            _shapeManager.CommandExecuted += (s, e) => scenePanel.Invalidate();
+            _shapeManager.ShapeAdded += (_, _) => scenePanel.Invalidate();
+            _shapeManager.ShapeDeleted += (_, _) => scenePanel.Invalidate();
+            _shapeManager.SelectionChanged += (_, _) => scenePanel.Invalidate();
+            _shapeManager.CommandExecuted += (_, _) => scenePanel.Invalidate();
 
-            editToolStripButton.Click += new EventHandler(editToolStripButton_Click);
+            editToolStripButton.Click += editToolStripButton_Click;
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void panel1_Paint(object? sender, PaintEventArgs e)
         {
             e.Graphics.Clear(scenePanel.BackColor);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -57,12 +57,7 @@ namespace ShapesProject
         {
 
         }
-
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void toolStripDropDownButton1_Click(object sender, EventArgs e)
         {
 
@@ -122,7 +117,7 @@ namespace ShapesProject
             _shapeManager.ExecuteCommand(command);
         }
 
-        private void scenePanel_MouseDown(object sender, MouseEventArgs e)
+        private void scenePanel_MouseDown(object? sender, MouseEventArgs e)
         {
             _shapeManager.ClearSelection();
 
@@ -142,28 +137,33 @@ namespace ShapesProject
             }
         }
 
-        private void scenePanel_MouseUp(object sender, MouseEventArgs e)
+        private void scenePanel_MouseUp(object? sender, MouseEventArgs e)
         {
             _dragStartPosition = Point.Empty;
         }
 
-        private void scenePanel_MouseMove(object sender, MouseEventArgs e)
+        private void scenePanel_MouseMove(object? sender, MouseEventArgs e)
         {
-            if (_shapeManager.SelectedShape != null && e.Button == MouseButtons.Left)
+            if (_shapeManager.SelectedShape == null || e.Button != MouseButtons.Left)
             {
-                var dx = e.X - _dragStartPosition.X;
-                var dy = e.Y - _dragStartPosition.Y;
-
-                if (dx != 0 || dy != 0)
-                {
-                    var moveCommand = new MoveCommand(_shapeManager.SelectedShape, dx, dy);
-                    _shapeManager.ExecuteCommand(moveCommand);
-                    _dragStartPosition = e.Location;
-                }
+                return;
             }
+            
+            var dx = e.X - _dragStartPosition.X;
+            var dy = e.Y - _dragStartPosition.Y;
+
+            if (dx == 0 && dy == 0)
+            {
+                return;
+            }
+            
+            var moveCommand = new MoveCommand(_shapeManager.SelectedShape, dx, dy);
+            
+            _shapeManager.ExecuteCommand(moveCommand);
+            _dragStartPosition = e.Location;
         }
 
-        private void editToolStripButton_Click(object sender, EventArgs e)
+        private void editToolStripButton_Click(object? sender, EventArgs e)
         {
         }
 

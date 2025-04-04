@@ -33,7 +33,9 @@ public class Triangle : Shape
 
         if (IsSelected)
         {
-            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth) { DashStyle = DashStyle.Dash };
+            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+            selectionPen.DashStyle = DashStyle.Dash;
+            
             g.DrawPolygon(selectionPen, points);
         }
     }
@@ -67,7 +69,6 @@ public class Triangle : Shape
 
     public override bool Contains(Point p)
     {
-        // Barycentric technique to check if point is inside triangle
         double area = CalculateArea();
         double area1 = Math.Abs((Point1.X * (Point2.Y - p.Y) +
                                   Point2.X * (p.Y - Point1.Y) +
@@ -78,6 +79,8 @@ public class Triangle : Shape
         double area3 = Math.Abs((Point3.X * (Point1.Y - p.Y) +
                                   Point1.X * (p.Y - Point3.Y) +
                                   p.X * (Point3.Y - Point1.Y)) / 2.0);
-        return area == area1 + area2 + area3;
+        
+        const double tolerance = 0.01;
+        return Math.Abs(area - (area1 + area2 + area3)) < tolerance;
     }
 }

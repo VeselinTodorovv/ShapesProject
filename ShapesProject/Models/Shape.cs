@@ -31,6 +31,5 @@ public abstract class Shape
 
     public abstract bool Contains(Point p);
 
-    // TODO: Implement Selection outline for all shapes
     protected virtual int SelectionBorderWidth => 2;
 }

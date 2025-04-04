@@ -38,7 +38,9 @@ class Rhombus : Shape
 
         if (IsSelected)
         {
-            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth) { DashStyle = DashStyle.Dash };
+            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+            selectionPen.DashStyle = DashStyle.Dash;
+            
             g.DrawPolygon(selectionPen, points);
         }
     }
@@ -59,7 +61,6 @@ class Rhombus : Shape
 
     public override bool Contains(Point p)
     {
-        // Check if the point is within the bounding rectangle of the rhombus
         return p.X >= X - Diagonal2 / 2 && p.X <= X + Diagonal2 / 2 &&
                p.Y >= Y - Diagonal1 / 2 && p.Y <= Y + Diagonal1 / 2;
     }

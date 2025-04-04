@@ -30,7 +30,8 @@ public class Circle : Shape
 
         if (IsSelected)
         {
-            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth) { DashStyle = DashStyle.Dash };
+            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+            selectionPen.DashStyle = DashStyle.Dash;
 
             g.DrawEllipse(selectionPen, X - Radius - SelectionBorderWidth, Y - Radius - SelectionBorderWidth,
                           diameter + 2 * SelectionBorderWidth, diameter + 2 * SelectionBorderWidth);

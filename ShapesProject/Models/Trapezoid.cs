@@ -41,7 +41,9 @@ namespace ShapesProject.Models
 
             if (IsSelected)
             {
-                using var selectionPen = new Pen(Color.Red, SelectionBorderWidth) { DashStyle = DashStyle.Dash };
+                using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+                selectionPen.DashStyle = DashStyle.Dash;
+                
                 g.DrawPolygon(selectionPen, points);
             }
         }

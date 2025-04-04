@@ -15,7 +15,6 @@ public class Scene
     {
         foreach (var shape in _shapeManager.GetShapes())
         {
-            Console.WriteLine($@"{shape.GetType().Name}: {shape.CalculateArea()}");
             shape.Draw(g);
         }
     }
