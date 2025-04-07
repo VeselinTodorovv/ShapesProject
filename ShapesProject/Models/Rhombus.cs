@@ -22,20 +22,21 @@ class Rhombus : Shape
 
     public override void Draw(Graphics g)
     {
+        var pos = GetDrawingPosition();
         using Pen pen = new(BorderColor);
         using SolidBrush brush = new(FillColor);
-
+        
         Point[] points =
         {
-            new(X, Y - Diagonal1 / 2),
-            new(X + Diagonal2 / 2, Y),
-            new(X, Y + Diagonal1 / 2),
-            new(X - Diagonal2 / 2, Y)
+            new(pos.X, pos.Y - Diagonal1 / 2),
+            new(pos.X + Diagonal2 / 2, pos.Y),
+            new(pos.X, pos.Y + Diagonal1 / 2),
+            new(pos.X - Diagonal2 / 2, pos.Y)
         };
-
+        
         g.FillPolygon(brush, points);
         g.DrawPolygon(pen, points);
-
+        
         if (!IsSelected)
         {
             return;
@@ -43,8 +44,17 @@ class Rhombus : Shape
         
         using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
         selectionPen.DashStyle = DashStyle.Dash;
-            
-        g.DrawPolygon(selectionPen, points);
+        
+        // Offset selection border
+        Point[] selectionPoints =
+        {
+            new(pos.X, pos.Y - Diagonal1 / 2 - SelectionBorderWidth),
+            new(pos.X + Diagonal2 / 2 + SelectionBorderWidth, pos.Y),
+            new(pos.X, pos.Y + Diagonal1 / 2 + SelectionBorderWidth),
+            new(pos.X - Diagonal2 / 2 - SelectionBorderWidth, pos.Y)
+        };
+        
+        g.DrawPolygon(selectionPen, selectionPoints);
     }
 
     public override void EditSize(params int[] parameters)

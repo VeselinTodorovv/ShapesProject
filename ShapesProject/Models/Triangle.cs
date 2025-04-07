@@ -26,11 +26,18 @@ public class Triangle : Shape
     {
         using Pen pen = new(BorderColor);
         using SolidBrush brush = new(FillColor);
-        Point[] points = { Point1, Point2, Point3 };
-
+        
+        // Temporary offset
+        Point[] points = 
+        {
+            new(Point1.X + TempOffsetX, Point1.Y + TempOffsetY),
+            new(Point2.X + TempOffsetX, Point2.Y + TempOffsetY),
+            new(Point3.X + TempOffsetX, Point3.Y + TempOffsetY)
+        };
+        
         g.FillPolygon(brush, points);
         g.DrawPolygon(pen, points);
-
+        
         if (!IsSelected)
         {
             return;
@@ -38,8 +45,16 @@ public class Triangle : Shape
         
         using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
         selectionPen.DashStyle = DashStyle.Dash;
-            
-        g.DrawPolygon(selectionPen, points);
+        
+        // Offset selection border
+        Point[] selectionPoints =
+        {
+            new(points[0].X - SelectionBorderWidth, points[0].Y - SelectionBorderWidth),
+            new(points[1].X + SelectionBorderWidth, points[1].Y - SelectionBorderWidth),
+            new(points[2].X, points[2].Y + SelectionBorderWidth)
+        };
+        
+        g.DrawPolygon(selectionPen, selectionPoints);
     }
 
     public override void Move(int x, int y)

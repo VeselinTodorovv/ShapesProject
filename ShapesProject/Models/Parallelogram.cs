@@ -25,15 +25,16 @@ class Parallelogram : Shape
 
     public override void Draw(Graphics g)
     {
+        var pos = GetDrawingPosition();
         using Pen pen = new(BorderColor);
         using SolidBrush brush = new(FillColor);
 
         Point[] points =
         {
-            new(X, Y),
-            new(X + Base, Y),
-            new(X + Base - Side, Y - Height),
-            new(X - Side, Y - Height)
+            new(pos.X, pos.Y),
+            new(pos.X + Base, pos.Y),
+            new(pos.X + Base - Side, pos.Y - Height),
+            new(pos.X - Side, pos.Y - Height)
         };
 
         g.FillPolygon(brush, points);
@@ -47,7 +48,16 @@ class Parallelogram : Shape
         using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
         selectionPen.DashStyle = DashStyle.Dash;
 
-        g.DrawPolygon(selectionPen, points);
+        // Offset selection border
+        Point[] selectionPoints =
+        {
+            new(pos.X - SelectionBorderWidth, pos.Y + SelectionBorderWidth),
+            new(pos.X + Base + SelectionBorderWidth, pos.Y + SelectionBorderWidth),
+            new(pos.X + Base - Side + SelectionBorderWidth, pos.Y - Height - SelectionBorderWidth),
+            new(pos.X - Side - SelectionBorderWidth, pos.Y - Height - SelectionBorderWidth)
+        };
+    
+        g.DrawPolygon(selectionPen, selectionPoints);
     }
 
     public override void EditSize(params int[] parameters)

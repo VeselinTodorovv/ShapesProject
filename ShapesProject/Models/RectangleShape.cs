@@ -21,11 +21,12 @@ public class RectangleShape : Shape
 
     public override void Draw(Graphics g)
     {
+        var pos = GetDrawingPosition();
         using Pen pen = new(BorderColor);
         using SolidBrush brush = new(FillColor);
 
-        g.FillRectangle(brush, X, Y, Width, Height);
-        g.DrawRectangle(pen, X, Y, Width, Height);
+        g.FillRectangle(brush, pos.X, pos.Y, Width, Height);
+        g.DrawRectangle(pen, pos.X, pos.Y, Width, Height);
 
         if (!IsSelected)
         {
@@ -35,9 +36,7 @@ public class RectangleShape : Shape
         using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
         selectionPen.DashStyle = DashStyle.Dash;
 
-        var rect = new Rectangle(
-        X - SelectionBorderWidth,
-        Y - SelectionBorderWidth,
+        var rect = new Rectangle(pos.X - SelectionBorderWidth, pos.Y - SelectionBorderWidth,
         Width + 2 * SelectionBorderWidth,
         Height + 2 * SelectionBorderWidth
         );

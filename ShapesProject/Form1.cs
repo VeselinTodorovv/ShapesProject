@@ -143,7 +143,7 @@ public partial class Form1 : Form
         
         if (_isDragging && selectedShape != null)
         {
-            // Clear temporary offset
+            // Clear
             selectedShape.TempOffsetX = 0;
             selectedShape.TempOffsetY = 0;
 
