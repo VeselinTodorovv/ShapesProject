@@ -21,12 +21,14 @@ public class Circle : Shape
 
     public override void Draw(Graphics g)
     {
-        using Pen pen = new(BorderColor);
-        using SolidBrush brush = new(FillColor);
+        var pos = GetDrawingPosition();
         int diameter = 2 * Radius;
 
-        g.FillEllipse(brush, X - Radius, Y - Radius, diameter, diameter);
-        g.DrawEllipse(pen, X - Radius, Y - Radius, diameter, diameter);
+        using Pen pen = new(BorderColor);
+        using SolidBrush brush = new(FillColor);
+
+        g.FillEllipse(brush, pos.X - Radius, pos.Y - Radius, diameter, diameter);
+        g.DrawEllipse(pen, pos.X - Radius, pos.Y - Radius, diameter, diameter);
 
         if (!IsSelected)
         {
@@ -35,8 +37,8 @@ public class Circle : Shape
         
         using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
         selectionPen.DashStyle = DashStyle.Dash;
-
-        g.DrawEllipse(selectionPen, X - Radius - SelectionBorderWidth, Y - Radius - SelectionBorderWidth,
+        
+        g.DrawEllipse(selectionPen, pos.X - Radius - SelectionBorderWidth, pos.Y - Radius - SelectionBorderWidth, 
         diameter + 2 * SelectionBorderWidth, diameter + 2 * SelectionBorderWidth);
     }
 

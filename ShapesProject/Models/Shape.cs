@@ -5,6 +5,9 @@ public abstract class Shape
     public int X { get; protected set; }
 
     public int Y { get; protected set; }
+    
+    public int TempOffsetX { get; set; }
+    public int TempOffsetY { get; set; }
 
     public Color FillColor { get; set; } = Color.White;
 
@@ -16,6 +19,8 @@ public abstract class Shape
         X = x;
         Y = y;
     }
+    
+    protected Point GetDrawingPosition() => new(X + TempOffsetX, Y + TempOffsetY);
 
     public abstract double CalculateArea();
 

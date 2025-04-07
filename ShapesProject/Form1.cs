@@ -125,25 +125,32 @@ public partial class Form1 : Form
         var newSelection = _shapeManager.GetShapes()
             .FirstOrDefault(shape => shape.Contains(e.Location));
 
-        if (newSelection != null)
+        if (newSelection == null)
         {
-            var selectCommand = new SelectCommand(newSelection, true);
+            return;
+        }
+        
+        var selectCommand = new SelectCommand(newSelection, true);
 
-            _shapeManager.ExecuteCommand(selectCommand);
-            _dragStartPosition = e.Location;
-            _isDragging = true;
-        }
-        else
-        {
-            _shapeManager.ClearSelection();
-        }
+        _shapeManager.ExecuteCommand(selectCommand);
+        _dragStartPosition = e.Location;
+        _isDragging = true;
     }
 
     private void scenePanel_MouseUp(object? sender, MouseEventArgs e)
     {
-        if (_isDragging && _currentMoveCommand != null)
+        var selectedShape = _shapeManager.SelectedShape;
+        
+        if (_isDragging && selectedShape != null)
         {
-            _shapeManager.ExecuteCommand(_currentMoveCommand);
+            // Clear temporary offset
+            selectedShape.TempOffsetX = 0;
+            selectedShape.TempOffsetY = 0;
+
+            if (_currentMoveCommand != null)
+            {
+                _shapeManager.ExecuteCommand(_currentMoveCommand);
+            }
         }
 
         _currentMoveCommand = null;
@@ -161,6 +168,7 @@ public partial class Form1 : Form
         var dx = e.X - _dragStartPosition.X;
         var dy = e.Y - _dragStartPosition.Y;
 
+        var selectedShape = _shapeManager.SelectedShape;
         if (dx == 0 && dy == 0)
         {
             return;
@@ -168,12 +176,15 @@ public partial class Form1 : Form
 
         if (_currentMoveCommand == null)
         {
-            _currentMoveCommand = new MoveCommand(_shapeManager.SelectedShape, dx, dy);
+            _currentMoveCommand = new MoveCommand(selectedShape, dx, dy);
         }
         else
         {
             _currentMoveCommand.AccumulateMovement(dx, dy);
         }
+        
+        selectedShape.TempOffsetX = _currentMoveCommand.TotalDx;
+        selectedShape.TempOffsetY = _currentMoveCommand.TotalDy;
 
         _dragStartPosition = e.Location;
 

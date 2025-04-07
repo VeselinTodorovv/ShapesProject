@@ -5,15 +5,18 @@ namespace ShapesProject.Utils.Commands;
 class MoveCommand : CommandBase
 {
     private readonly Shape? _shape;
-    private int _totalDx, _totalDy;
     private bool _executed;
+    
+    public int TotalDx { get; private set; }
+
+    public int TotalDy { get; private set; }
 
     public MoveCommand(Shape shape, int dx, int dy)
     {
         _shape = shape
             ?? throw new ArgumentNullException(nameof(shape));
-        _totalDx = dx;
-        _totalDy = dy;
+        TotalDx = dx;
+        TotalDy = dy;
     }
 
     public void AccumulateMovement(int dx, int dy)
@@ -23,8 +26,8 @@ class MoveCommand : CommandBase
             throw new InvalidOperationException("Cannot accumulate movement after execution");
         }
 
-        _totalDx += dx;
-        _totalDy += dy;
+        TotalDx += dx;
+        TotalDy += dy;
     }
 
     public override void Execute()
@@ -39,7 +42,7 @@ class MoveCommand : CommandBase
             return;
         }
             
-        _shape.Move(_totalDx, _totalDy);
+        _shape.Move(TotalDx, TotalDy);
         _executed = true;
     }
 
@@ -50,7 +53,7 @@ class MoveCommand : CommandBase
             return;
         }
             
-        _shape?.Move(-_totalDx, -_totalDy);
+        _shape?.Move(-TotalDx, -TotalDy);
         _executed = false;
     }
 }
