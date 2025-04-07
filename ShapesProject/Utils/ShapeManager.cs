@@ -21,6 +21,7 @@ public class ShapeManager
     public void ExecuteCommand(ICommand command)
     {
         command.Execute();
+
         _commandHistory.Push(command);
         _redoStack.Clear();
 
@@ -28,7 +29,7 @@ public class ShapeManager
         {
             OnSelectionChanged(SelectedShape);
         }
-        
+
         CommandExecuted?.Invoke(this, EventArgs.Empty);
     }
 

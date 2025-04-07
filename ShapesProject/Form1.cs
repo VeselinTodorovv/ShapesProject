@@ -11,6 +11,9 @@ public partial class Form1 : Form
     private readonly ShapeManager _shapeManager;
     private readonly Scene _scene;
 
+    private MoveCommand? _currentMoveCommand;
+    private bool _isDragging;
+
     private Point _dragStartPosition;
 
     public Form1()
@@ -68,7 +71,7 @@ public partial class Form1 : Form
 
     private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var rectangle = new RectangleShape(50, 50, 100, 50);
+        var rectangle = new RectangleShape(0, 0, 100, 50);
 
         var command = new AddShapeCommand(_shapeManager, rectangle);
         _shapeManager.ExecuteCommand(command);
@@ -128,6 +131,7 @@ public partial class Form1 : Form
 
             _shapeManager.ExecuteCommand(selectCommand);
             _dragStartPosition = e.Location;
+            _isDragging = true;
         }
         else
         {
@@ -137,12 +141,19 @@ public partial class Form1 : Form
 
     private void scenePanel_MouseUp(object? sender, MouseEventArgs e)
     {
+        if (_isDragging && _currentMoveCommand != null)
+        {
+            _shapeManager.ExecuteCommand(_currentMoveCommand);
+        }
+
+        _currentMoveCommand = null;
+        _isDragging = false;
         _dragStartPosition = Point.Empty;
     }
 
     private void scenePanel_MouseMove(object? sender, MouseEventArgs e)
     {
-        if (_shapeManager.SelectedShape == null || e.Button != MouseButtons.Left)
+        if (!_isDragging || _shapeManager.SelectedShape == null || e.Button != MouseButtons.Left)
         {
             return;
         }
@@ -155,19 +166,31 @@ public partial class Form1 : Form
             return;
         }
 
-        var moveCommand = new MoveCommand(_shapeManager.SelectedShape, dx, dy);
+        if (_currentMoveCommand == null)
+        {
+            _currentMoveCommand = new MoveCommand(_shapeManager.SelectedShape, dx, dy);
+        }
+        else
+        {
+            _currentMoveCommand.AccumulateMovement(dx, dy);
+        }
 
-        _shapeManager.ExecuteCommand(moveCommand);
         _dragStartPosition = e.Location;
+
+        scenePanel.Invalidate();
     }
 
     private void editToolStripButton_Click(object? sender, EventArgs e)
     {
     }
 
-    private void toolStripButton3_Click(object sender, EventArgs e)
+    private void undoToolStripButton_Click(object sender, EventArgs e)
     {
-
+        _shapeManager.Undo();
+    }
+    private void redoToolStripButton_Click(object sender, EventArgs e)
+    {
+        _shapeManager.Redo();
     }
 
     private void deleteStripButton_Click(object sender, EventArgs e)
@@ -179,5 +202,15 @@ public partial class Form1 : Form
 
         var deleteCommand = new DeleteShapeCommand(_shapeManager, _shapeManager.SelectedShape);
         _shapeManager.ExecuteCommand(deleteCommand);
+    }
+
+    private void fillColorToolStripComboBox_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void borderColorToolStripComboBox_Click(object sender, EventArgs e)
+    {
+
     }
 }
