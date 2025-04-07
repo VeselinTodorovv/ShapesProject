@@ -28,14 +28,16 @@ public class Circle : Shape
         g.FillEllipse(brush, X - Radius, Y - Radius, diameter, diameter);
         g.DrawEllipse(pen, X - Radius, Y - Radius, diameter, diameter);
 
-        if (IsSelected)
+        if (!IsSelected)
         {
-            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-            selectionPen.DashStyle = DashStyle.Dash;
-
-            g.DrawEllipse(selectionPen, X - Radius - SelectionBorderWidth, Y - Radius - SelectionBorderWidth,
-                          diameter + 2 * SelectionBorderWidth, diameter + 2 * SelectionBorderWidth);
+            return;
         }
+        
+        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+        selectionPen.DashStyle = DashStyle.Dash;
+
+        g.DrawEllipse(selectionPen, X - Radius - SelectionBorderWidth, Y - Radius - SelectionBorderWidth,
+        diameter + 2 * SelectionBorderWidth, diameter + 2 * SelectionBorderWidth);
     }
 
     public override void EditSize(params int[] parameters)

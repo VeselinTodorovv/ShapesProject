@@ -1,9 +1,8 @@
-﻿namespace ShapesProject.Utils.Commands
+﻿namespace ShapesProject.Utils.Commands;
+
+public interface ICommand
 {
-    public interface ICommand
-    {
-        void Execute();
-        void Undo();
-        void Redo();
-    }
+    void Execute();
+    void Undo();
+    void Redo();
 }

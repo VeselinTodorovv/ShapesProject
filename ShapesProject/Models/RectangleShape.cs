@@ -27,20 +27,22 @@ public class RectangleShape : Shape
         g.FillRectangle(brush, X, Y, Width, Height);
         g.DrawRectangle(pen, X, Y, Width, Height);
 
-        if (IsSelected)
+        if (!IsSelected)
         {
-            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-            selectionPen.DashStyle = DashStyle.Dash;
-
-            var rect = new Rectangle(
-                X - SelectionBorderWidth,
-                Y - SelectionBorderWidth,
-                Width + 2 * SelectionBorderWidth,
-                Height + 2 * SelectionBorderWidth
-            );
-
-            g.DrawRectangle(selectionPen, rect);
+            return;
         }
+        
+        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+        selectionPen.DashStyle = DashStyle.Dash;
+
+        var rect = new Rectangle(
+        X - SelectionBorderWidth,
+        Y - SelectionBorderWidth,
+        Width + 2 * SelectionBorderWidth,
+        Height + 2 * SelectionBorderWidth
+        );
+
+        g.DrawRectangle(selectionPen, rect);
     }
 
     public override void EditSize(params int[] parameters)

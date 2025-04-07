@@ -68,7 +68,7 @@
             toolStripSeparator8 = new ToolStripSeparator();
             editToolStripButton = new ToolStripButton();
             toolStripSeparator6 = new ToolStripSeparator();
-            toolStripButton5 = new ToolStripButton();
+            deleteStripButton = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripComboBox1 = new ToolStripComboBox();
             toolStripSeparator2 = new ToolStripSeparator();
@@ -208,7 +208,7 @@
             // 
             // toolStrip
             // 
-            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripSeparator3, toolStripButton1, toolStripSeparator4, toolStripButton2, toolStripSeparator5, toolStripButton3, toolStripSeparator7, toolStripButton4, toolStripSeparator8, editToolStripButton, toolStripSeparator6, toolStripButton5, toolStripSeparator1, toolStripComboBox1, toolStripSeparator2, toolStripComboBox2 });
+            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripSeparator3, toolStripButton1, toolStripSeparator4, toolStripButton2, toolStripSeparator5, toolStripButton3, toolStripSeparator7, toolStripButton4, toolStripSeparator8, editToolStripButton, toolStripSeparator6, deleteStripButton, toolStripSeparator1, toolStripComboBox1, toolStripSeparator2, toolStripComboBox2 });
             toolStrip.Location = new Point(0, 24);
             toolStrip.Name = "toolStrip";
             toolStrip.Size = new Size(1209, 25);
@@ -229,42 +229,42 @@
             // rectangleToolStripMenuItem
             // 
             rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
-            rectangleToolStripMenuItem.Size = new Size(180, 22);
+            rectangleToolStripMenuItem.Size = new Size(147, 22);
             rectangleToolStripMenuItem.Text = "Rectangle";
             rectangleToolStripMenuItem.Click += rectangleToolStripMenuItem_Click;
             // 
             // circleToolStripMenuItem
             // 
             circleToolStripMenuItem.Name = "circleToolStripMenuItem";
-            circleToolStripMenuItem.Size = new Size(180, 22);
+            circleToolStripMenuItem.Size = new Size(147, 22);
             circleToolStripMenuItem.Text = "Circle";
             circleToolStripMenuItem.Click += circleToolStripMenuItem_Click;
             // 
             // triangleToolStripMenuItem
             // 
             triangleToolStripMenuItem.Name = "triangleToolStripMenuItem";
-            triangleToolStripMenuItem.Size = new Size(180, 22);
+            triangleToolStripMenuItem.Size = new Size(147, 22);
             triangleToolStripMenuItem.Text = "Triangle";
             triangleToolStripMenuItem.Click += triangleToolStripMenuItem_Click;
             // 
             // rhombusToolStripMenuItem
             // 
             rhombusToolStripMenuItem.Name = "rhombusToolStripMenuItem";
-            rhombusToolStripMenuItem.Size = new Size(180, 22);
+            rhombusToolStripMenuItem.Size = new Size(147, 22);
             rhombusToolStripMenuItem.Text = "Rhombus";
             rhombusToolStripMenuItem.Click += rhombusToolStripMenuItem_Click;
             // 
             // parallelogramToolStripMenuItem
             // 
             parallelogramToolStripMenuItem.Name = "parallelogramToolStripMenuItem";
-            parallelogramToolStripMenuItem.Size = new Size(180, 22);
+            parallelogramToolStripMenuItem.Size = new Size(147, 22);
             parallelogramToolStripMenuItem.Text = "Parallelogram";
             parallelogramToolStripMenuItem.Click += parallelogramToolStripMenuItem_Click;
             // 
             // trapezoidToolStripMenuItem
             // 
             trapezoidToolStripMenuItem.Name = "trapezoidToolStripMenuItem";
-            trapezoidToolStripMenuItem.Size = new Size(180, 22);
+            trapezoidToolStripMenuItem.Size = new Size(147, 22);
             trapezoidToolStripMenuItem.Text = "Trapezoid";
             trapezoidToolStripMenuItem.Click += trapezoidToolStripMenuItem_Click;
             // 
@@ -344,14 +344,15 @@
             toolStripSeparator6.Name = "toolStripSeparator6";
             toolStripSeparator6.Size = new Size(6, 25);
             // 
-            // toolStripButton5
+            // deleteStripButton
             // 
-            toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            toolStripButton5.Image = (Image)resources.GetObject("toolStripButton5.Image");
-            toolStripButton5.ImageTransparentColor = Color.Magenta;
-            toolStripButton5.Name = "toolStripButton5";
-            toolStripButton5.Size = new Size(79, 22);
-            toolStripButton5.Text = "Delete Shape";
+            deleteStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            deleteStripButton.Image = (Image)resources.GetObject("deleteStripButton.Image");
+            deleteStripButton.ImageTransparentColor = Color.Magenta;
+            deleteStripButton.Name = "deleteStripButton";
+            deleteStripButton.Size = new Size(79, 22);
+            deleteStripButton.Text = "Delete Shape";
+            deleteStripButton.Click += deleteStripButton_Click;
             // 
             // toolStripSeparator1
             // 
@@ -427,7 +428,7 @@
         private ToolStripButton toolStripButton2;
         private ToolStripButton toolStripButton3;
         private ToolStripButton toolStripButton4;
-        private ToolStripButton toolStripButton5;
+        private ToolStripButton deleteStripButton;
         private ToolStripComboBox toolStripComboBox1;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripSeparator toolStripSeparator4;

@@ -39,13 +39,15 @@ namespace ShapesProject.Models
             g.FillPolygon(brush, points);
             g.DrawPolygon(pen, points);
 
-            if (IsSelected)
+            if (!IsSelected)
             {
-                using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-                selectionPen.DashStyle = DashStyle.Dash;
-                
-                g.DrawPolygon(selectionPen, points);
+                return;
             }
+            
+            using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+            selectionPen.DashStyle = DashStyle.Dash;
+                
+            g.DrawPolygon(selectionPen, points);
         }
 
         public override void EditSize(params int[] parameters)
