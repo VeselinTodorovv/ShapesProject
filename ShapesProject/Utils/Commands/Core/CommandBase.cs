@@ -1,4 +1,4 @@
-﻿namespace ShapesProject.Utils.Commands;
+﻿namespace ShapesProject.Utils.Commands.Core;
 
 abstract class CommandBase : ICommand
 {

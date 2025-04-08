@@ -1,5 +1,6 @@
 ﻿using ShapesProject.Models;
-using ShapesProject.Utils.Commands;
+using ShapesProject.Utils.Commands.Core;
+using ShapesProject.Utils.Commands.Selection;
 
 namespace ShapesProject.Utils;
 
@@ -78,7 +79,7 @@ public class ShapeManager
         }
     }
 
-    private void OnSelectionChanged(Shape shape)
+    internal void OnSelectionChanged(Shape shape)
     {
         SelectionChanged?.Invoke(this, new ShapeEventArgs(shape));
     }

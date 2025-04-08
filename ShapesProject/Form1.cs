@@ -1,8 +1,11 @@
 using ShapesProject.Models;
 using ShapesProject.Utils;
-using ShapesProject.Utils.Commands;
 using System.Drawing.Drawing2D;
 using System.Reflection;
+using ShapesProject.Utils.Commands.AddRemove;
+using ShapesProject.Utils.Commands.Colors;
+using ShapesProject.Utils.Commands.Movement;
+using ShapesProject.Utils.Commands.Selection;
 
 namespace ShapesProject;
 
@@ -132,6 +135,7 @@ public partial class Form1 : Form
         var selectCommand = new SelectCommand(newSelection, true);
 
         _shapeManager.ExecuteCommand(selectCommand);
+        
         _dragStartPosition = e.Location;
         _isDragging = true;
     }

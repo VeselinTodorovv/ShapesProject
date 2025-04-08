@@ -1,18 +1,19 @@
 ﻿using ShapesProject.Models;
+using ShapesProject.Utils.Commands.Core;
 
-namespace ShapesProject.Utils.Commands
+namespace ShapesProject.Utils.Commands.Colors
 {
-    class ChangeBorderColorCommand : CommandBase
+    class ChangeFillColorCommand : CommandBase
     {
         private readonly Shape _shape;
         private readonly Color _newColor;
         private readonly Color _oldColor;
 
-        public ChangeBorderColorCommand(Shape shape, Color newColor)
+        public ChangeFillColorCommand(Shape shape, Color newColor)
         {
             _shape = shape;
             _newColor = newColor;
-            _oldColor = _shape.BorderColor;
+            _oldColor = _shape.FillColor;
         }
 
         public override void Execute()
@@ -21,12 +22,12 @@ namespace ShapesProject.Utils.Commands
             {
                 throw new InvalidOperationException("Shape is null");
             }
-            if (_shape.BorderColor == _newColor)
+            if (_shape.FillColor == _newColor)
             {
                 return;
             }
 
-            _shape.BorderColor = _newColor;
+            _shape.FillColor = _newColor;
         }
 
         public override void Undo()
@@ -35,12 +36,12 @@ namespace ShapesProject.Utils.Commands
             {
                 throw new InvalidOperationException("Shape is null");
             }
-            if (_shape.BorderColor == _oldColor)
+            if (_shape.FillColor == _oldColor)
             {
                 return;
             }
 
-            _shape.BorderColor = _oldColor;
+            _shape.FillColor = _oldColor;
         }
     }
 }

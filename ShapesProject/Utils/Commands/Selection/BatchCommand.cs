@@ -1,4 +1,6 @@
-﻿namespace ShapesProject.Utils.Commands;
+﻿using ShapesProject.Utils.Commands.Core;
+
+namespace ShapesProject.Utils.Commands.Selection;
 
 class BatchCommand : ICommand
 {

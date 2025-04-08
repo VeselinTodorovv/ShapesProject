@@ -1,6 +1,7 @@
 ﻿using ShapesProject.Models;
+using ShapesProject.Utils.Commands.Core;
 
-namespace ShapesProject.Utils.Commands;
+namespace ShapesProject.Utils.Commands.Movement;
 
 class MoveCommand : CommandBase
 {
