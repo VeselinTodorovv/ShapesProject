@@ -215,13 +215,40 @@ public partial class Form1 : Form
         _shapeManager.ExecuteCommand(deleteCommand);
     }
 
-    private void fillColorToolStripComboBox_Click(object sender, EventArgs e)
+    private void fillColorButton_Click(object sender, EventArgs e)
     {
+        var selectedShape = _shapeManager.SelectedShape;
+        if (selectedShape == null)
+        {
+            return;
+        }
+        
+        using var colorDialog = new ColorDialog();
+        if (colorDialog.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+        
+        var command = new ChangeFillColorCommand(selectedShape, colorDialog.Color);
+        _shapeManager.ExecuteCommand(command);
     }
 
     private void borderColorToolStripComboBox_Click(object sender, EventArgs e)
     {
+        var selectedShape = _shapeManager.SelectedShape;
+        if (selectedShape == null)
+        {
+            return;
+        }
 
+        using var colorDialog = new ColorDialog();
+        if (colorDialog.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+        
+        var command = new ChangeBorderColorCommand(selectedShape, colorDialog.Color);
+        _shapeManager.ExecuteCommand(command);
     }
 
     private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -241,35 +268,5 @@ public partial class Form1 : Form
 
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
-    }
-
-    private void applyToolStripButton_Click(object sender, EventArgs e)
-    {
-        var selectedShape = _shapeManager.SelectedShape;
-        if (selectedShape == null)
-        {
-            return;
-        }
-
-        string? selectedfillColorName = fillColorToolStripComboBox.SelectedItem?.ToString();
-        if (selectedfillColorName == null)
-        {
-            return;
-        }
-
-        string? selectedBorderColorName = borderColorToolStripComboBox.SelectedItem?.ToString();
-        if (selectedBorderColorName == null)
-        {
-            return;
-        }
-
-        var fillColor = Color.FromName(selectedfillColorName);
-        var borderColor = Color.FromName(selectedBorderColorName);
-
-        selectedShape.FillColor = fillColor;
-        selectedShape.BorderColor = borderColor;
-
-        // TODO: Add a command for color change action
-        scenePanel.Invalidate();
     }
 }

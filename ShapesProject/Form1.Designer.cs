@@ -53,10 +53,9 @@
             toolStripSeparator6 = new ToolStripSeparator();
             deleteStripButton = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
-            fillColorToolStripComboBox = new ToolStripComboBox();
+            fillColorButton = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
-            borderColorToolStripComboBox = new ToolStripComboBox();
-            applyToolStripButton = new ToolStripButton();
+            borderColorToolStripComboBox = new ToolStripButton();
             menuStrip.SuspendLayout();
             toolStrip.SuspendLayout();
             SuspendLayout();
@@ -118,7 +117,7 @@
             // 
             // toolStrip
             // 
-            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripSeparator3, undoToolStripButton, toolStripSeparator7, redoToolStripButton, toolStripSeparator8, editToolStripButton, toolStripSeparator6, deleteStripButton, toolStripSeparator1, fillColorToolStripComboBox, toolStripSeparator2, borderColorToolStripComboBox, applyToolStripButton });
+            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripSeparator3, undoToolStripButton, toolStripSeparator7, redoToolStripButton, toolStripSeparator8, editToolStripButton, toolStripSeparator6, deleteStripButton, toolStripSeparator1, fillColorButton, toolStripSeparator2, borderColorToolStripComboBox });
             toolStrip.Location = new Point(0, 24);
             toolStrip.Name = "toolStrip";
             toolStrip.RenderMode = ToolStripRenderMode.Professional;
@@ -242,13 +241,15 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 25);
             // 
-            // fillColorToolStripComboBox
+            // fillColorButton
             // 
-            fillColorToolStripComboBox.Items.AddRange(new object[] { "White", "Red", "Green", "Blue", "Yellow", "Black" });
-            fillColorToolStripComboBox.Name = "fillColorToolStripComboBox";
-            fillColorToolStripComboBox.Size = new Size(121, 25);
-            fillColorToolStripComboBox.Text = "Fill Color";
-            fillColorToolStripComboBox.Click += fillColorToolStripComboBox_Click;
+            fillColorButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            fillColorButton.Image = (Image)resources.GetObject("fillColorButton.Image");
+            fillColorButton.ImageTransparentColor = Color.Magenta;
+            fillColorButton.Name = "fillColorButton";
+            fillColorButton.Size = new Size(58, 22);
+            fillColorButton.Text = "Fill Color";
+            fillColorButton.Click += fillColorButton_Click;
             // 
             // toolStripSeparator2
             // 
@@ -257,20 +258,13 @@
             // 
             // borderColorToolStripComboBox
             // 
-            borderColorToolStripComboBox.Items.AddRange(new object[] { "White", "Red", "Green", "Blue", "Yellow", "Black" });
+            borderColorToolStripComboBox.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            borderColorToolStripComboBox.Image = (Image)resources.GetObject("borderColorToolStripComboBox.Image");
+            borderColorToolStripComboBox.ImageTransparentColor = Color.Magenta;
             borderColorToolStripComboBox.Name = "borderColorToolStripComboBox";
-            borderColorToolStripComboBox.Size = new Size(121, 25);
+            borderColorToolStripComboBox.Size = new Size(78, 22);
             borderColorToolStripComboBox.Text = "Border Color";
             borderColorToolStripComboBox.Click += borderColorToolStripComboBox_Click;
-            // 
-            // applyToolStripButton
-            // 
-            applyToolStripButton.Image = (Image)resources.GetObject("applyToolStripButton.Image");
-            applyToolStripButton.ImageTransparentColor = Color.Magenta;
-            applyToolStripButton.Name = "applyToolStripButton";
-            applyToolStripButton.Size = new Size(58, 22);
-            applyToolStripButton.Text = "Apply";
-            applyToolStripButton.Click += applyToolStripButton_Click;
             // 
             // Form1
             // 
@@ -308,18 +302,17 @@
         private ToolStripButton undoToolStripButton;
         private ToolStripButton redoToolStripButton;
         private ToolStripButton deleteStripButton;
-        private ToolStripComboBox fillColorToolStripComboBox;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripSeparator toolStripSeparator7;
         private ToolStripSeparator toolStripSeparator6;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripComboBox borderColorToolStripComboBox;
         private ToolStripMenuItem rhombusToolStripMenuItem;
         private ToolStripMenuItem parallelogramToolStripMenuItem;
         private ToolStripMenuItem trapezoidToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripButton editToolStripButton;
-        private ToolStripButton applyToolStripButton;
+        private ToolStripButton fillColorButton;
+        private ToolStripButton borderColorToolStripComboBox;
     }
 }
