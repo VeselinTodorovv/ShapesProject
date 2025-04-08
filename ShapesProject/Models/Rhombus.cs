@@ -2,7 +2,7 @@
 
 namespace ShapesProject.Models;
 
-class Rhombus : Shape
+public class Rhombus : Shape
 {
     public int Diagonal1 { get; protected set; }
     public int Diagonal2 { get; protected set; }

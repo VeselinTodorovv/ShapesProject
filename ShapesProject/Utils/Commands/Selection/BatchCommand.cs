@@ -2,7 +2,7 @@
 
 namespace ShapesProject.Utils.Commands.Selection;
 
-class BatchCommand : ICommand
+internal class BatchCommand : ICommand
 {
     private readonly List<ICommand> _commands;
 

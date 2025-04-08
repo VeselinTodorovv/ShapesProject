@@ -3,7 +3,7 @@ using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Movement;
 
-class MoveCommand : CommandBase
+internal class MoveCommand : CommandBase
 {
     private readonly Shape? _shape;
     private bool _executed;

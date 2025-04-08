@@ -59,6 +59,9 @@ public class RectangleShape : Shape
 
     public override bool Contains(Point p)
     {
-        return p.X >= X && p.X <= X + Width && p.Y >= Y && p.Y <= Y + Height;
+        var pos = GetDrawingPosition();
+
+        return p.X >= pos.X && p.X <= pos.X + Width &&
+               p.Y >= pos.Y && p.Y <= pos.Y + Height;
     }
 }

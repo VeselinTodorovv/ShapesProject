@@ -56,7 +56,9 @@ public class Circle : Shape
 
     public override bool Contains(Point p)
     {
-        double distance = Math.Sqrt(Math.Pow(p.X - X, 2) + Math.Pow(p.Y - Y, 2));
+        var pos = GetDrawingPosition();
+        double distance = Math.Sqrt(Math.Pow(p.X - pos.X, 2) + Math.Pow(p.Y - pos.Y, 2));
+
         return distance <= Radius;
     }
 }

@@ -67,11 +67,6 @@ public partial class Form1 : Form
 
     }
 
-    private void toolStripButton1_Click(object sender, EventArgs e)
-    {
-
-    }
-
     private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
     {
         var rectangle = new RectangleShape(0, 0, 100, 50);

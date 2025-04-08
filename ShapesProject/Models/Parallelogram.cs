@@ -1,9 +1,8 @@
-﻿
-using System.Drawing.Drawing2D;
+﻿using System.Drawing.Drawing2D;
 
 namespace ShapesProject.Models;
 
-class Parallelogram : Shape
+public class Parallelogram : Shape
 {
     public int Base { get; protected set; }
     public int Height { get; protected set; }

@@ -3,7 +3,7 @@ using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Colors
 {
-    class ChangeFillColorCommand : CommandBase
+    internal class ChangeFillColorCommand : CommandBase
     {
         private readonly Shape _shape;
         private readonly Color _newColor;

@@ -1,9 +1,8 @@
-﻿
-using System.Drawing.Drawing2D;
+﻿using System.Drawing.Drawing2D;
 
 namespace ShapesProject.Models;
 
-class Trapezoid : Shape
+public class Trapezoid : Shape
 {
     public int Base1 { get; protected set; }
     public int Base2 { get; protected set; }
@@ -76,7 +75,6 @@ class Trapezoid : Shape
 
     public override bool Contains(Point p)
     {
-        // Check if the point is within the bounding rectangle of the trapezoid
         return p.X >= X && p.X <= X + Math.Max(Base1, Base2) &&
                p.Y >= Y && p.Y <= Y + Height;
     }

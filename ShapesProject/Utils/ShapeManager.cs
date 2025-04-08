@@ -79,7 +79,7 @@ public class ShapeManager
         }
     }
 
-    internal void OnSelectionChanged(Shape shape)
+    private void OnSelectionChanged(Shape shape)
     {
         SelectionChanged?.Invoke(this, new ShapeEventArgs(shape));
     }
