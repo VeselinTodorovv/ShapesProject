@@ -36,19 +36,6 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             loadToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
-            editToolStripMenuItem = new ToolStripMenuItem();
-            undoToolStripMenuItem = new ToolStripMenuItem();
-            redoToolStripMenuItem = new ToolStripMenuItem();
-            deleteShapeToolStripMenuItem = new ToolStripMenuItem();
-            changeFillColorToolStripMenuItem = new ToolStripMenuItem();
-            changeBorderColorToolStripMenuItem = new ToolStripMenuItem();
-            shapesToolStripMenuItem = new ToolStripMenuItem();
-            addRectangleToolStripMenuItem = new ToolStripMenuItem();
-            addCircleToolStripMenuItem = new ToolStripMenuItem();
-            addTriangleToolStripMenuItem = new ToolStripMenuItem();
-            addRhombusToolStripMenuItem = new ToolStripMenuItem();
-            addParallelogramToolStripMenuItem = new ToolStripMenuItem();
-            addTrapezoidToolStripMenuItem = new ToolStripMenuItem();
             toolStrip = new ToolStrip();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             rectangleToolStripMenuItem = new ToolStripMenuItem();
@@ -76,17 +63,18 @@
             // 
             // scenePanel
             // 
-            scenePanel.Location = new Point(570, 52);
+            scenePanel.Location = new Point(12, 52);
             scenePanel.Name = "scenePanel";
-            scenePanel.Size = new Size(627, 491);
+            scenePanel.Size = new Size(1185, 491);
             scenePanel.TabIndex = 0;
             scenePanel.Paint += panel1_Paint;
             // 
             // menuStrip
             // 
-            menuStrip.Items.AddRange(new ToolStripItem[] { file, editToolStripMenuItem, shapesToolStripMenuItem });
+            menuStrip.Items.AddRange(new ToolStripItem[] { file });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
+            menuStrip.RenderMode = ToolStripRenderMode.Professional;
             menuStrip.Size = new Size(1209, 24);
             menuStrip.TabIndex = 3;
             menuStrip.Text = "menuStrip1";
@@ -98,116 +86,42 @@
             file.Name = "file";
             file.Size = new Size(37, 20);
             file.Text = "File";
-            file.Click += whatToolStripMenuItem_Click;
+            file.Click += fileToolStripMenuItem_Click;
             // 
             // newToolStripMenuItem
             // 
             newToolStripMenuItem.Name = "newToolStripMenuItem";
             newToolStripMenuItem.Size = new Size(100, 22);
+            newToolStripMenuItem.Text = "New";
+            newToolStripMenuItem.Click += newToolStripMenuItem_Click;
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(100, 22);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // loadToolStripMenuItem
             // 
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             loadToolStripMenuItem.Size = new Size(100, 22);
             loadToolStripMenuItem.Text = "Load";
+            loadToolStripMenuItem.Click += loadToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             exitToolStripMenuItem.Size = new Size(100, 22);
             exitToolStripMenuItem.Text = "Exit";
-            // 
-            // editToolStripMenuItem
-            // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, deleteShapeToolStripMenuItem, changeFillColorToolStripMenuItem, changeBorderColorToolStripMenuItem });
-            editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(39, 20);
-            editToolStripMenuItem.Text = "Edit";
-            // 
-            // undoToolStripMenuItem
-            // 
-            undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            undoToolStripMenuItem.Size = new Size(185, 22);
-            undoToolStripMenuItem.Text = "Undo";
-            // 
-            // redoToolStripMenuItem
-            // 
-            redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            redoToolStripMenuItem.Size = new Size(185, 22);
-            redoToolStripMenuItem.Text = "Redo";
-            // 
-            // deleteShapeToolStripMenuItem
-            // 
-            deleteShapeToolStripMenuItem.Name = "deleteShapeToolStripMenuItem";
-            deleteShapeToolStripMenuItem.Size = new Size(185, 22);
-            deleteShapeToolStripMenuItem.Text = "Delete Shape";
-            // 
-            // changeFillColorToolStripMenuItem
-            // 
-            changeFillColorToolStripMenuItem.Name = "changeFillColorToolStripMenuItem";
-            changeFillColorToolStripMenuItem.Size = new Size(185, 22);
-            changeFillColorToolStripMenuItem.Text = "Change Fill Color";
-            // 
-            // changeBorderColorToolStripMenuItem
-            // 
-            changeBorderColorToolStripMenuItem.Name = "changeBorderColorToolStripMenuItem";
-            changeBorderColorToolStripMenuItem.Size = new Size(185, 22);
-            changeBorderColorToolStripMenuItem.Text = "Change Border Color";
-            // 
-            // shapesToolStripMenuItem
-            // 
-            shapesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addRectangleToolStripMenuItem, addCircleToolStripMenuItem, addTriangleToolStripMenuItem, addRhombusToolStripMenuItem, addParallelogramToolStripMenuItem, addTrapezoidToolStripMenuItem });
-            shapesToolStripMenuItem.Name = "shapesToolStripMenuItem";
-            shapesToolStripMenuItem.Size = new Size(56, 20);
-            shapesToolStripMenuItem.Text = "Shapes";
-            // 
-            // addRectangleToolStripMenuItem
-            // 
-            addRectangleToolStripMenuItem.Name = "addRectangleToolStripMenuItem";
-            addRectangleToolStripMenuItem.Size = new Size(172, 22);
-            addRectangleToolStripMenuItem.Text = "Add Rectangle";
-            // 
-            // addCircleToolStripMenuItem
-            // 
-            addCircleToolStripMenuItem.Name = "addCircleToolStripMenuItem";
-            addCircleToolStripMenuItem.Size = new Size(172, 22);
-            addCircleToolStripMenuItem.Text = "Add Circle";
-            // 
-            // addTriangleToolStripMenuItem
-            // 
-            addTriangleToolStripMenuItem.Name = "addTriangleToolStripMenuItem";
-            addTriangleToolStripMenuItem.Size = new Size(172, 22);
-            addTriangleToolStripMenuItem.Text = "Add Triangle";
-            // 
-            // addRhombusToolStripMenuItem
-            // 
-            addRhombusToolStripMenuItem.Name = "addRhombusToolStripMenuItem";
-            addRhombusToolStripMenuItem.Size = new Size(172, 22);
-            addRhombusToolStripMenuItem.Text = "Add Rhombus";
-            // 
-            // addParallelogramToolStripMenuItem
-            // 
-            addParallelogramToolStripMenuItem.Name = "addParallelogramToolStripMenuItem";
-            addParallelogramToolStripMenuItem.Size = new Size(172, 22);
-            addParallelogramToolStripMenuItem.Text = "Add Parallelogram";
-            // 
-            // addTrapezoidToolStripMenuItem
-            // 
-            addTrapezoidToolStripMenuItem.Name = "addTrapezoidToolStripMenuItem";
-            addTrapezoidToolStripMenuItem.Size = new Size(172, 22);
-            addTrapezoidToolStripMenuItem.Text = "Add Trapezoid";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // toolStrip
             // 
             toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripSeparator3, undoToolStripButton, toolStripSeparator7, redoToolStripButton, toolStripSeparator8, editToolStripButton, toolStripSeparator6, deleteStripButton, toolStripSeparator1, fillColorToolStripComboBox, toolStripSeparator2, borderColorToolStripComboBox, applyToolStripButton });
             toolStrip.Location = new Point(0, 24);
             toolStrip.Name = "toolStrip";
+            toolStrip.RenderMode = ToolStripRenderMode.Professional;
             toolStrip.Size = new Size(1209, 25);
             toolStrip.TabIndex = 4;
             toolStrip.Text = "toolStrip1";
@@ -356,6 +270,7 @@
             applyToolStripButton.Name = "applyToolStripButton";
             applyToolStripButton.Size = new Size(58, 22);
             applyToolStripButton.Text = "Apply";
+            applyToolStripButton.Click += applyToolStripButton_Click;
             // 
             // Form1
             // 
@@ -386,19 +301,6 @@
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripMenuItem loadToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
-        private ToolStripMenuItem editToolStripMenuItem;
-        private ToolStripMenuItem undoToolStripMenuItem;
-        private ToolStripMenuItem redoToolStripMenuItem;
-        private ToolStripMenuItem deleteShapeToolStripMenuItem;
-        private ToolStripMenuItem changeFillColorToolStripMenuItem;
-        private ToolStripMenuItem changeBorderColorToolStripMenuItem;
-        private ToolStripMenuItem shapesToolStripMenuItem;
-        private ToolStripMenuItem addRectangleToolStripMenuItem;
-        private ToolStripMenuItem addCircleToolStripMenuItem;
-        private ToolStripMenuItem addTriangleToolStripMenuItem;
-        private ToolStripMenuItem addRhombusToolStripMenuItem;
-        private ToolStripMenuItem addParallelogramToolStripMenuItem;
-        private ToolStripMenuItem addTrapezoidToolStripMenuItem;
         private ToolStripDropDownButton toolStripDropDownButton1;
         private ToolStripMenuItem rectangleToolStripMenuItem;
         private ToolStripMenuItem circleToolStripMenuItem;

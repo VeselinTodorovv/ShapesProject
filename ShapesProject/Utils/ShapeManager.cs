@@ -44,6 +44,7 @@ public class ShapeManager
         command.Undo();
 
         _redoStack.Push(command);
+        
         OnCommandExecuted();
     }
 
@@ -57,6 +58,7 @@ public class ShapeManager
         var command = _redoStack.Pop();
         command.Redo();
         _commandHistory.Push(command);
+
         OnCommandExecuted();
     }
 

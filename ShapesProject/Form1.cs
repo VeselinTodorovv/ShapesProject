@@ -54,7 +54,7 @@ public partial class Form1 : Form
 
     }
 
-    private void whatToolStripMenuItem_Click(object sender, EventArgs e)
+    private void fileToolStripMenuItem_Click(object sender, EventArgs e)
     {
 
     }
@@ -91,7 +91,6 @@ public partial class Form1 : Form
 
         var command = new AddShapeCommand(_shapeManager, triangle);
         _shapeManager.ExecuteCommand(command);
-
     }
 
     private void rhombusToolStripMenuItem_Click(object sender, EventArgs e)
@@ -129,33 +128,12 @@ public partial class Form1 : Form
         {
             return;
         }
-        
+
         var selectCommand = new SelectCommand(newSelection, true);
 
         _shapeManager.ExecuteCommand(selectCommand);
         _dragStartPosition = e.Location;
         _isDragging = true;
-    }
-
-    private void scenePanel_MouseUp(object? sender, MouseEventArgs e)
-    {
-        var selectedShape = _shapeManager.SelectedShape;
-        
-        if (_isDragging && selectedShape != null)
-        {
-            // Clear
-            selectedShape.TempOffsetX = 0;
-            selectedShape.TempOffsetY = 0;
-
-            if (_currentMoveCommand != null)
-            {
-                _shapeManager.ExecuteCommand(_currentMoveCommand);
-            }
-        }
-
-        _currentMoveCommand = null;
-        _isDragging = false;
-        _dragStartPosition = Point.Empty;
     }
 
     private void scenePanel_MouseMove(object? sender, MouseEventArgs e)
@@ -182,13 +160,34 @@ public partial class Form1 : Form
         {
             _currentMoveCommand.AccumulateMovement(dx, dy);
         }
-        
+
         selectedShape.TempOffsetX = _currentMoveCommand.TotalDx;
         selectedShape.TempOffsetY = _currentMoveCommand.TotalDy;
 
         _dragStartPosition = e.Location;
 
         scenePanel.Invalidate();
+    }
+
+    private void scenePanel_MouseUp(object? sender, MouseEventArgs e)
+    {
+        var selectedShape = _shapeManager.SelectedShape;
+
+        if (_isDragging && selectedShape != null)
+        {
+            // Clear
+            selectedShape.TempOffsetX = 0;
+            selectedShape.TempOffsetY = 0;
+
+            if (_currentMoveCommand != null)
+            {
+                _shapeManager.ExecuteCommand(_currentMoveCommand);
+            }
+        }
+
+        _currentMoveCommand = null;
+        _isDragging = false;
+        _dragStartPosition = Point.Empty;
     }
 
     private void editToolStripButton_Click(object? sender, EventArgs e)
@@ -206,22 +205,71 @@ public partial class Form1 : Form
 
     private void deleteStripButton_Click(object sender, EventArgs e)
     {
-        if (_shapeManager.SelectedShape == null)
+        var selectedShape = _shapeManager.SelectedShape;
+        if (selectedShape == null)
         {
             return;
         }
 
-        var deleteCommand = new DeleteShapeCommand(_shapeManager, _shapeManager.SelectedShape);
+        var deleteCommand = new DeleteShapeCommand(_shapeManager, selectedShape);
         _shapeManager.ExecuteCommand(deleteCommand);
     }
 
     private void fillColorToolStripComboBox_Click(object sender, EventArgs e)
     {
-
     }
 
     private void borderColorToolStripComboBox_Click(object sender, EventArgs e)
     {
 
+    }
+
+    private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void newToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+    }
+
+    private void applyToolStripButton_Click(object sender, EventArgs e)
+    {
+        var selectedShape = _shapeManager.SelectedShape;
+        if (selectedShape == null)
+        {
+            return;
+        }
+
+        string? selectedfillColorName = fillColorToolStripComboBox.SelectedItem?.ToString();
+        if (selectedfillColorName == null)
+        {
+            return;
+        }
+
+        string? selectedBorderColorName = borderColorToolStripComboBox.SelectedItem?.ToString();
+        if (selectedBorderColorName == null)
+        {
+            return;
+        }
+
+        var fillColor = Color.FromName(selectedfillColorName);
+        var borderColor = Color.FromName(selectedBorderColorName);
+
+        selectedShape.FillColor = fillColor;
+        selectedShape.BorderColor = borderColor;
+
+        // TODO: Add a command for color change action
+        scenePanel.Invalidate();
     }
 }
