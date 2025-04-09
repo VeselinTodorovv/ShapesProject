@@ -79,5 +79,5 @@ public class Trapezoid : Shape
                p.Y >= Y && p.Y <= Y + Height;
     }
     public override Shape Clone() => throw new NotImplementedException();
-    public override ICommand CreateEditCommand(Shape oldCircle) => throw new NotImplementedException();
+    public override ICommand CreateEditCommand(Shape oldShape) => throw new NotImplementedException();
 }

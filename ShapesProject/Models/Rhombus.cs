@@ -1,5 +1,6 @@
 ﻿using System.Drawing.Drawing2D;
 using ShapesProject.Utils.Commands.Core;
+using ShapesProject.Utils.Commands.Edit;
 
 namespace ShapesProject.Models;
 
@@ -76,6 +77,33 @@ public class Rhombus : Shape
         return p.X >= X - Diagonal2 / 2 && p.X <= X + Diagonal2 / 2 &&
                p.Y >= Y - Diagonal1 / 2 && p.Y <= Y + Diagonal1 / 2;
     }
-    public override Shape Clone() => throw new NotImplementedException();
-    public override ICommand CreateEditCommand(Shape oldCircle) => throw new NotImplementedException();
+    public override Shape Clone()
+    {
+        var clone = new Rhombus(X, Y, Diagonal1, Diagonal2)
+        {
+            FillColor = FillColor,
+            BorderColor = BorderColor,
+            IsSelected = IsSelected,
+            TempOffsetX = TempOffsetX,
+            TempOffsetY = TempOffsetY,
+        };
+        
+        return clone;
+    }
+
+    public override ICommand CreateEditCommand(Shape oldShape)
+    {
+        if (oldShape is not Rhombus rhombus)
+        {
+            throw new ArgumentException("Invalid shape type.");
+        }
+
+        return new EditRhombusCommand(
+            this,
+            rhombus.Diagonal1, this.Diagonal1,
+            rhombus.Diagonal2, this.Diagonal2,
+            rhombus.FillColor, this.FillColor,
+            rhombus.BorderColor, this.BorderColor
+        );
+    }
 }

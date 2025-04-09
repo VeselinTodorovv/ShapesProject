@@ -43,6 +43,5 @@ public abstract class Shape
     protected virtual int SelectionBorderWidth => 2;
     
     public abstract Shape Clone();
-    public abstract ICommand CreateEditCommand(Shape oldCircle);
-
+    public abstract ICommand CreateEditCommand(Shape oldShape);
 }

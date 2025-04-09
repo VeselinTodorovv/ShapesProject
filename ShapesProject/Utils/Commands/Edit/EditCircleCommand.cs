@@ -16,13 +16,18 @@ internal class EditCircleCommand : CommandBase
     private readonly Color _oldBorder;
     private readonly Color _newBorder;
     
-    public EditCircleCommand(Circle circle, int oldRadius, int newRadius, Color oldFill, Color newFill, Color oldBorder, Color newBorder)
+    public EditCircleCommand(Circle circle, int oldRadius, int newRadius,
+        Color oldFill, Color newFill, Color oldBorder, Color newBorder)
     {
-        _circle = circle ?? throw new ArgumentNullException(nameof(circle));
+        _circle = circle
+                  ?? throw new ArgumentNullException(nameof(circle));
+
         _oldRadius = oldRadius;
         _newRadius = newRadius;
+        
         _oldFill = oldFill;
         _newFill = newFill;
+        
         _oldBorder = oldBorder;
         _newBorder = newBorder;
     }
@@ -33,6 +38,7 @@ internal class EditCircleCommand : CommandBase
         _circle.FillColor = _newFill;
         _circle.BorderColor = _newBorder;
     }
+    
     public override void Undo()
     {
         _circle.EditSize(_oldRadius);

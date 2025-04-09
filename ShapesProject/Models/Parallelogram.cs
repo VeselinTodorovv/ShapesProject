@@ -79,5 +79,5 @@ public class Parallelogram : Shape
                p.Y >= Y - Height && p.Y <= Y;
     }
     public override Shape Clone() => throw new NotImplementedException();
-    public override ICommand CreateEditCommand(Shape oldCircle) => throw new NotImplementedException();
+    public override ICommand CreateEditCommand(Shape oldShape) => throw new NotImplementedException();
 }

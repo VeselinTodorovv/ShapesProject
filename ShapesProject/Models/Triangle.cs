@@ -101,5 +101,5 @@ public class Triangle : Shape
         return Math.Abs(area - (area1 + area2 + area3)) < tolerance;
     }
     public override Shape Clone() => throw new NotImplementedException();
-    public override ICommand CreateEditCommand(Shape oldCircle) => throw new NotImplementedException();
+    public override ICommand CreateEditCommand(Shape oldShape) => throw new NotImplementedException();
 }

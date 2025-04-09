@@ -75,18 +75,18 @@ public class Circle : Shape
         
         return clone;
     }
-    public override ICommand CreateEditCommand(Shape oldCircle)
+    public override ICommand CreateEditCommand(Shape oldShape)
     {
-        if (oldCircle is not Circle circle)
+        if (oldShape is not Circle circle)
         {
             throw new ArgumentException("Invalid shape type.");
         }
         
         return new EditCircleCommand(
-        this,
-        circle.Radius, this.Radius,
-        circle.FillColor, this.FillColor,
-        circle.BorderColor, this.BorderColor
+            this,
+            circle.Radius, this.Radius,
+            circle.FillColor, this.FillColor,
+            circle.BorderColor, this.BorderColor
         );
     }
 }
