@@ -5,7 +5,7 @@ namespace ShapesProject.Models;
 
 public class Circle : Shape
 {
-    public int Radius { get; protected internal set; }
+    public int Radius { get; set; }
 
     public Circle(int x, int y, int radius) : base(x, y)
     {

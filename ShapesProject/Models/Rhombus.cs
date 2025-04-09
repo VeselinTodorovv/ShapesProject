@@ -4,8 +4,8 @@ namespace ShapesProject.Models;
 
 public class Rhombus : Shape
 {
-    public int Diagonal1 { get; protected set; }
-    public int Diagonal2 { get; protected set; }
+    public int Diagonal1 { get; set; }
+    public int Diagonal2 { get; set; }
 
     public Rhombus(int x, int y, int diagonal1, int diagonal2) : base(x, y)
     {

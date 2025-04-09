@@ -120,6 +120,11 @@ public partial class Form1 : Form
 
     private void scenePanel_MouseDown(object? sender, MouseEventArgs e)
     {
+        if (e.Button != MouseButtons.Left)
+        {
+            return;
+        }
+
         _shapeManager.ClearSelection();
 
         var newSelection = _shapeManager.GetShapes()
@@ -133,7 +138,7 @@ public partial class Form1 : Form
         var selectCommand = new SelectCommand(newSelection, true);
 
         _shapeManager.ExecuteCommand(selectCommand);
-        
+
         _dragStartPosition = e.Location;
         _isDragging = true;
     }
@@ -233,13 +238,13 @@ public partial class Form1 : Form
         {
             return;
         }
-        
+
         using var colorDialog = new ColorDialog();
         if (colorDialog.ShowDialog() != DialogResult.OK)
         {
             return;
         }
-        
+
         var command = new ChangeFillColorCommand(selectedShape, colorDialog.Color);
         _shapeManager.ExecuteCommand(command);
     }
@@ -257,7 +262,7 @@ public partial class Form1 : Form
         {
             return;
         }
-        
+
         var command = new ChangeBorderColorCommand(selectedShape, colorDialog.Color);
         _shapeManager.ExecuteCommand(command);
     }

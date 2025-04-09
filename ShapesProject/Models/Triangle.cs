@@ -4,9 +4,9 @@ namespace ShapesProject.Models;
 
 public class Triangle : Shape
 {
-    public Point Point1 { get; protected set; }
-    public Point Point2 { get; protected set; }
-    public Point Point3 { get; protected set; }
+    public Point Point1 { get; set; }
+    public Point Point2 { get; set; }
+    public Point Point3 { get; set; }
 
     public Triangle(Point point1, Point point2, Point point3) : base(point1.X, point1.Y)
     {

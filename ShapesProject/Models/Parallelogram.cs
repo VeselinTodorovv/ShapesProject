@@ -4,9 +4,9 @@ namespace ShapesProject.Models;
 
 public class Parallelogram : Shape
 {
-    public int Base { get; protected set; }
-    public int Height { get; protected set; }
-    public int Side { get; protected set; }
+    public int Base { get; set; }
+    public int Height { get; set; }
+    public int Side { get; set; }
 
     public Parallelogram(int x, int y, int baseLength, int height, int side) : base(x, y)
     {

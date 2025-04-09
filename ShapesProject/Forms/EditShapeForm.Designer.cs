@@ -37,10 +37,13 @@ partial class EditShapeForm
         // 
         // propertyGrid1
         // 
+        propertyGrid1.HelpVisible = false;
         propertyGrid1.Location = new Point(12, 12);
         propertyGrid1.Name = "propertyGrid1";
+        propertyGrid1.PropertySort = PropertySort.Categorized;
         propertyGrid1.Size = new Size(324, 278);
         propertyGrid1.TabIndex = 0;
+        propertyGrid1.ToolbarVisible = false;
         propertyGrid1.Click += propertyGrid1_Click;
         // 
         // btnApply
@@ -61,16 +64,20 @@ partial class EditShapeForm
         btnCancel.TabIndex = 2;
         btnCancel.Text = "Cancel";
         btnCancel.UseVisualStyleBackColor = true;
+        btnCancel.Click += btnCancel_Click;
         // 
         // EditShapeForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
+        AutoSize = true;
+        AutoSizeMode = AutoSizeMode.GrowAndShrink;
         ClientSize = new Size(348, 331);
         Controls.Add(btnCancel);
         Controls.Add(btnApply);
         Controls.Add(propertyGrid1);
         Name = "EditShapeForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "EditShapeForm";
         ResumeLayout(false);
     }

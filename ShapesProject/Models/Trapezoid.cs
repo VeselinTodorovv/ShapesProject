@@ -4,9 +4,9 @@ namespace ShapesProject.Models;
 
 public class Trapezoid : Shape
 {
-    public int Base1 { get; protected set; }
-    public int Base2 { get; protected set; }
-    public int Height { get; protected set; }
+    public int Base1 { get; set; }
+    public int Base2 { get; set; }
+    public int Height { get; set; }
 
     public Trapezoid(int x, int y, int base1, int base2, int height) : base(x, y)
     {

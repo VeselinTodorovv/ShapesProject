@@ -4,9 +4,9 @@ namespace ShapesProject.Models;
 
 public class RectangleShape : Shape
 {
-    public int Width { get; protected set; }
+    public int Width { get; set; }
 
-    public int Height { get; protected set; }
+    public int Height { get; set; }
 
     public RectangleShape(int x, int y, int width, int height) : base(x, y)
     {

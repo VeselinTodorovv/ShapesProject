@@ -1,23 +1,33 @@
-﻿namespace ShapesProject.Models;
+﻿using System.ComponentModel;
+
+namespace ShapesProject.Models;
 
 public abstract class Shape
 {
     public int X { get; protected set; }
 
     public int Y { get; protected set; }
-    
-    public int TempOffsetX { get; set; }
-    public int TempOffsetY { get; set; }
+
+    public int TempOffsetX { get; internal set; }
+
+    public int TempOffsetY { get; internal set; }
 
     public Color FillColor { get; set; } = Color.White;
 
     public Color BorderColor { get; set; } = Color.Black;
-    public bool IsSelected { get; set; }
+
+    public bool IsSelected { get; internal set; }
 
     protected Shape(int x, int y)
     {
         X = x;
         Y = y;
+    }
+
+    internal virtual void SetTempOffset(int tempOffsetX, int tempOffsetY)
+    {
+        TempOffsetX = tempOffsetX;
+        TempOffsetY = tempOffsetY;
     }
     
     protected Point GetDrawingPosition() => new(X + TempOffsetX, Y + TempOffsetY);
