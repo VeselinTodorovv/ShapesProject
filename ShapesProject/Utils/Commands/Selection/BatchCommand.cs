@@ -1,6 +1,8 @@
-﻿namespace ShapesProject.Utils.Commands;
+﻿using ShapesProject.Utils.Commands.Core;
 
-class BatchCommand : ICommand
+namespace ShapesProject.Utils.Commands.Selection;
+
+internal class BatchCommand : ICommand
 {
     private readonly List<ICommand> _commands;
 

@@ -1,8 +1,9 @@
 ﻿using ShapesProject.Models;
+using ShapesProject.Utils.Commands.Core;
 
-namespace ShapesProject.Utils.Commands;
+namespace ShapesProject.Utils.Commands.AddRemove;
 
-class AddShapeCommand : CommandBase
+internal class AddShapeCommand : CommandBase
 {
     private readonly ShapeManager _manager;
     private readonly Shape _shape;

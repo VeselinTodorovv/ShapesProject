@@ -1,5 +1,6 @@
 ﻿using ShapesProject.Models;
-using ShapesProject.Utils.Commands;
+using ShapesProject.Utils.Commands.Core;
+using ShapesProject.Utils.Commands.Selection;
 
 namespace ShapesProject.Utils;
 
@@ -21,6 +22,7 @@ public class ShapeManager
     public void ExecuteCommand(ICommand command)
     {
         command.Execute();
+
         _commandHistory.Push(command);
         _redoStack.Clear();
 
@@ -28,7 +30,7 @@ public class ShapeManager
         {
             OnSelectionChanged(SelectedShape);
         }
-        
+
         CommandExecuted?.Invoke(this, EventArgs.Empty);
     }
 
@@ -43,6 +45,7 @@ public class ShapeManager
         command.Undo();
 
         _redoStack.Push(command);
+        
         OnCommandExecuted();
     }
 
@@ -56,6 +59,7 @@ public class ShapeManager
         var command = _redoStack.Pop();
         command.Redo();
         _commandHistory.Push(command);
+
         OnCommandExecuted();
     }
 

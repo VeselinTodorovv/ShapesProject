@@ -1,12 +1,14 @@
 ﻿using System.Drawing.Drawing2D;
+using ShapesProject.Utils.Commands.Core;
+using ShapesProject.Utils.Commands.Edit;
 
 namespace ShapesProject.Models;
 
 public class RectangleShape : Shape
 {
-    public int Width { get; protected set; }
+    public int Width { get; set; }
 
-    public int Height { get; protected set; }
+    public int Height { get; set; }
 
     public RectangleShape(int x, int y, int width, int height) : base(x, y)
     {
@@ -15,34 +17,6 @@ public class RectangleShape : Shape
 
         Width = width;
         Height = height;
-    }
-
-    public override double CalculateArea() => Width * Height;
-
-    public override void Draw(Graphics g)
-    {
-        using Pen pen = new(BorderColor);
-        using SolidBrush brush = new(FillColor);
-
-        g.FillRectangle(brush, X, Y, Width, Height);
-        g.DrawRectangle(pen, X, Y, Width, Height);
-
-        if (!IsSelected)
-        {
-            return;
-        }
-        
-        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-        selectionPen.DashStyle = DashStyle.Dash;
-
-        var rect = new Rectangle(
-        X - SelectionBorderWidth,
-        Y - SelectionBorderWidth,
-        Width + 2 * SelectionBorderWidth,
-        Height + 2 * SelectionBorderWidth
-        );
-
-        g.DrawRectangle(selectionPen, rect);
     }
 
     public override void EditSize(params int[] parameters)
@@ -57,9 +31,69 @@ public class RectangleShape : Shape
             throw new ArgumentException("Width and Height must be positive.");
         }
     }
+    public override double CalculateArea() => Width * Height;
+
+    public override void Draw(Graphics g)
+    {
+        var pos = GetDrawingPosition();
+        using Pen pen = new(BorderColor);
+        using SolidBrush brush = new(FillColor);
+
+        g.FillRectangle(brush, pos.X, pos.Y, Width, Height);
+        g.DrawRectangle(pen, pos.X, pos.Y, Width, Height);
+
+        if (!IsSelected)
+        {
+            return;
+        }
+        
+        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+        selectionPen.DashStyle = DashStyle.Dash;
+
+        var rect = new Rectangle(pos.X - SelectionBorderWidth, pos.Y - SelectionBorderWidth,
+        Width + 2 * SelectionBorderWidth,
+        Height + 2 * SelectionBorderWidth
+        );
+
+        g.DrawRectangle(selectionPen, rect);
+    }
 
     public override bool Contains(Point p)
     {
-        return p.X >= X && p.X <= X + Width && p.Y >= Y && p.Y <= Y + Height;
+        var pos = GetDrawingPosition();
+
+        return p.X >= pos.X && p.X <= pos.X + Width &&
+               p.Y >= pos.Y && p.Y <= pos.Y + Height;
+    }
+    
+    public override Shape Clone()
+    {
+        var clone = new RectangleShape(X, Y, Width, Height)
+        {
+            FillColor = FillColor,
+            BorderColor = BorderColor,
+            IsSelected = IsSelected,
+            TempOffsetX = TempOffsetX,
+            TempOffsetY = TempOffsetY
+        };
+        
+        return clone;
+
+    }
+    
+    public override ICommand CreateEditCommand(Shape oldShape)
+    {
+        if (oldShape is not RectangleShape rectangle)
+        {
+            throw new ArgumentException("Invalid shape type.");
+        }
+        
+        return new EditRectangleCommand(
+            this,
+            rectangle.Width, this.Width,
+            rectangle.Height, this.Height,
+            rectangle.FillColor, this.FillColor,
+            rectangle.BorderColor, this.BorderColor
+        );
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ShapesProject.Utils.Commands;
+﻿namespace ShapesProject.Utils.Commands.Core;
 
 public interface ICommand
 {

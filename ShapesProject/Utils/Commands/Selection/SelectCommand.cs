@@ -1,8 +1,9 @@
 ﻿using ShapesProject.Models;
+using ShapesProject.Utils.Commands.Core;
 
-namespace ShapesProject.Utils.Commands;
+namespace ShapesProject.Utils.Commands.Selection;
 
-class SelectCommand : CommandBase
+internal class SelectCommand : CommandBase
 {
     private readonly Shape _shape;
     private readonly bool _newState;

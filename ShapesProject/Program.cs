@@ -1,3 +1,5 @@
+using ShapesProject.Forms;
+
 namespace ShapesProject;
 
 internal static class Program

@@ -1,11 +1,13 @@
 ﻿
 using System.Drawing.Drawing2D;
+using ShapesProject.Utils.Commands.Core;
+using ShapesProject.Utils.Commands.Edit;
 
 namespace ShapesProject.Models;
 
 public class Circle : Shape
 {
-    public int Radius { get; protected set; }
+    public int Radius { get; set; }
 
     public Circle(int x, int y, int radius) : base(x, y)
     {
@@ -15,29 +17,6 @@ public class Circle : Shape
         }
 
         Radius = radius;
-    }
-
-    public override double CalculateArea() => Math.PI * Radius * Radius;
-
-    public override void Draw(Graphics g)
-    {
-        using Pen pen = new(BorderColor);
-        using SolidBrush brush = new(FillColor);
-        int diameter = 2 * Radius;
-
-        g.FillEllipse(brush, X - Radius, Y - Radius, diameter, diameter);
-        g.DrawEllipse(pen, X - Radius, Y - Radius, diameter, diameter);
-
-        if (!IsSelected)
-        {
-            return;
-        }
-        
-        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-        selectionPen.DashStyle = DashStyle.Dash;
-
-        g.DrawEllipse(selectionPen, X - Radius - SelectionBorderWidth, Y - Radius - SelectionBorderWidth,
-        diameter + 2 * SelectionBorderWidth, diameter + 2 * SelectionBorderWidth);
     }
 
     public override void EditSize(params int[] parameters)
@@ -51,10 +30,65 @@ public class Circle : Shape
             throw new ArgumentException("Radius must be positive .");
         }
     }
+    public override double CalculateArea() => Math.PI * Radius * Radius;
+
+    public override void Draw(Graphics g)
+    {
+        var pos = GetDrawingPosition();
+        int diameter = 2 * Radius;
+
+        using Pen pen = new(BorderColor);
+        using SolidBrush brush = new(FillColor);
+
+        g.FillEllipse(brush, pos.X - Radius, pos.Y - Radius, diameter, diameter);
+        g.DrawEllipse(pen, pos.X - Radius, pos.Y - Radius, diameter, diameter);
+
+        if (!IsSelected)
+        {
+            return;
+        }
+        
+        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
+        selectionPen.DashStyle = DashStyle.Dash;
+        
+        g.DrawEllipse(selectionPen, pos.X - Radius - SelectionBorderWidth, pos.Y - Radius - SelectionBorderWidth, 
+        diameter + 2 * SelectionBorderWidth, diameter + 2 * SelectionBorderWidth);
+    }
 
     public override bool Contains(Point p)
     {
-        double distance = Math.Sqrt(Math.Pow(p.X - X, 2) + Math.Pow(p.Y - Y, 2));
+        var pos = GetDrawingPosition();
+        double distance = Math.Sqrt(Math.Pow(p.X - pos.X, 2) + Math.Pow(p.Y - pos.Y, 2));
+
         return distance <= Radius;
+    }
+    
+    public override Shape Clone()
+    {
+        var clone = new Circle(X, Y, Radius)
+        {
+            FillColor = FillColor,
+            BorderColor = BorderColor,
+            IsSelected = IsSelected,
+            TempOffsetX = TempOffsetX,
+            TempOffsetY = TempOffsetY
+        };
+        
+        return clone;
+    }
+    
+    public override ICommand CreateEditCommand(Shape oldShape)
+    {
+        if (oldShape is not Circle circle)
+        {
+            throw new ArgumentException("Invalid shape type.");
+        }
+        
+        return new EditCircleCommand(
+            this,
+            circle.Radius, this.Radius,
+            circle.FillColor, this.FillColor,
+            circle.BorderColor, this.BorderColor
+        );
     }
 }

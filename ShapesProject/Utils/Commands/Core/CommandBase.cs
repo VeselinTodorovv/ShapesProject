@@ -1,6 +1,6 @@
-﻿namespace ShapesProject.Utils.Commands;
+﻿namespace ShapesProject.Utils.Commands.Core;
 
-abstract class CommandBase : ICommand
+internal abstract class CommandBase : ICommand
 {
     public abstract void Execute();
     public abstract void Undo();
