@@ -62,6 +62,7 @@ public class Circle : Shape
 
         return distance <= Radius;
     }
+    
     public override Shape Clone()
     {
         var clone = new Circle(X, Y, Radius)
@@ -75,6 +76,7 @@ public class Circle : Shape
         
         return clone;
     }
+    
     public override ICommand CreateEditCommand(Shape oldShape)
     {
         if (oldShape is not Circle circle)

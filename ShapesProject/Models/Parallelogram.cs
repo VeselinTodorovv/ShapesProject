@@ -1,5 +1,6 @@
 ﻿using System.Drawing.Drawing2D;
 using ShapesProject.Utils.Commands.Core;
+using ShapesProject.Utils.Commands.Edit;
 
 namespace ShapesProject.Models;
 
@@ -78,6 +79,35 @@ public class Parallelogram : Shape
         return p.X >= X - Side && p.X <= X + Base &&
                p.Y >= Y - Height && p.Y <= Y;
     }
-    public override Shape Clone() => throw new NotImplementedException();
-    public override ICommand CreateEditCommand(Shape oldShape) => throw new NotImplementedException();
+    
+    public override Shape Clone()
+    {
+        var clone = new Parallelogram(X, Y, Base, Height, Side)
+        {
+            FillColor = FillColor,
+            BorderColor = BorderColor,
+            IsSelected = IsSelected,
+            TempOffsetX = TempOffsetX,
+            TempOffsetY = TempOffsetY
+        };
+        
+        return clone;
+    }
+    
+    public override ICommand CreateEditCommand(Shape oldShape)
+    {
+        if (oldShape is not Parallelogram parallelogram)
+        {
+            throw new ArgumentException("Invalid shape type.");
+        }
+        
+        return new EditParallelogramCommand(
+            this,
+            parallelogram.Base, this.Base,
+            parallelogram.Height, this.Height,
+            parallelogram.Side, this.Side,
+            parallelogram.FillColor, this.FillColor,
+            parallelogram.BorderColor, this.BorderColor
+        );
+    }
 }

@@ -65,6 +65,7 @@ public class RectangleShape : Shape
         return p.X >= pos.X && p.X <= pos.X + Width &&
                p.Y >= pos.Y && p.Y <= pos.Y + Height;
     }
+    
     public override Shape Clone()
     {
         var clone = new RectangleShape(X, Y, Width, Height)
@@ -79,6 +80,7 @@ public class RectangleShape : Shape
         return clone;
 
     }
+    
     public override ICommand CreateEditCommand(Shape oldShape)
     {
         if (oldShape is not RectangleShape rectangle)

@@ -100,6 +100,8 @@ public class Triangle : Shape
         const double tolerance = 0.01;
         return Math.Abs(area - (area1 + area2 + area3)) < tolerance;
     }
+    
     public override Shape Clone() => throw new NotImplementedException();
+    
     public override ICommand CreateEditCommand(Shape oldShape) => throw new NotImplementedException();
 }

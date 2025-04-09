@@ -77,6 +77,7 @@ public class Rhombus : Shape
         return p.X >= X - Diagonal2 / 2 && p.X <= X + Diagonal2 / 2 &&
                p.Y >= Y - Diagonal1 / 2 && p.Y <= Y + Diagonal1 / 2;
     }
+    
     public override Shape Clone()
     {
         var clone = new Rhombus(X, Y, Diagonal1, Diagonal2)
