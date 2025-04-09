@@ -1,4 +1,5 @@
 ﻿using System.Drawing.Drawing2D;
+using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Models;
 
@@ -20,6 +21,19 @@ public class Parallelogram : Shape
         Side = side;
     }
 
+    public override void EditSize(params int[] parameters)
+    {
+        if (parameters.Length == 3 && parameters[0] > 0 && parameters[1] > 0 && parameters[2] > 0)
+        {
+            Base = parameters[0];
+            Height = parameters[1];
+            Side = parameters[2];
+        }
+        else
+        {
+            throw new ArgumentException("Invalid parameters for parallelogram. Provide base, height, and side length.");
+        }
+    }
     public override double CalculateArea() => Base * Height;
 
     public override void Draw(Graphics g)
@@ -64,4 +78,6 @@ public class Parallelogram : Shape
         return p.X >= X - Side && p.X <= X + Base &&
                p.Y >= Y - Height && p.Y <= Y;
     }
+    public override Shape Clone() => throw new NotImplementedException();
+    public override ICommand CreateEditCommand(Shape oldCircle) => throw new NotImplementedException();
 }

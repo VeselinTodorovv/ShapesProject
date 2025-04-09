@@ -1,4 +1,5 @@
 ﻿using System.Drawing.Drawing2D;
+using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Models;
 
@@ -20,6 +21,19 @@ public class Trapezoid : Shape
         Height = height;
     }
 
+    public override void EditSize(params int[] parameters)
+    {
+        if (parameters.Length == 3 && parameters[0] > 0 && parameters[1] > 0 && parameters[2] > 0)
+        {
+            Base1 = parameters[0];
+            Base2 = parameters[1];
+            Height = parameters[2];
+        }
+        else
+        {
+            throw new ArgumentException("Values must be positive.");
+        }
+    }
     public override double CalculateArea() => (Base1 + Base2) * Height / 2.0;
 
     public override void Draw(Graphics g)
@@ -64,4 +78,6 @@ public class Trapezoid : Shape
         return p.X >= X && p.X <= X + Math.Max(Base1, Base2) &&
                p.Y >= Y && p.Y <= Y + Height;
     }
+    public override Shape Clone() => throw new NotImplementedException();
+    public override ICommand CreateEditCommand(Shape oldCircle) => throw new NotImplementedException();
 }

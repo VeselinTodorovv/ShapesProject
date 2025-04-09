@@ -29,8 +29,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Utils\Commands\Edit\" />
-  </ItemGroup>
-
 </Project>

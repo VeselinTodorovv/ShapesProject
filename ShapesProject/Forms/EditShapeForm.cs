@@ -17,11 +17,6 @@ public partial class EditShapeForm : Form
         btnCancel.Click += btnCancel_Click!;
     }
 
-    private void propertyGrid1_Click(object? sender, EventArgs e)
-    {
-
-    }
-
     private void btnApply_Click(object? sender, EventArgs e)
     {
         DialogResult = DialogResult.OK;

@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Models;
 
@@ -24,11 +24,7 @@ public abstract class Shape
         Y = y;
     }
 
-    internal virtual void SetTempOffset(int tempOffsetX, int tempOffsetY)
-    {
-        TempOffsetX = tempOffsetX;
-        TempOffsetY = tempOffsetY;
-    }
+    public abstract void EditSize(params int[] parameters);
     
     protected Point GetDrawingPosition() => new(X + TempOffsetX, Y + TempOffsetY);
 
@@ -45,4 +41,8 @@ public abstract class Shape
     public abstract bool Contains(Point p);
 
     protected virtual int SelectionBorderWidth => 2;
+    
+    public abstract Shape Clone();
+    public abstract ICommand CreateEditCommand(Shape oldCircle);
+
 }

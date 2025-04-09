@@ -44,7 +44,6 @@ partial class EditShapeForm
         propertyGrid1.Size = new Size(324, 278);
         propertyGrid1.TabIndex = 0;
         propertyGrid1.ToolbarVisible = false;
-        propertyGrid1.Click += propertyGrid1_Click;
         // 
         // btnApply
         // 

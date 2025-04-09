@@ -1,4 +1,5 @@
 ﻿using System.Drawing.Drawing2D;
+using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Models;
 
@@ -18,6 +19,19 @@ public class Rhombus : Shape
         Diagonal2 = diagonal2;
     }
 
+    public override void EditSize(params int[] parameters)
+    {
+        if (parameters.Length == 2 &&
+            parameters[0] > 0 && parameters[1] > 0)
+        {
+            Diagonal1 = parameters[0];
+            Diagonal2 = parameters[1];
+        }
+        else
+        {
+            throw new ArgumentException("Invalid parameters");
+        }
+    }
     public override double CalculateArea() => Diagonal1 * Diagonal2 / 2.0;
 
     public override void Draw(Graphics g)
@@ -62,4 +76,6 @@ public class Rhombus : Shape
         return p.X >= X - Diagonal2 / 2 && p.X <= X + Diagonal2 / 2 &&
                p.Y >= Y - Diagonal1 / 2 && p.Y <= Y + Diagonal1 / 2;
     }
+    public override Shape Clone() => throw new NotImplementedException();
+    public override ICommand CreateEditCommand(Shape oldCircle) => throw new NotImplementedException();
 }

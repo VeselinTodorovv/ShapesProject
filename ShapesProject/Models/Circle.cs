@@ -1,5 +1,7 @@
 ﻿
 using System.Drawing.Drawing2D;
+using ShapesProject.Utils.Commands.Core;
+using ShapesProject.Utils.Commands.Edit;
 
 namespace ShapesProject.Models;
 
@@ -17,6 +19,17 @@ public class Circle : Shape
         Radius = radius;
     }
 
+    public override void EditSize(params int[] parameters)
+    {
+        if (parameters.Length == 1 && parameters[0] > 0)
+        {
+            Radius = parameters[0];
+        }
+        else
+        {
+            throw new ArgumentException("Radius must be positive .");
+        }
+    }
     public override double CalculateArea() => Math.PI * Radius * Radius;
 
     public override void Draw(Graphics g)
@@ -48,5 +61,32 @@ public class Circle : Shape
         double distance = Math.Sqrt(Math.Pow(p.X - pos.X, 2) + Math.Pow(p.Y - pos.Y, 2));
 
         return distance <= Radius;
+    }
+    public override Shape Clone()
+    {
+        var clone = new Circle(X, Y, Radius)
+        {
+            FillColor = FillColor,
+            BorderColor = BorderColor,
+            IsSelected = IsSelected,
+            TempOffsetX = TempOffsetX,
+            TempOffsetY = TempOffsetY
+        };
+        
+        return clone;
+    }
+    public override ICommand CreateEditCommand(Shape oldCircle)
+    {
+        if (oldCircle is not Circle circle)
+        {
+            throw new ArgumentException("Invalid shape type.");
+        }
+        
+        return new EditCircleCommand(
+        this,
+        circle.Radius, this.Radius,
+        circle.FillColor, this.FillColor,
+        circle.BorderColor, this.BorderColor
+        );
     }
 }

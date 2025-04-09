@@ -1,4 +1,5 @@
 ﻿using System.Drawing.Drawing2D;
+using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Models;
 
@@ -15,6 +16,22 @@ public class Triangle : Shape
         Point3 = point3;
     }
 
+    public override void EditSize(params int[] parameters)
+    {
+        if (parameters.Length == 6)
+        {
+            Point1 = new Point(parameters[0], parameters[1]);
+            Point2 = new Point(parameters[2], parameters[3]);
+            Point3 = new Point(parameters[4], parameters[5]);
+ 
+            X = Point1.X;
+            Y = Point1.Y;
+        }
+        else
+        {
+            throw new ArgumentException("Invalid parameters for triangle.");
+        }
+    }
     public override double CalculateArea()
     {
         return Math.Abs((Point1.X * (Point2.Y - Point3.Y) +
@@ -83,4 +100,6 @@ public class Triangle : Shape
         const double tolerance = 0.01;
         return Math.Abs(area - (area1 + area2 + area3)) < tolerance;
     }
+    public override Shape Clone() => throw new NotImplementedException();
+    public override ICommand CreateEditCommand(Shape oldCircle) => throw new NotImplementedException();
 }
