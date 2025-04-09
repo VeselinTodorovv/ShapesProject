@@ -219,7 +219,7 @@
             editToolStripButton.Name = "editToolStripButton";
             editToolStripButton.Size = new Size(31, 22);
             editToolStripButton.Text = "Edit";
-            editToolStripButton.Click += editToolStripButton_Click;
+            //editToolStripButton.Click += editToolStripButton_Click;
             // 
             // toolStripSeparator6
             // 

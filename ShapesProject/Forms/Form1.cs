@@ -194,6 +194,15 @@ public partial class Form1 : Form
 
     private void editToolStripButton_Click(object? sender, EventArgs e)
     {
+        var selectedShape = _shapeManager.SelectedShape;
+        if (selectedShape == null) return;
+
+        using var editForm = new EditShapeForm(selectedShape);
+        if (editForm.ShowDialog() == DialogResult.OK)
+        {
+            // TODO: Handle property changes through commands
+            scenePanel.Invalidate();
+        }
     }
 
     private void undoToolStripButton_Click(object sender, EventArgs e)
