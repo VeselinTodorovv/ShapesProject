@@ -32,8 +32,6 @@ public abstract class Shape
         Y += y;
     }
 
-    public abstract void EditSize(params int[] parameters);
-
     public abstract bool Contains(Point p);
 
     protected virtual int SelectionBorderWidth => 2;

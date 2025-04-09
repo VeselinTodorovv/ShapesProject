@@ -5,7 +5,7 @@ namespace ShapesProject.Models;
 
 public class Circle : Shape
 {
-    public int Radius { get; protected set; }
+    public int Radius { get; protected internal set; }
 
     public Circle(int x, int y, int radius) : base(x, y)
     {
@@ -40,18 +40,6 @@ public class Circle : Shape
         
         g.DrawEllipse(selectionPen, pos.X - Radius - SelectionBorderWidth, pos.Y - Radius - SelectionBorderWidth, 
         diameter + 2 * SelectionBorderWidth, diameter + 2 * SelectionBorderWidth);
-    }
-
-    public override void EditSize(params int[] parameters)
-    {
-        if (parameters.Length == 1 && parameters[0] > 0)
-        {
-            Radius = parameters[0];
-        }
-        else
-        {
-            throw new ArgumentException("Radius must be positive .");
-        }
     }
 
     public override bool Contains(Point p)

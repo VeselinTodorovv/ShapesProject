@@ -67,23 +67,6 @@ public class Triangle : Shape
         Y = Point1.Y;
     }
 
-    public override void EditSize(params int[] parameters)
-    {
-        if (parameters.Length == 6)
-        {
-            Point1 = new Point(parameters[0], parameters[1]);
-            Point2 = new Point(parameters[2], parameters[3]);
-            Point3 = new Point(parameters[4], parameters[5]);
-
-            X = Point1.X;
-            Y = Point1.Y;
-        }
-        else
-        {
-            throw new ArgumentException("Invalid parameters for triangle.");
-        }
-    }
-
     public override bool Contains(Point p)
     {
         double area = CalculateArea();

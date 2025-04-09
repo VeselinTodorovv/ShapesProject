@@ -57,20 +57,6 @@ public class Rhombus : Shape
         g.DrawPolygon(selectionPen, selectionPoints);
     }
 
-    public override void EditSize(params int[] parameters)
-    {
-        if (parameters.Length == 2 &&
-            parameters[0] > 0 && parameters[1] > 0)
-        {
-            Diagonal1 = parameters[0];
-            Diagonal2 = parameters[1];
-        }
-        else
-        {
-            throw new ArgumentException("Invalid parameters");
-        }
-    }
-
     public override bool Contains(Point p)
     {
         return p.X >= X - Diagonal2 / 2 && p.X <= X + Diagonal2 / 2 &&

@@ -59,20 +59,6 @@ public class Trapezoid : Shape
         g.DrawPolygon(selectionPen, selectionPoints);
     }
 
-    public override void EditSize(params int[] parameters)
-    {
-        if (parameters.Length == 3 && parameters[0] > 0 && parameters[1] > 0 && parameters[2] > 0)
-        {
-            Base1 = parameters[0];
-            Base2 = parameters[1];
-            Height = parameters[2];
-        }
-        else
-        {
-            throw new ArgumentException("Values must be positive.");
-        }
-    }
-
     public override bool Contains(Point p)
     {
         return p.X >= X && p.X <= X + Math.Max(Base1, Base2) &&

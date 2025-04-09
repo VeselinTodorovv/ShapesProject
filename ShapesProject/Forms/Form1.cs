@@ -1,13 +1,13 @@
-using ShapesProject.Models;
-using ShapesProject.Utils;
 using System.Drawing.Drawing2D;
 using System.Reflection;
+using ShapesProject.Models;
+using ShapesProject.Utils;
 using ShapesProject.Utils.Commands.AddRemove;
 using ShapesProject.Utils.Commands.Colors;
 using ShapesProject.Utils.Commands.Movement;
 using ShapesProject.Utils.Commands.Selection;
 
-namespace ShapesProject;
+namespace ShapesProject.Forms;
 
 public partial class Form1 : Form
 {
@@ -69,7 +69,7 @@ public partial class Form1 : Form
 
     private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var rectangle = new RectangleShape(0, 0, 100, 50);
+        var rectangle = ShapeFactory.CreateShape("RectangleShape", 0, 0, 100, 50);
 
         var command = new AddShapeCommand(_shapeManager, rectangle);
         _shapeManager.ExecuteCommand(command);
@@ -77,7 +77,7 @@ public partial class Form1 : Form
 
     private void circleToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var circle = new Circle(200, 200, 50);
+        var circle = ShapeFactory.CreateShape("Circle", 200, 200, 50);
 
         var command = new AddShapeCommand(_shapeManager, circle);
         _shapeManager.ExecuteCommand(command);
@@ -85,7 +85,10 @@ public partial class Form1 : Form
 
     private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var triangle = new Triangle(new Point(300, 300), new Point(350, 350), new Point(250, 350));
+        var triangle = ShapeFactory.CreateShape("Triangle",
+                                                        300, 300,   //P1
+                                                        350, 350,   //P2
+                                                        250, 350);  //P3
 
         var command = new AddShapeCommand(_shapeManager, triangle);
         _shapeManager.ExecuteCommand(command);
@@ -93,7 +96,7 @@ public partial class Form1 : Form
 
     private void rhombusToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var rhombus = new Rhombus(250, 250, 120, 120);
+        var rhombus = ShapeFactory.CreateShape("Rhombus", 250, 250, 120, 120);
 
         var command = new AddShapeCommand(_shapeManager, rhombus);
         _shapeManager.ExecuteCommand(command);
@@ -101,7 +104,7 @@ public partial class Form1 : Form
 
     private void parallelogramToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var parallelogram = new Parallelogram(150, 150, 120, 120, 30);
+        var parallelogram = ShapeFactory.CreateShape("Parallelogram", 150, 150, 120, 120, 30);
 
         var command = new AddShapeCommand(_shapeManager, parallelogram);
         _shapeManager.ExecuteCommand(command);
@@ -109,7 +112,7 @@ public partial class Form1 : Form
 
     private void trapezoidToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var trapezoid = new Trapezoid(150, 250, 220, 180, 100);
+        var trapezoid = ShapeFactory.CreateShape("Trapezoid", 150, 250, 220, 180, 100);
 
         var command = new AddShapeCommand(_shapeManager, trapezoid);
         _shapeManager.ExecuteCommand(command);

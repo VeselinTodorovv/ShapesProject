@@ -1,4 +1,4 @@
-﻿namespace ShapesProject
+﻿namespace ShapesProject.Forms
 {
     partial class Form1
     {

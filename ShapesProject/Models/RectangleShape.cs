@@ -44,19 +44,6 @@ public class RectangleShape : Shape
         g.DrawRectangle(selectionPen, rect);
     }
 
-    public override void EditSize(params int[] parameters)
-    {
-        if (parameters.Length == 2 && parameters[0] > 0 && parameters[1] > 0)
-        {
-            Width = parameters[0];
-            Height = parameters[1];
-        }
-        else
-        {
-            throw new ArgumentException("Width and Height must be positive.");
-        }
-    }
-
     public override bool Contains(Point p)
     {
         var pos = GetDrawingPosition();
