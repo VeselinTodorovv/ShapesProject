@@ -30,6 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShapeProject.Application\ShapeProject.Application.csproj" />
+    <ProjectReference Include="..\ShapeProject.Infrastructure\ShapeProject.Infrastructure.csproj" />
     <ProjectReference Include="..\ShapesProject.Domain\ShapesProject.Domain.csproj" />
   </ItemGroup>
 

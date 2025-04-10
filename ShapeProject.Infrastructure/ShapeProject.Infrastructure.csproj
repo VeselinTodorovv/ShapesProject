@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Infrastructure</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ShapeProject.Application\ShapeProject.Application.csproj" />
+      <ProjectReference Include="..\ShapesProject.Domain\ShapesProject.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

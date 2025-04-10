@@ -1,14 +1,18 @@
 using System.Drawing.Drawing2D;
 using System.Reflection;
+using Infrastructure.Factories.Command;
+using Infrastructure.Factories.Shape;
+using ShapeProject.Application.Commands.AddRemove;
+using ShapeProject.Application.Commands.Colors;
+using ShapeProject.Application.Commands.Core;
+using ShapeProject.Application.Commands.Movement;
+using ShapeProject.Application.Commands.Selection;
+using ShapeProject.Application.Services;
 using ShapesProject.Domain.Primitives;
 using ShapesProject.Domain.Shapes;
-using ShapesProject.Forms.CommandFactories;
 using ShapesProject.Utils;
-using ShapesProject.Utils.Commands.AddRemove;
-using ShapesProject.Utils.Commands.Colors;
-using ShapesProject.Utils.Commands.Core;
-using ShapesProject.Utils.Commands.Movement;
-using ShapesProject.Utils.Commands.Selection;
+
+using ColorConverter=Infrastructure.Converters.ColorConverter;
 
 namespace ShapesProject.Forms;
 
@@ -271,12 +275,7 @@ public partial class Form1 : Form
             return;
         }
 
-        var customColor = new CustomColor(
-            colorDialog.Color.R,
-            colorDialog.Color.G,
-            colorDialog.Color.B,
-            colorDialog.Color.A
-        );
+        var customColor = ColorConverter.ToDomainColor(colorDialog.Color);
 
         var command = new ChangeFillColorCommand(selectedShape, customColor);
         _shapeManager.ExecuteCommand(command);
@@ -296,12 +295,7 @@ public partial class Form1 : Form
             return;
         }
 
-        var customColor = new CustomColor(
-            colorDialog.Color.R,
-            colorDialog.Color.G,
-            colorDialog.Color.B,
-            colorDialog.Color.A
-        );
+        var customColor = ColorConverter.ToDomainColor(colorDialog.Color);
 
         var command = new ChangeBorderColorCommand(selectedShape, customColor);
         _shapeManager.ExecuteCommand(command);
