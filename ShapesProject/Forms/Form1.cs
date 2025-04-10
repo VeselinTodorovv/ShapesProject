@@ -1,6 +1,5 @@
 using System.Drawing.Drawing2D;
 using System.Reflection;
-using ShapesProject.Models;
 using ShapesProject.Utils;
 using ShapesProject.Utils.Commands.AddRemove;
 using ShapesProject.Utils.Commands.Colors;

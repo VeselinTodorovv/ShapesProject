@@ -1,6 +1,4 @@
-﻿using ShapesProject.Utils;
-
-namespace ShapesProject.Models;
+﻿namespace ShapesProject.Utils;
 
 public class Scene
 {
