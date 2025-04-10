@@ -1,4 +1,6 @@
-﻿using ShapesProject.Models;
+﻿using System.Drawing;
+using ShapesProject.Domain;
+using ShapesProject.Domain.Primitives;
 using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Edit;
@@ -41,13 +43,21 @@ internal class EditRectangleCommand : CommandBase
     public override void Execute()
     {
         _rectangle.EditSize(_newWidth, _newHeight);
-        _rectangle.FillColor = _newFill;
-        _rectangle.BorderColor = _newBorder;
+        
+        var newFillColor = new CustomColor(_newFill.A, _newFill.R, _newFill.G, _newFill.B);
+        var newBorderColor = new CustomColor(_newBorder.A, _newBorder.R, _newBorder.G, _newBorder.B);
+        
+        _rectangle.FillColor = newFillColor;
+        _rectangle.BorderColor = newBorderColor;
     }
     public override void Undo()
     {
         _rectangle.EditSize(_oldWidth, _oldHeight);
-        _rectangle.FillColor = _oldFill;
-        _rectangle.BorderColor = _oldBorder;
+        
+        var oldFillColor = new CustomColor(_oldFill.A, _oldFill.R, _oldFill.G, _oldFill.B);
+        var oldBorderColor = new CustomColor(_oldBorder.A, _oldBorder.R, _oldBorder.G, _oldBorder.B);
+        
+        _rectangle.FillColor = oldFillColor;
+        _rectangle.BorderColor = oldBorderColor;
     }
 }

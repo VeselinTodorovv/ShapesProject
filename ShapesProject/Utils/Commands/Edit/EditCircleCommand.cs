@@ -1,4 +1,6 @@
-﻿using ShapesProject.Models;
+﻿using System.Drawing;
+using ShapesProject.Domain;
+using ShapesProject.Domain.Primitives;
 using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Edit;
@@ -35,14 +37,22 @@ internal class EditCircleCommand : CommandBase
     public override void Execute()
     {
         _circle.EditSize(_newRadius);
-        _circle.FillColor = _newFill;
-        _circle.BorderColor = _newBorder;
+        
+        var newFillColor = new CustomColor(_newFill.A, _newFill.R, _newFill.G, _newFill.B);
+        var newBorderColor = new CustomColor(_newBorder.A, _newBorder.R, _newBorder.G, _newBorder.B);
+        
+        _circle.FillColor = newFillColor;
+        _circle.BorderColor = newBorderColor;
     }
     
     public override void Undo()
     {
         _circle.EditSize(_oldRadius);
-        _circle.FillColor = _oldFill;
-        _circle.BorderColor = _oldBorder;
+        
+        var oldFillColor = new CustomColor(_oldFill.A, _oldFill.R, _oldFill.G, _oldFill.B);
+        var oldBorderColor = new CustomColor(_oldBorder.A, _oldBorder.R, _oldBorder.G, _oldBorder.B);
+        
+        _circle.FillColor = oldFillColor;
+        _circle.BorderColor = oldBorderColor;
     }
 }

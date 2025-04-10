@@ -1,4 +1,6 @@
-﻿using ShapesProject.Models;
+﻿using System.Drawing;
+using ShapesProject.Domain;
+using ShapesProject.Domain.Primitives;
 using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Edit;
@@ -47,13 +49,21 @@ internal class EditParallelogramCommand : CommandBase
     public override void Execute()
     {
         _parallelogram.EditSize(_newBase, _newHeight, _newSide);
-        _parallelogram.FillColor = _newFill;
-        _parallelogram.BorderColor = _newBorder;
+        
+        var newFillColor = new CustomColor(_newFill.A, _newFill.R, _newFill.G, _newFill.B);
+        var newBorderColor = new CustomColor(_newBorder.A, _newBorder.R, _newBorder.G, _newBorder.B);
+        
+        _parallelogram.FillColor = newFillColor;
+        _parallelogram.BorderColor = newBorderColor;
     }
     public override void Undo()
     {
         _parallelogram.EditSize(_oldBase, _oldHeight, _oldSide);
-        _parallelogram.FillColor = _oldFill;
-        _parallelogram.BorderColor = _oldBorder;
+        
+        var oldFillColor = new CustomColor(_oldFill.A, _oldFill.R, _oldFill.G, _oldFill.B);
+        var oldBorderColor = new CustomColor(_oldBorder.A, _oldBorder.R, _oldBorder.G, _oldBorder.B);
+        
+        _parallelogram.FillColor = oldFillColor;
+        _parallelogram.BorderColor = oldBorderColor;
     }
 }

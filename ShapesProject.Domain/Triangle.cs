@@ -1,16 +1,14 @@
-﻿using ShapesProject.Models.Primitives;
-using ShapesProject.Utils.Commands.Core;
-using ShapesProject.Utils.Commands.Edit;
+﻿using ShapesProject.Domain.Primitives;
 
-namespace ShapesProject.Models;
+namespace ShapesProject.Domain;
 
 public class Triangle : Shape
 {
-    public Point Point1 { get; set; }
-    public Point Point2 { get; set; }
-    public Point Point3 { get; set; }
+    public CustomPoint Point1 { get; set; }
+    public CustomPoint Point2 { get; set; }
+    public CustomPoint Point3 { get; set; }
 
-    public Triangle(Point point1, Point point2, Point point3) : base(point1.X, point1.Y)
+    public Triangle(CustomPoint point1, CustomPoint point2, CustomPoint point3) : base(point1.X, point1.Y)
     {
         Point1 = point1;
         Point2 = point2;
@@ -21,9 +19,9 @@ public class Triangle : Shape
     {
         if (parameters.Length == 6)
         {
-            Point1 = new Point(parameters[0], parameters[1]);
-            Point2 = new Point(parameters[2], parameters[3]);
-            Point3 = new Point(parameters[4], parameters[5]);
+            Point1 = new CustomPoint(parameters[0], parameters[1]);
+            Point2 = new CustomPoint(parameters[2], parameters[3]);
+            Point3 = new CustomPoint(parameters[4], parameters[5]);
  
             X = Point1.X;
             Y = Point1.Y;
@@ -46,9 +44,9 @@ public class Triangle : Shape
 
     public override void Move(int x, int y)
     {
-        Point1 = new Point(Point1.X + x, Point1.Y + y);
-        Point2 = new Point(Point2.X + x, Point2.Y + y);
-        Point3 = new Point(Point3.X + x, Point3.Y + y);
+        Point1 = new CustomPoint(Point1.X + x, Point1.Y + y);
+        Point2 = new CustomPoint(Point2.X + x, Point2.Y + y);
+        Point3 = new CustomPoint(Point3.X + x, Point3.Y + y);
 
         X = Point1.X;
         Y = Point1.Y;
@@ -84,15 +82,5 @@ public class Triangle : Shape
 
         return clone;
     }
-    
-    public override ICommand CreateEditCommand(Shape oldShape)
-    {
-        if (oldShape is not Triangle triangle)
-        {
-            throw new ArgumentException("Invalid shape.");
-        }
-        
-        // TODO: Implement
-        return new EditTriangleCommand();
-    }
+
 }

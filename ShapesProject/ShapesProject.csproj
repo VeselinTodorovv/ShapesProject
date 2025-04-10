@@ -29,4 +29,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShapesProject.Domain\ShapesProject.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿using ShapesProject.Models;
+﻿using ShapesProject.Domain;
 using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.AddRemove;

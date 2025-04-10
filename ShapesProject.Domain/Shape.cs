@@ -1,7 +1,6 @@
-﻿using ShapesProject.Models.Primitives;
-using ShapesProject.Utils.Commands.Core;
+﻿using ShapesProject.Domain.Primitives;
 
-namespace ShapesProject.Models;
+namespace ShapesProject.Domain;
 
 public abstract class Shape
 {
@@ -9,15 +8,15 @@ public abstract class Shape
 
     public int Y { get; protected set; }
 
-    public int TempOffsetX { get; protected set; }
+    public int TempOffsetX { get; set; }
 
-    public int TempOffsetY { get; protected set; }
+    public int TempOffsetY { get; set; }
 
     public CustomColor FillColor { get; set; } = CustomColor.White;
 
     public CustomColor BorderColor { get; set; } = CustomColor.Black;
 
-    public bool IsSelected { get; internal set; }
+    public bool IsSelected { get; set; }
 
     protected Shape(int x, int y)
     {
@@ -27,7 +26,7 @@ public abstract class Shape
 
     public abstract void EditSize(params int[] parameters);
     
-    protected internal Point GetDrawingPosition() => new(X + TempOffsetX, Y + TempOffsetY);
+    public CustomPoint GetDrawingPosition() => new(X + TempOffsetX, Y + TempOffsetY);
 
     public abstract double CalculateArea();
 
@@ -41,8 +40,7 @@ public abstract class Shape
 
     public abstract bool Contains(CustomPoint p);
 
-    protected internal virtual int SelectionBorderWidth => 2;
+    public virtual int SelectionBorderWidth => 2;
     
     public abstract Shape Clone();
-    public abstract ICommand CreateEditCommand(Shape oldShape);
 }

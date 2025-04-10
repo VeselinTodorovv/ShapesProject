@@ -1,4 +1,4 @@
-﻿namespace ShapesProject.Models.Primitives;
+﻿namespace ShapesProject.Domain.Primitives;
 
 public struct CustomPoint
 {

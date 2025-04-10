@@ -1,4 +1,6 @@
-﻿using ShapesProject.Models;
+﻿using System.Drawing;
+using ShapesProject.Domain;
+using ShapesProject.Domain.Primitives;
 using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Colors;
@@ -13,7 +15,7 @@ internal class ChangeBorderColorCommand : CommandBase
     {
         _shape = shape;
         _newColor = newColor;
-        _oldColor = _shape.BorderColor;
+        _oldColor = Color.FromArgb(_shape.BorderColor.A, _shape.BorderColor.R, _shape.BorderColor.G, _shape.BorderColor.B);
     }
 
     public override void Execute()
@@ -22,12 +24,14 @@ internal class ChangeBorderColorCommand : CommandBase
         {
             throw new InvalidOperationException("Shape is null");
         }
-        if (_shape.BorderColor == _newColor)
+        
+        var borderColor = Color.FromArgb(_shape.BorderColor.A, _shape.BorderColor.R, _shape.BorderColor.G, _shape.BorderColor.B);
+        if (borderColor == _newColor)
         {
             return;
         }
 
-        _shape.BorderColor = _newColor;
+        _shape.BorderColor = new CustomColor(_newColor.A, _newColor.R, _newColor.G, _newColor.B);
     }
 
     public override void Undo()
@@ -36,11 +40,13 @@ internal class ChangeBorderColorCommand : CommandBase
         {
             throw new InvalidOperationException("Shape is null");
         }
-        if (_shape.BorderColor == _oldColor)
+        
+        var borderColor = Color.FromArgb(_shape.BorderColor.A, _shape.BorderColor.R, _shape.BorderColor.G, _shape.BorderColor.B);
+        if (borderColor == _oldColor)
         {
             return;
         }
 
-        _shape.BorderColor = _oldColor;
+        _shape.BorderColor = new CustomColor(_oldColor.A, _oldColor.R, _oldColor.G, _oldColor.B);
     }
 }

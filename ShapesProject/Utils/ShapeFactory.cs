@@ -1,4 +1,5 @@
-﻿using ShapesProject.Models;
+﻿using ShapesProject.Domain;
+using ShapesProject.Domain.Primitives;
 
 namespace ShapesProject.Utils;
 
@@ -13,9 +14,9 @@ public class ShapeFactory
         { "Trapezoid", args => new Trapezoid((int)args[0], (int)args[1], (int)args[2], (int)args[3], (int)args[4]) },
         
         { "Triangle", args => new Triangle(
-        new Point((int)args[0], (int)args[1]),
-        new Point((int)args[2], (int)args[3]),
-        new Point((int)args[4], (int)args[5])) }
+        new CustomPoint((int)args[0], (int)args[1]),
+        new CustomPoint((int)args[2], (int)args[3]),
+        new CustomPoint((int)args[4], (int)args[5])) }
     };
 
     public static Shape CreateShape(string shapeType, params object[] parameters)

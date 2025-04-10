@@ -1,8 +1,6 @@
-﻿using ShapesProject.Models.Primitives;
-using ShapesProject.Utils.Commands.Core;
-using ShapesProject.Utils.Commands.Edit;
+﻿using ShapesProject.Domain.Primitives;
 
-namespace ShapesProject.Models;
+namespace ShapesProject.Domain;
 
 public class Rhombus : Shape
 {
@@ -59,19 +57,4 @@ public class Rhombus : Shape
         return clone;
     }
 
-    public override ICommand CreateEditCommand(Shape oldShape)
-    {
-        if (oldShape is not Rhombus rhombus)
-        {
-            throw new ArgumentException("Invalid shape type.");
-        }
-
-        return new EditRhombusCommand(
-            this,
-            rhombus.Diagonal1, this.Diagonal1,
-            rhombus.Diagonal2, this.Diagonal2,
-            rhombus.FillColor, this.FillColor,
-            rhombus.BorderColor, this.BorderColor
-        );
-    }
 }

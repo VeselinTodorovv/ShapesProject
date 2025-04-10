@@ -1,4 +1,6 @@
-﻿using ShapesProject.Models;
+﻿using System.Drawing;
+using ShapesProject.Domain;
+using ShapesProject.Domain.Primitives;
 using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Edit;
@@ -47,14 +49,22 @@ internal class EditTrapezoidCommand : CommandBase
     public override void Execute()
     {
         _trapezoid.EditSize(_newBase1, _newBase2, _newHeight);
-        _trapezoid.FillColor = _newFill;
-        _trapezoid.BorderColor = _newBorder;
+        
+        var newFillColor = new CustomColor(_newFill.A, _newFill.R, _newFill.G, _newFill.B);
+        var newBorderColor = new CustomColor(_newBorder.A, _newBorder.R, _newBorder.G, _newBorder.B);
+        
+        _trapezoid.FillColor = newFillColor;
+        _trapezoid.BorderColor = newBorderColor;
     }
     
     public override void Undo()
     {
         _trapezoid.EditSize(_oldBase1, _oldBase2, _oldHeight);
-        _trapezoid.FillColor = _oldFill;
-        _trapezoid.BorderColor = _oldBorder;
+        
+        var oldFillColor = new CustomColor(_oldFill.A, _oldFill.R, _oldFill.G, _oldFill.B);
+        var oldBorderColor = new CustomColor(_oldBorder.A, _oldBorder.R, _oldBorder.G, _oldBorder.B);
+        
+        _trapezoid.FillColor = oldFillColor;
+        _trapezoid.BorderColor = oldBorderColor;
     }
 }

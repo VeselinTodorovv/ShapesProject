@@ -1,8 +1,6 @@
-﻿using ShapesProject.Models.Primitives;
-using ShapesProject.Utils.Commands.Core;
-using ShapesProject.Utils.Commands.Edit;
+﻿using ShapesProject.Domain.Primitives;
 
-namespace ShapesProject.Models;
+namespace ShapesProject.Domain;
 
 public class RectangleShape : Shape
 {
@@ -59,20 +57,5 @@ public class RectangleShape : Shape
         return clone;
 
     }
-    
-    public override ICommand CreateEditCommand(Shape oldShape)
-    {
-        if (oldShape is not RectangleShape rectangle)
-        {
-            throw new ArgumentException("Invalid shape type.");
-        }
-        
-        return new EditRectangleCommand(
-            this,
-            rectangle.Width, this.Width,
-            rectangle.Height, this.Height,
-            rectangle.FillColor, this.FillColor,
-            rectangle.BorderColor, this.BorderColor
-        );
-    }
+
 }

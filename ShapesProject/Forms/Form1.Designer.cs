@@ -1,4 +1,6 @@
-﻿namespace ShapesProject.Forms
+﻿using System.Drawing;
+
+namespace ShapesProject.Forms
 {
     partial class Form1
     {

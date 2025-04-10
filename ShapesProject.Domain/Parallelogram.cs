@@ -1,8 +1,6 @@
-﻿using ShapesProject.Models.Primitives;
-using ShapesProject.Utils.Commands.Core;
-using ShapesProject.Utils.Commands.Edit;
+﻿using ShapesProject.Domain.Primitives;
 
-namespace ShapesProject.Models;
+namespace ShapesProject.Domain;
 
 public class Parallelogram : Shape
 {
@@ -60,21 +58,5 @@ public class Parallelogram : Shape
         
         return clone;
     }
-    
-    public override ICommand CreateEditCommand(Shape oldShape)
-    {
-        if (oldShape is not Parallelogram parallelogram)
-        {
-            throw new ArgumentException("Invalid shape type.");
-        }
-        
-        return new EditParallelogramCommand(
-            this,
-            parallelogram.Base, this.Base,
-            parallelogram.Height, this.Height,
-            parallelogram.Side, this.Side,
-            parallelogram.FillColor, this.FillColor,
-            parallelogram.BorderColor, this.BorderColor
-        );
-    }
+
 }

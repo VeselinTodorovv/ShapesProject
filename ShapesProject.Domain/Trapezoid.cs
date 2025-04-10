@@ -1,8 +1,6 @@
-﻿using ShapesProject.Models.Primitives;
-using ShapesProject.Utils.Commands.Core;
-using ShapesProject.Utils.Commands.Edit;
+﻿using ShapesProject.Domain.Primitives;
 
-namespace ShapesProject.Models;
+namespace ShapesProject.Domain;
 
 public class Trapezoid : Shape
 {
@@ -59,21 +57,5 @@ public class Trapezoid : Shape
 
         return clone;
     }
-    
-    public override ICommand CreateEditCommand(Shape oldShape)
-    {
-        if (oldShape is not Trapezoid trapezoid)
-        {
-            throw new ArgumentException("Invalid shape type.");
-        }
-        
-        return new EditTrapezoidCommand(
-            this,
-            trapezoid.Base1, this.Base1,
-            trapezoid.Base2, this.Base2,
-            trapezoid.Height, this.Height,
-            trapezoid.FillColor, this.FillColor,
-            trapezoid.BorderColor, this.BorderColor
-        );
-    }
+
 }
