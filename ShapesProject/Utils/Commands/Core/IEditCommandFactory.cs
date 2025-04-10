@@ -1,4 +1,4 @@
-﻿using ShapesProject.Domain;
+﻿using ShapesProject.Domain.Shapes;
 
 namespace ShapesProject.Utils.Commands.Core;
 

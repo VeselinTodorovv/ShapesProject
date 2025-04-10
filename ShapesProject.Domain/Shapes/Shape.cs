@@ -1,12 +1,12 @@
 ﻿using ShapesProject.Domain.Primitives;
 
-namespace ShapesProject.Domain;
+namespace ShapesProject.Domain.Shapes;
 
 public abstract class Shape
 {
-    public int X { get; protected set; }
+    protected int X { get; set; }
 
-    public int Y { get; protected set; }
+    protected int Y { get; set; }
 
     public int TempOffsetX { get; set; }
 

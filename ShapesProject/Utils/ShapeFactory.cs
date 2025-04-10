@@ -1,5 +1,5 @@
-﻿using ShapesProject.Domain;
-using ShapesProject.Domain.Primitives;
+﻿using ShapesProject.Domain.Primitives;
+using ShapesProject.Domain.Shapes;
 
 namespace ShapesProject.Utils;
 

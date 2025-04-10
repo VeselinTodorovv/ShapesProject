@@ -15,6 +15,6 @@ public struct CustomColor
         A = a;
     }
 
-    public static CustomColor White => new CustomColor(255, 255, 255);
-    public static CustomColor Black => new CustomColor(0, 0, 0);
+    public static CustomColor White => new(255, 255, 255);
+    public static CustomColor Black => new(0, 0, 0);
 }

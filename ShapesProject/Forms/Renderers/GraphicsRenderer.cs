@@ -1,7 +1,7 @@
-﻿using System.Drawing;
-using System.Drawing.Drawing2D;
+﻿using System.Drawing.Drawing2D;
 using ShapesProject.Domain;
 using ShapesProject.Domain.Primitives;
+using ShapesProject.Domain.Shapes;
 
 namespace ShapesProject.Forms.Renderers;
 

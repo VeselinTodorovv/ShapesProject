@@ -1,4 +1,6 @@
-﻿namespace ShapesProject.Domain;
+﻿using ShapesProject.Domain.Shapes;
+
+namespace ShapesProject.Domain;
 
 public interface IRenderVisitor
 {

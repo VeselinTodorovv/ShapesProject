@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using ShapesProject.Forms.Renderers;
+﻿using ShapesProject.Forms.Renderers;
 
 namespace ShapesProject.Utils;
 

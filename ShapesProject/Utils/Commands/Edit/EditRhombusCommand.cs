@@ -1,6 +1,5 @@
-﻿using System.Drawing;
-using ShapesProject.Domain;
-using ShapesProject.Domain.Primitives;
+﻿using ShapesProject.Domain.Primitives;
+using ShapesProject.Domain.Shapes;
 using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Edit;
@@ -44,8 +43,8 @@ internal class EditRhombusCommand : CommandBase
     {
         _rhombus.EditSize(_newDiagonal1, _newDiagonal2);
         
-        var newFillColor = new CustomColor(_newFill.A, _newFill.R, _newFill.G, _newFill.B);
-        var newBorderColor = new CustomColor(_newBorder.A, _newBorder.R, _newBorder.G, _newBorder.B);
+        var newFillColor = new CustomColor(_newFill.R, _newFill.G, _newFill.B, _newFill.A);
+        var newBorderColor = new CustomColor(_newBorder.R, _newBorder.G, _newBorder.B, _newBorder.A);
         
         _rhombus.FillColor = newFillColor;
         _rhombus.BorderColor = newBorderColor;

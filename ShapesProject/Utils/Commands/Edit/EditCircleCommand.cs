@@ -1,6 +1,5 @@
-﻿using System.Drawing;
-using ShapesProject.Domain;
-using ShapesProject.Domain.Primitives;
+﻿using ShapesProject.Domain.Primitives;
+using ShapesProject.Domain.Shapes;
 using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Edit;
@@ -38,8 +37,8 @@ internal class EditCircleCommand : CommandBase
     {
         _circle.EditSize(_newRadius);
         
-        var newFillColor = new CustomColor(_newFill.A, _newFill.R, _newFill.G, _newFill.B);
-        var newBorderColor = new CustomColor(_newBorder.A, _newBorder.R, _newBorder.G, _newBorder.B);
+        var newFillColor = new CustomColor(_newFill.R, _newFill.G, _newFill.B, _newFill.A);
+        var newBorderColor = new CustomColor(_newBorder.R, _newBorder.G, _newBorder.B, _newBorder.A);
         
         _circle.FillColor = newFillColor;
         _circle.BorderColor = newBorderColor;
@@ -49,8 +48,8 @@ internal class EditCircleCommand : CommandBase
     {
         _circle.EditSize(_oldRadius);
         
-        var oldFillColor = new CustomColor(_oldFill.A, _oldFill.R, _oldFill.G, _oldFill.B);
-        var oldBorderColor = new CustomColor(_oldBorder.A, _oldBorder.R, _oldBorder.G, _oldBorder.B);
+        var oldFillColor = new CustomColor(_oldFill.R, _oldFill.G, _oldFill.B, _oldFill.A);
+        var oldBorderColor = new CustomColor(_oldBorder.R, _oldBorder.G, _oldBorder.B, _oldBorder.A);
         
         _circle.FillColor = oldFillColor;
         _circle.BorderColor = oldBorderColor;

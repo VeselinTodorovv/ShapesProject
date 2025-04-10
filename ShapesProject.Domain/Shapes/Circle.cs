@@ -1,6 +1,6 @@
 ﻿using ShapesProject.Domain.Primitives;
 
-namespace ShapesProject.Domain;
+namespace ShapesProject.Domain.Shapes;
 
 public class Circle : Shape
 {
@@ -54,5 +54,4 @@ public class Circle : Shape
         
         return clone;
     }
-
 }

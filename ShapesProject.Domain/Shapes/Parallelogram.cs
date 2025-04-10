@@ -1,6 +1,6 @@
 ﻿using ShapesProject.Domain.Primitives;
 
-namespace ShapesProject.Domain;
+namespace ShapesProject.Domain.Shapes;
 
 public class Parallelogram : Shape
 {

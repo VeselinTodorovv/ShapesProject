@@ -1,4 +1,4 @@
-﻿using ShapesProject.Domain;
+﻿using ShapesProject.Domain.Shapes;
 using ShapesProject.Utils.Commands.Core;
 
 namespace ShapesProject.Utils.Commands.Movement;
@@ -16,6 +16,7 @@ internal class MoveCommand : CommandBase
     {
         _shape = shape
             ?? throw new ArgumentNullException(nameof(shape));
+        
         TotalDx = dx;
         TotalDy = dy;
     }

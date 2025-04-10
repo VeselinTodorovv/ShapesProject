@@ -1,7 +1,7 @@
 using System.Drawing.Drawing2D;
 using System.Reflection;
-using ShapesProject.Domain;
 using ShapesProject.Domain.Primitives;
+using ShapesProject.Domain.Shapes;
 using ShapesProject.Forms.CommandFactories;
 using ShapesProject.Utils;
 using ShapesProject.Utils.Commands.AddRemove;
@@ -271,7 +271,14 @@ public partial class Form1 : Form
             return;
         }
 
-        var command = new ChangeFillColorCommand(selectedShape, colorDialog.Color);
+        var customColor = new CustomColor(
+            colorDialog.Color.R,
+            colorDialog.Color.G,
+            colorDialog.Color.B,
+            colorDialog.Color.A
+        );
+
+        var command = new ChangeFillColorCommand(selectedShape, customColor);
         _shapeManager.ExecuteCommand(command);
     }
 
@@ -289,7 +296,14 @@ public partial class Form1 : Form
             return;
         }
 
-        var command = new ChangeBorderColorCommand(selectedShape, colorDialog.Color);
+        var customColor = new CustomColor(
+            colorDialog.Color.R,
+            colorDialog.Color.G,
+            colorDialog.Color.B,
+            colorDialog.Color.A
+        );
+
+        var command = new ChangeBorderColorCommand(selectedShape, customColor);
         _shapeManager.ExecuteCommand(command);
     }
 

@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using ShapesProject.Domain;
+﻿using ShapesProject.Domain.Shapes;
 using ShapesProject.Utils.Commands.Core;
 using ShapesProject.Utils.Commands.Edit;
 
