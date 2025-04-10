@@ -5,7 +5,7 @@ namespace ShapesProject.Utils.Commands.Edit;
 
 internal class EditTrapezoidCommand : CommandBase
 {
-    private readonly Trapezoid _trapezoid;
+    private readonly Shape _trapezoid;
     
     private readonly int _oldBase1;
     private readonly int _newBase1;

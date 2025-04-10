@@ -1,4 +1,4 @@
-﻿using System.Drawing.Drawing2D;
+﻿using ShapesProject.Models.Primitives;
 using ShapesProject.Utils.Commands.Core;
 using ShapesProject.Utils.Commands.Edit;
 
@@ -36,45 +36,12 @@ public class Trapezoid : Shape
         }
     }
     public override double CalculateArea() => (Base1 + Base2) * Height / 2.0;
-
-    public override void Draw(Graphics g)
+    public override void Accept(IRenderVisitor visitor)
     {
-        var pos = GetDrawingPosition();
-        using Pen pen = new(BorderColor);
-        using SolidBrush brush = new(FillColor);
-        
-        Point[] points =
-        {
-            new(pos.X, pos.Y),  // Top-left corner
-            new(pos.X + Base1, pos.Y),  // Top-right corner
-            new(pos.X + Base1 - Base2 + (Base1 - Base2) / 2, pos.Y + Height),  // Bottom-right corner
-            new(pos.X + (Base1 - Base2) / 2, pos.Y + Height)  // Bottom-left corner
-        };
-        
-        g.FillPolygon(brush, points);
-        g.DrawPolygon(pen, points);
-        
-        if (!IsSelected)
-        {
-            return;
-        }
-        
-        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-        selectionPen.DashStyle = DashStyle.Dash;
-        
-        // Offset selection border
-        Point[] selectionPoints =
-        {
-            new(pos.X - SelectionBorderWidth, pos.Y - SelectionBorderWidth),
-            new(pos.X + Base1 + SelectionBorderWidth, pos.Y - SelectionBorderWidth),
-            new(pos.X + Base1 - Base2 + (Base1 - Base2) / 2 + SelectionBorderWidth, pos.Y + Height + SelectionBorderWidth),
-            new(pos.X + (Base1 - Base2) / 2 - SelectionBorderWidth, pos.Y + Height + SelectionBorderWidth)
-        };
-        
-        g.DrawPolygon(selectionPen, selectionPoints);
+        visitor.VisitTrapezoid(this);
     }
 
-    public override bool Contains(Point p)
+    public override bool Contains(CustomPoint p)
     {
         return p.X >= X && p.X <= X + Math.Max(Base1, Base2) &&
                p.Y >= Y && p.Y <= Y + Height;

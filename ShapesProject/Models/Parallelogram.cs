@@ -1,4 +1,4 @@
-﻿using System.Drawing.Drawing2D;
+﻿using ShapesProject.Models.Primitives;
 using ShapesProject.Utils.Commands.Core;
 using ShapesProject.Utils.Commands.Edit;
 
@@ -36,45 +36,12 @@ public class Parallelogram : Shape
         }
     }
     public override double CalculateArea() => Base * Height;
-
-    public override void Draw(Graphics g)
+    public override void Accept(IRenderVisitor visitor)
     {
-        var pos = GetDrawingPosition();
-        using Pen pen = new(BorderColor);
-        using SolidBrush brush = new(FillColor);
-
-        Point[] points =
-        {
-            new(pos.X, pos.Y),
-            new(pos.X + Base, pos.Y),
-            new(pos.X + Base - Side, pos.Y - Height),
-            new(pos.X - Side, pos.Y - Height)
-        };
-
-        g.FillPolygon(brush, points);
-        g.DrawPolygon(pen, points);
-
-        if (!IsSelected)
-        {
-            return;
-        }
-        
-        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-        selectionPen.DashStyle = DashStyle.Dash;
-
-        // Offset selection border
-        Point[] selectionPoints =
-        {
-            new(pos.X - SelectionBorderWidth, pos.Y + SelectionBorderWidth),
-            new(pos.X + Base + SelectionBorderWidth, pos.Y + SelectionBorderWidth),
-            new(pos.X + Base - Side + SelectionBorderWidth, pos.Y - Height - SelectionBorderWidth),
-            new(pos.X - Side - SelectionBorderWidth, pos.Y - Height - SelectionBorderWidth)
-        };
-    
-        g.DrawPolygon(selectionPen, selectionPoints);
+        visitor.VisitParallelogram(this);
     }
 
-    public override bool Contains(Point p)
+    public override bool Contains(CustomPoint p)
     {
         return p.X >= X - Side && p.X <= X + Base &&
                p.Y >= Y - Height && p.Y <= Y;

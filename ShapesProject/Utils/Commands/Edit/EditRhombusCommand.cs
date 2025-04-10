@@ -5,7 +5,7 @@ namespace ShapesProject.Utils.Commands.Edit;
 
 internal class EditRhombusCommand : CommandBase
 {
-    private readonly Rhombus _rhombus;
+    private readonly Shape _rhombus;
     
     private readonly int _oldDiagonal1;
     private readonly int _newDiagonal1;

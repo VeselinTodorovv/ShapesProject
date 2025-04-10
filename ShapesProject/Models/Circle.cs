@@ -1,4 +1,4 @@
-﻿using System.Drawing.Drawing2D;
+﻿using ShapesProject.Models.Primitives;
 using ShapesProject.Utils.Commands.Core;
 using ShapesProject.Utils.Commands.Edit;
 
@@ -30,31 +30,12 @@ public class Circle : Shape
         }
     }
     public override double CalculateArea() => Math.PI * Radius * Radius;
-
-    public override void Draw(Graphics g)
+    public override void Accept(IRenderVisitor visitor)
     {
-        var pos = GetDrawingPosition();
-        int diameter = 2 * Radius;
-
-        using Pen pen = new(BorderColor);
-        using SolidBrush brush = new(FillColor);
-
-        g.FillEllipse(brush, pos.X - Radius, pos.Y - Radius, diameter, diameter);
-        g.DrawEllipse(pen, pos.X - Radius, pos.Y - Radius, diameter, diameter);
-
-        if (!IsSelected)
-        {
-            return;
-        }
-        
-        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-        selectionPen.DashStyle = DashStyle.Dash;
-        
-        g.DrawEllipse(selectionPen, pos.X - Radius - SelectionBorderWidth, pos.Y - Radius - SelectionBorderWidth, 
-        diameter + 2 * SelectionBorderWidth, diameter + 2 * SelectionBorderWidth);
+        visitor.VisitCircle(this);
     }
 
-    public override bool Contains(Point p)
+    public override bool Contains(CustomPoint p)
     {
         var pos = GetDrawingPosition();
         double distance = Math.Sqrt(Math.Pow(p.X - pos.X, 2) + Math.Pow(p.Y - pos.Y, 2));

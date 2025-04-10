@@ -5,7 +5,7 @@ namespace ShapesProject.Utils.Commands.Edit;
 
 internal class EditParallelogramCommand : CommandBase
 {
-    private readonly Parallelogram _parallelogram;
+    private readonly Shape _parallelogram;
     
     private readonly int _oldBase;
     private readonly int _newBase;

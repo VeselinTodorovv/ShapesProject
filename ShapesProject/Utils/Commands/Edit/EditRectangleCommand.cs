@@ -5,7 +5,7 @@ namespace ShapesProject.Utils.Commands.Edit;
 
 internal class EditRectangleCommand : CommandBase
 {
-    private readonly RectangleShape _rectangle;
+    private readonly Shape _rectangle;
     
     private readonly int _oldWidth;
     private readonly int _newWidth;

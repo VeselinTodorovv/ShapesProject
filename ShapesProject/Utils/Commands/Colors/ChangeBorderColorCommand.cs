@@ -1,47 +1,46 @@
 ﻿using ShapesProject.Models;
 using ShapesProject.Utils.Commands.Core;
 
-namespace ShapesProject.Utils.Commands.Colors
+namespace ShapesProject.Utils.Commands.Colors;
+
+internal class ChangeBorderColorCommand : CommandBase
 {
-    internal class ChangeBorderColorCommand : CommandBase
+    private readonly Shape _shape;
+    private readonly Color _newColor;
+    private readonly Color _oldColor;
+
+    public ChangeBorderColorCommand(Shape shape, Color newColor)
     {
-        private readonly Shape _shape;
-        private readonly Color _newColor;
-        private readonly Color _oldColor;
+        _shape = shape;
+        _newColor = newColor;
+        _oldColor = _shape.BorderColor;
+    }
 
-        public ChangeBorderColorCommand(Shape shape, Color newColor)
+    public override void Execute()
+    {
+        if (_shape == null)
         {
-            _shape = shape;
-            _newColor = newColor;
-            _oldColor = _shape.BorderColor;
+            throw new InvalidOperationException("Shape is null");
+        }
+        if (_shape.BorderColor == _newColor)
+        {
+            return;
         }
 
-        public override void Execute()
-        {
-            if (_shape == null)
-            {
-                throw new InvalidOperationException("Shape is null");
-            }
-            if (_shape.BorderColor == _newColor)
-            {
-                return;
-            }
+        _shape.BorderColor = _newColor;
+    }
 
-            _shape.BorderColor = _newColor;
+    public override void Undo()
+    {
+        if (_shape == null)
+        {
+            throw new InvalidOperationException("Shape is null");
+        }
+        if (_shape.BorderColor == _oldColor)
+        {
+            return;
         }
 
-        public override void Undo()
-        {
-            if (_shape == null)
-            {
-                throw new InvalidOperationException("Shape is null");
-            }
-            if (_shape.BorderColor == _oldColor)
-            {
-                return;
-            }
-
-            _shape.BorderColor = _oldColor;
-        }
+        _shape.BorderColor = _oldColor;
     }
 }

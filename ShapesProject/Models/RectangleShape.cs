@@ -1,4 +1,4 @@
-﻿using System.Drawing.Drawing2D;
+﻿using ShapesProject.Models.Primitives;
 using ShapesProject.Utils.Commands.Core;
 using ShapesProject.Utils.Commands.Edit;
 
@@ -32,33 +32,12 @@ public class RectangleShape : Shape
         }
     }
     public override double CalculateArea() => Width * Height;
-
-    public override void Draw(Graphics g)
+    public override void Accept(IRenderVisitor visitor)
     {
-        var pos = GetDrawingPosition();
-        using Pen pen = new(BorderColor);
-        using SolidBrush brush = new(FillColor);
-
-        g.FillRectangle(brush, pos.X, pos.Y, Width, Height);
-        g.DrawRectangle(pen, pos.X, pos.Y, Width, Height);
-
-        if (!IsSelected)
-        {
-            return;
-        }
-        
-        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-        selectionPen.DashStyle = DashStyle.Dash;
-
-        var rect = new Rectangle(pos.X - SelectionBorderWidth, pos.Y - SelectionBorderWidth,
-        Width + 2 * SelectionBorderWidth,
-        Height + 2 * SelectionBorderWidth
-        );
-
-        g.DrawRectangle(selectionPen, rect);
+        visitor.VisitRectangle(this);
     }
 
-    public override bool Contains(Point p)
+    public override bool Contains(CustomPoint p)
     {
         var pos = GetDrawingPosition();
 

@@ -5,7 +5,7 @@ namespace ShapesProject.Utils.Commands.Edit;
 
 internal class EditCircleCommand : CommandBase
 {
-    private readonly Circle _circle;
+    private readonly Shape _circle;
     
     private readonly int _oldRadius;
     private readonly int _newRadius;

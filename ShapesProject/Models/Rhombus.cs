@@ -1,4 +1,4 @@
-﻿using System.Drawing.Drawing2D;
+﻿using ShapesProject.Models.Primitives;
 using ShapesProject.Utils.Commands.Core;
 using ShapesProject.Utils.Commands.Edit;
 
@@ -34,45 +34,12 @@ public class Rhombus : Shape
         }
     }
     public override double CalculateArea() => Diagonal1 * Diagonal2 / 2.0;
-
-    public override void Draw(Graphics g)
+    public override void Accept(IRenderVisitor visitor)
     {
-        var pos = GetDrawingPosition();
-        using Pen pen = new(BorderColor);
-        using SolidBrush brush = new(FillColor);
-        
-        Point[] points =
-        {
-            new(pos.X, pos.Y - Diagonal1 / 2),
-            new(pos.X + Diagonal2 / 2, pos.Y),
-            new(pos.X, pos.Y + Diagonal1 / 2),
-            new(pos.X - Diagonal2 / 2, pos.Y)
-        };
-        
-        g.FillPolygon(brush, points);
-        g.DrawPolygon(pen, points);
-        
-        if (!IsSelected)
-        {
-            return;
-        }
-        
-        using var selectionPen = new Pen(Color.Red, SelectionBorderWidth);
-        selectionPen.DashStyle = DashStyle.Dash;
-        
-        // Offset selection border
-        Point[] selectionPoints =
-        {
-            new(pos.X, pos.Y - Diagonal1 / 2 - SelectionBorderWidth),
-            new(pos.X + Diagonal2 / 2 + SelectionBorderWidth, pos.Y),
-            new(pos.X, pos.Y + Diagonal1 / 2 + SelectionBorderWidth),
-            new(pos.X - Diagonal2 / 2 - SelectionBorderWidth, pos.Y)
-        };
-        
-        g.DrawPolygon(selectionPen, selectionPoints);
+        visitor.VisitRhombus(this);
     }
 
-    public override bool Contains(Point p)
+    public override bool Contains(CustomPoint p)
     {
         return p.X >= X - Diagonal2 / 2 && p.X <= X + Diagonal2 / 2 &&
                p.Y >= Y - Diagonal1 / 2 && p.Y <= Y + Diagonal1 / 2;

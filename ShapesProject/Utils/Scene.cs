@@ -1,4 +1,6 @@
-﻿namespace ShapesProject.Utils;
+﻿using ShapesProject.Forms.Renderers;
+
+namespace ShapesProject.Utils;
 
 public class Scene
 {
@@ -11,9 +13,10 @@ public class Scene
 
     public void DrawShapes(Graphics g)
     {
+        var renderer = new GraphicsRenderer(g);
         foreach (var shape in _shapeManager.GetShapes())
         {
-            shape.Draw(g);
+            shape.Accept(renderer);
         }
     }
 }
