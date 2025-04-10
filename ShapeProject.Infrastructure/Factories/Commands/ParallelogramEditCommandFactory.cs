@@ -2,11 +2,11 @@
 using ShapeProject.Application.Commands.Edit;
 using ShapesProject.Domain.Shapes;
 
-namespace Infrastructure.Factories.Command;
+namespace Infrastructure.Factories.Commands;
 
 public class ParallelogramEditCommandFactory : IEditCommandFactory
 {
-    public ICommand Create(ShapesProject.Domain.Shapes.Shape currentShape, ShapesProject.Domain.Shapes.Shape oldShape)
+    public ICommand Create(Shape currentShape, Shape oldShape)
     {
         if (currentShape is not Parallelogram current || oldShape is not Parallelogram old)
         {
@@ -14,17 +14,17 @@ public class ParallelogramEditCommandFactory : IEditCommandFactory
         }
         
         return new EditParallelogramCommand(
-        current,
-        old.Base,
-        current.Base,
-        old.Height,
-        current.Height,
-        old.Side,
-        current.Side,
-        old.FillColor,
-        current.FillColor,
-        old.BorderColor,
-        current.BorderColor
+            current,
+            old.Base,
+            current.Base,
+            old.Height,
+            current.Height,
+            old.Side,
+            current.Side,
+            old.FillColor,
+            current.FillColor,
+            old.BorderColor,
+            current.BorderColor
         );
     }
 }

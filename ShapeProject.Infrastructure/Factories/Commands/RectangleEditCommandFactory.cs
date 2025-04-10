@@ -3,17 +3,18 @@ using ShapeProject.Application.Commands.Core;
 using ShapeProject.Application.Commands.Edit;
 using ShapesProject.Domain.Shapes;
 
-namespace Infrastructure.Factories.Command;
+namespace Infrastructure.Factories.Commands;
 
 public class RectangleEditCommandFactory : IEditCommandFactory
 {
-    public ICommand Create(ShapesProject.Domain.Shapes.Shape currentShape, ShapesProject.Domain.Shapes.Shape oldShape)
+    public ICommand Create(Shape currentShape, Shape oldShape)
     {
         if (currentShape is not RectangleShape current || oldShape is not RectangleShape old)
         {
             throw new ArgumentException("Invalid shape type.");
         }
 
+        // TODO: Follow the examples in the Circle/Parallelogram and remove UI logic
         var oldFill = Color.FromArgb(old.FillColor.A, old.FillColor.R, old.FillColor.G, old.FillColor.B);
         var newFill = Color.FromArgb(current.FillColor.A, current.FillColor.R, current.FillColor.G, current.FillColor.B);
         

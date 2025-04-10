@@ -50,6 +50,7 @@ public class EditTrapezoidCommand : CommandBase
     {
         _trapezoid.EditSize(_newBase1, _newBase2, _newHeight);
         
+        // TODO: Follow the example in EditCircleCommand and remove UI logic
         var newFillColor = new CustomColor(_newFill.R, _newFill.G, _newFill.B, _newFill.A);
         var newBorderColor = new CustomColor(_newBorder.R, _newBorder.G, _newBorder.B, _newBorder.A);
         

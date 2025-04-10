@@ -1,12 +1,13 @@
 ﻿using ShapesProject.Domain.Primitives;
 using ShapesProject.Domain.Shapes;
 
-namespace Infrastructure.Factories.Shape;
+namespace Infrastructure.Factories.Shapes;
 
 public class ShapeFactory
 {
     private static readonly Dictionary<string, Func<object[], ShapesProject.Domain.Shapes.Shape>> ShapeCreators = new()
     {
+        // TODO: Refactor for type safety
         { "Circle", args => new Circle((int)args[0], (int)args[1], (int)args[2]) },
         { "Parallelogram", args => new Parallelogram((int)args[0], (int)args[1], (int)args[2], (int)args[3], (int)args[4]) },
         { "RectangleShape", args => new RectangleShape((int)args[0], (int)args[1], (int)args[2], (int)args[3])},

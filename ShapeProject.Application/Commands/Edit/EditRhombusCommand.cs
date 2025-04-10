@@ -44,6 +44,7 @@ public class EditRhombusCommand : CommandBase
     {
         _rhombus.EditSize(_newDiagonal1, _newDiagonal2);
         
+        // TODO: Follow the example in EditCircleCommand and remove UI logic
         var newFillColor = new CustomColor(_newFill.R, _newFill.G, _newFill.B, _newFill.A);
         var newBorderColor = new CustomColor(_newBorder.R, _newBorder.G, _newBorder.B, _newBorder.A);
         

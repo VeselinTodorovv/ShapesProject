@@ -2,11 +2,11 @@
 using ShapeProject.Application.Commands.Edit;
 using ShapesProject.Domain.Shapes;
 
-namespace Infrastructure.Factories.Command;
+namespace Infrastructure.Factories.Commands;
 
 public class CircleEditCommandFactory : IEditCommandFactory
 {
-    public ICommand Create(ShapesProject.Domain.Shapes.Shape currentShape, ShapesProject.Domain.Shapes.Shape oldShape)
+    public ICommand Create(Shape currentShape, Shape oldShape)
     {
         if (currentShape is not Circle current || oldShape is not Circle old)
         {

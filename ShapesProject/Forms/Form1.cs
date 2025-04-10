@@ -1,7 +1,7 @@
 using System.Drawing.Drawing2D;
 using System.Reflection;
-using Infrastructure.Factories.Command;
-using Infrastructure.Factories.Shape;
+using Infrastructure.Factories.Commands;
+using Infrastructure.Factories.Shapes;
 using ShapeProject.Application.Commands.AddRemove;
 using ShapeProject.Application.Commands.Colors;
 using ShapeProject.Application.Commands.Core;

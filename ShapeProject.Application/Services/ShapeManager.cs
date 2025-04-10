@@ -19,7 +19,7 @@ public class ShapeManager
 
     public IReadOnlyList<Shape> GetShapes() => _shapes.AsReadOnly();
 
-    public void ExecuteCommand(Commands.Core.ICommand command)
+    public void ExecuteCommand(ICommand command)
     {
         command.Execute();
 
