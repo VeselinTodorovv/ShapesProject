@@ -1,10 +1,18 @@
 using System.Drawing.Drawing2D;
 using System.Reflection;
+using Infrastructure.Factories.Commands;
+using Infrastructure.Factories.Shapes;
+using ShapeProject.Application.Commands.AddRemove;
+using ShapeProject.Application.Commands.Colors;
+using ShapeProject.Application.Commands.Core;
+using ShapeProject.Application.Commands.Movement;
+using ShapeProject.Application.Commands.Selection;
+using ShapeProject.Application.Services;
+using ShapesProject.Domain.Primitives;
+using ShapesProject.Domain.Shapes;
 using ShapesProject.Utils;
-using ShapesProject.Utils.Commands.AddRemove;
-using ShapesProject.Utils.Commands.Colors;
-using ShapesProject.Utils.Commands.Movement;
-using ShapesProject.Utils.Commands.Selection;
+
+using ColorConverter=Infrastructure.Converters.ColorConverter;
 
 namespace ShapesProject.Forms;
 
@@ -12,24 +20,31 @@ public partial class Form1 : Form
 {
     private readonly ShapeManager _shapeManager;
     private readonly Scene _scene;
-
+    private readonly Dictionary<Type, IEditCommandFactory> _editCommandFactories = new();
+    
     private MoveCommand? _currentMoveCommand;
     private bool _isDragging;
-
+    
     private Point _dragStartPosition;
-
+    
     public Form1()
     {
         InitializeComponent();
-
+        
         // Fix for flickering while moving shapes
         typeof(Panel).InvokeMember("DoubleBuffered",
         BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
         null, scenePanel, new object[] { true });
-
+        
         _shapeManager = new ShapeManager();
         _scene = new Scene(_shapeManager);
-
+        
+        _editCommandFactories.Add(typeof(Circle), new CircleEditCommandFactory());
+        _editCommandFactories.Add(typeof(Parallelogram), new ParallelogramEditCommandFactory());
+        _editCommandFactories.Add(typeof(RectangleShape), new RectangleEditCommandFactory());
+        _editCommandFactories.Add(typeof(Rhombus), new RhombusEditCommandFactory());
+        _editCommandFactories.Add(typeof(Trapezoid), new TrapezoidEditCommandFactory());
+        
         scenePanel.Paint += panel1_Paint;
         scenePanel.MouseDown += scenePanel_MouseDown;
         scenePanel.MouseMove += scenePanel_MouseMove;
@@ -126,8 +141,9 @@ public partial class Form1 : Form
 
         _shapeManager.ClearSelection();
 
+        var point = new CustomPoint(e.X, e.Y);
         var newSelection = _shapeManager.GetShapes()
-            .FirstOrDefault(shape => shape.Contains(e.Location));
+            .FirstOrDefault(shape => shape.Contains(point));
 
         if (newSelection == null)
         {
@@ -201,7 +217,7 @@ public partial class Form1 : Form
         var selectedShape = _shapeManager.SelectedShape;
         if (selectedShape == null)
         {
-            MessageBox.Show("Please select a shape to edit.");
+            MessageBox.Show(@"Please select a shape to edit.");
             return;
         }
 
@@ -214,7 +230,13 @@ public partial class Form1 : Form
             return;
         }
         
-        var command = selectedShape.CreateEditCommand(oldState);
+        var shapeType = selectedShape.GetType();
+        if (!_editCommandFactories.TryGetValue(shapeType, out var factory))
+        {
+            return;
+        }
+        
+        var command = factory.Create(selectedShape, oldState);
         _shapeManager.ExecuteCommand(command);
     }
 
@@ -253,7 +275,9 @@ public partial class Form1 : Form
             return;
         }
 
-        var command = new ChangeFillColorCommand(selectedShape, colorDialog.Color);
+        var customColor = ColorConverter.ToDomainColor(colorDialog.Color);
+
+        var command = new ChangeFillColorCommand(selectedShape, customColor);
         _shapeManager.ExecuteCommand(command);
     }
 
@@ -271,7 +295,9 @@ public partial class Form1 : Form
             return;
         }
 
-        var command = new ChangeBorderColorCommand(selectedShape, colorDialog.Color);
+        var customColor = ColorConverter.ToDomainColor(colorDialog.Color);
+
+        var command = new ChangeBorderColorCommand(selectedShape, customColor);
         _shapeManager.ExecuteCommand(command);
     }
 
