@@ -3,24 +3,22 @@ using ShapesProject.Domain.Shapes;
 
 namespace Infrastructure.Factories.Shapes;
 
-public class ShapeFactory
+public abstract class ShapeFactory
 {
-    private static readonly Dictionary<string, Func<object[], ShapesProject.Domain.Shapes.Shape>> ShapeCreators = new()
+    private static readonly Dictionary<Type, Func<int[], Shape>> ShapeCreators = new()
     {
-        // TODO: Refactor for type safety
-        { "Circle", args => new Circle((int)args[0], (int)args[1], (int)args[2]) },
-        { "Parallelogram", args => new Parallelogram((int)args[0], (int)args[1], (int)args[2], (int)args[3], (int)args[4]) },
-        { "RectangleShape", args => new RectangleShape((int)args[0], (int)args[1], (int)args[2], (int)args[3])},
-        { "Rhombus", args => new Rhombus((int)args[0], (int)args[1], (int)args[2], (int)args[3]) },
-        { "Trapezoid", args => new Trapezoid((int)args[0], (int)args[1], (int)args[2], (int)args[3], (int)args[4]) },
-        
-        { "Triangle", args => new Triangle(
-        new CustomPoint((int)args[0], (int)args[1]),
-        new CustomPoint((int)args[2], (int)args[3]),
-        new CustomPoint((int)args[4], (int)args[5])) }
+        { typeof(Circle), args => new Circle(args[0], args[1], args[2]) },
+        { typeof(Parallelogram), args => new Parallelogram(args[0], args[1], args[2], args[3], args[4]) },
+        { typeof(RectangleShape), args => new RectangleShape(args[0], args[1], args[2], args[3])},
+        { typeof(Rhombus), args => new Rhombus(args[0], args[1], args[2], args[3]) },
+        { typeof(Trapezoid), args => new Trapezoid(args[0], args[1], args[2], args[3], args[4]) },
+        { typeof(Triangle), args => new Triangle(
+        new CustomPoint(args[0], args[1]),
+        new CustomPoint(args[2], args[3]),
+        new CustomPoint(args[4], args[5])) }
     };
 
-    public static ShapesProject.Domain.Shapes.Shape CreateShape(string shapeType, params object[] parameters)
+    public static Shape CreateShape(Type shapeType, params int[] parameters)
     {
         if (ShapeCreators.TryGetValue(shapeType, out var creator))
         {

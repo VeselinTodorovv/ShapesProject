@@ -16,7 +16,7 @@ using PointConverter=Infrastructure.Converters.PointConverter;
 
 namespace ShapesProject.Forms;
 
-public partial class Form1 : Form
+public partial class MainForm : Form
 {
     private readonly ShapeManager _shapeManager;
     private readonly Scene _scene;
@@ -27,7 +27,7 @@ public partial class Form1 : Form
     
     private Point _dragStartPosition;
     
-    public Form1()
+    public MainForm()
     {
         InitializeComponent();
         
@@ -39,13 +39,8 @@ public partial class Form1 : Form
         _shapeManager = new ShapeManager();
         _scene = new Scene(_shapeManager);
         
-        // TODO: (Bad Practice) Try to move these outside the UI project, so the ShapesProject.UI.Domain reference can be removed
-        _editCommandFactories.Add(typeof(Circle), new CircleEditCommandFactory());
-        _editCommandFactories.Add(typeof(Parallelogram), new ParallelogramEditCommandFactory());
-        _editCommandFactories.Add(typeof(RectangleShape), new RectangleEditCommandFactory());
-        _editCommandFactories.Add(typeof(Rhombus), new RhombusEditCommandFactory());
-        _editCommandFactories.Add(typeof(Trapezoid), new TrapezoidEditCommandFactory());
-        _editCommandFactories.Add(typeof(Triangle), new TriangleEditCommandFactory());
+        // TODO: (Bad Practice) Try to move these outside the UI project
+        RegisterCommandFactories();
         
         scenePanel.Paint += panel1_Paint;
         scenePanel.MouseDown += scenePanel_MouseDown;
@@ -56,8 +51,16 @@ public partial class Form1 : Form
         _shapeManager.ShapeDeleted += (_, _) => scenePanel.Invalidate();
         _shapeManager.SelectionChanged += (_, _) => scenePanel.Invalidate();
         _shapeManager.CommandExecuted += (_, _) => scenePanel.Invalidate();
-
-        editToolStripButton.Click += editToolStripButton_Click;
+    }
+    
+    private void RegisterCommandFactories()
+    {
+        _editCommandFactories.Add(typeof(Circle), new CircleEditCommandFactory());
+        _editCommandFactories.Add(typeof(Parallelogram), new ParallelogramEditCommandFactory());
+        _editCommandFactories.Add(typeof(RectangleShape), new RectangleEditCommandFactory());
+        _editCommandFactories.Add(typeof(Rhombus), new RhombusEditCommandFactory());
+        _editCommandFactories.Add(typeof(Trapezoid), new TrapezoidEditCommandFactory());
+        _editCommandFactories.Add(typeof(Triangle), new TriangleEditCommandFactory());
     }
 
     private void panel1_Paint(object? sender, PaintEventArgs e)
@@ -85,7 +88,7 @@ public partial class Form1 : Form
 
     private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var rectangle = ShapeFactory.CreateShape("RectangleShape", 0, 0, 100, 50);
+        var rectangle = ShapeFactory.CreateShape(typeof(RectangleShape), 0, 0, 100, 50);
 
         var command = new AddShapeCommand(_shapeManager, rectangle);
         _shapeManager.ExecuteCommand(command);
@@ -93,7 +96,7 @@ public partial class Form1 : Form
 
     private void circleToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var circle = ShapeFactory.CreateShape("Circle", 200, 200, 50);
+        var circle = ShapeFactory.CreateShape(typeof(Circle), 200, 200, 50);
 
         var command = new AddShapeCommand(_shapeManager, circle);
         _shapeManager.ExecuteCommand(command);
@@ -101,7 +104,7 @@ public partial class Form1 : Form
 
     private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var triangle = ShapeFactory.CreateShape("Triangle",
+        var triangle = ShapeFactory.CreateShape(typeof(Triangle),
                                                         300, 300,   //P1
                                                         350, 350,   //P2
                                                         250, 350);  //P3
@@ -112,7 +115,7 @@ public partial class Form1 : Form
 
     private void rhombusToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var rhombus = ShapeFactory.CreateShape("Rhombus", 250, 250, 120, 120);
+        var rhombus = ShapeFactory.CreateShape(typeof(Rhombus), 250, 250, 120, 120);
 
         var command = new AddShapeCommand(_shapeManager, rhombus);
         _shapeManager.ExecuteCommand(command);
@@ -120,7 +123,7 @@ public partial class Form1 : Form
 
     private void parallelogramToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var parallelogram = ShapeFactory.CreateShape("Parallelogram", 150, 150, 120, 120, 30);
+        var parallelogram = ShapeFactory.CreateShape(typeof(Parallelogram), 150, 150, 120, 120, 30);
 
         var command = new AddShapeCommand(_shapeManager, parallelogram);
         _shapeManager.ExecuteCommand(command);
@@ -128,7 +131,7 @@ public partial class Form1 : Form
 
     private void trapezoidToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var trapezoid = ShapeFactory.CreateShape("Trapezoid", 150, 250, 220, 180, 100);
+        var trapezoid = ShapeFactory.CreateShape(typeof(Trapezoid), 150, 250, 220, 180, 100);
 
         var command = new AddShapeCommand(_shapeManager, trapezoid);
         _shapeManager.ExecuteCommand(command);
