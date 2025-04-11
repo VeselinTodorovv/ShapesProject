@@ -45,6 +45,7 @@ public partial class Form1 : Form
         _editCommandFactories.Add(typeof(RectangleShape), new RectangleEditCommandFactory());
         _editCommandFactories.Add(typeof(Rhombus), new RhombusEditCommandFactory());
         _editCommandFactories.Add(typeof(Trapezoid), new TrapezoidEditCommandFactory());
+        _editCommandFactories.Add(typeof(Triangle), new TriangleEditCommandFactory());
         
         scenePanel.Paint += panel1_Paint;
         scenePanel.MouseDown += scenePanel_MouseDown;
