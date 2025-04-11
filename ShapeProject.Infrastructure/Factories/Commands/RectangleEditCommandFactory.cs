@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using ShapeProject.Application.Commands.Core;
+﻿using ShapeProject.Application.Commands.Core;
 using ShapeProject.Application.Commands.Edit;
 using ShapesProject.Domain.Shapes;
 
@@ -13,24 +12,13 @@ public class RectangleEditCommandFactory : IEditCommandFactory
         {
             throw new ArgumentException("Invalid shape type.");
         }
-
-        // TODO: Follow the examples in the Circle/Parallelogram and remove UI logic
-        var oldFill = Color.FromArgb(old.FillColor.A, old.FillColor.R, old.FillColor.G, old.FillColor.B);
-        var newFill = Color.FromArgb(current.FillColor.A, current.FillColor.R, current.FillColor.G, current.FillColor.B);
-        
-        var oldBorder = Color.FromArgb(old.BorderColor.A, old.BorderColor.R, old.BorderColor.G, old.BorderColor.B);
-        var newBorder = Color.FromArgb(current.BorderColor.A, current.BorderColor.R, current.BorderColor.G, current.BorderColor.B);
         
         return new EditRectangleCommand(
             current,
-            old.Width,
-            current.Width,
-            old.Height,
-            current.Height,
-            oldFill,
-            newFill,
-            oldBorder,
-            newBorder
+            old.Width, current.Width,
+            old.Height, current.Height,
+            old.FillColor, current.FillColor,
+            old.BorderColor, current.BorderColor
         );
     }
 }

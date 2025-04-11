@@ -4,20 +4,20 @@ using ShapesProject.Domain.Shapes;
 
 namespace Infrastructure.Factories.Commands;
 
-public class TrapezoidEditCommandFactory : IEditCommandFactory
+public class TriangleEditCommandFactory : IEditCommandFactory
 {
     public ICommand Create(Shape currentShape, Shape oldShape)
     {
-        if (currentShape is not Trapezoid current || oldShape is not Trapezoid old)
+        if (currentShape is not Triangle current || oldShape is not Triangle old)
         {
-            throw new ArgumentException("Invalid shape type.");
+            throw new ArgumentException("Invalid shape type");
         }
-        
-        return new EditTrapezoidCommand(
+
+        return new EditTriangleCommand(
             current,
-            old.Base1, current.Base1,
-            old.Base2, current.Base2,
-            old.Height, current.Height,
+            old.Point1, current.Point1,
+            old.Point2, current.Point2,
+            old.Point3, current.Point3,
             old.FillColor, current.FillColor,
             old.BorderColor, current.BorderColor
         );

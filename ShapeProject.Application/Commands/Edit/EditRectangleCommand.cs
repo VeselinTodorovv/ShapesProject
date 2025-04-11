@@ -9,20 +9,14 @@ public class EditRectangleCommand : CommandBase
 {
     private readonly Shape _rectangle;
     
-    private readonly int _oldWidth;
-    private readonly int _newWidth;
+    private readonly int _oldWidth, _newWidth;
+    private readonly int _oldHeight, _newHeight;
     
-    private readonly int _oldHeight;
-    private readonly int _newHeight;
-    
-    private readonly Color _oldFill;
-    private readonly Color _newFill;
-    
-    private readonly Color _oldBorder;
-    private readonly Color _newBorder;
+    private readonly CustomColor _oldFill, _newFill;
+    private readonly CustomColor _oldBorder, _newBorder;
 
     public EditRectangleCommand(RectangleShape rectangle, int oldWidth, int newWidth, int oldHeight, int newHeight,
-        Color oldFill, Color newFill, Color oldBorder, Color newBorder)
+        CustomColor oldFill, CustomColor newFill, CustomColor oldBorder, CustomColor newBorder)
     {
         _rectangle = rectangle
                      ?? throw new ArgumentNullException(nameof(rectangle));
@@ -44,21 +38,14 @@ public class EditRectangleCommand : CommandBase
     {
         _rectangle.EditSize(_newWidth, _newHeight);
         
-        // TODO: Follow the example in EditCircleCommand and remove UI logic
-        var newFillColor = new CustomColor(_newFill.R, _newFill.G, _newFill.B, _newFill.A);
-        var newBorderColor = new CustomColor(_newBorder.R, _newBorder.G, _newBorder.B, _newBorder.A);
-        
-        _rectangle.FillColor = newFillColor;
-        _rectangle.BorderColor = newBorderColor;
+        _rectangle.FillColor = _newFill;
+        _rectangle.BorderColor = _newBorder;
     }
     public override void Undo()
     {
         _rectangle.EditSize(_oldWidth, _oldHeight);
         
-        var oldFillColor = new CustomColor(_oldFill.R, _oldFill.G, _oldFill.B, _oldFill.A);
-        var oldBorderColor = new CustomColor(_oldBorder.R, _oldBorder.G, _oldBorder.B, _oldBorder.A);
-        
-        _rectangle.FillColor = oldFillColor;
-        _rectangle.BorderColor = oldBorderColor;
+        _rectangle.FillColor = _oldFill;
+        _rectangle.BorderColor = _oldBorder;
     }
 }

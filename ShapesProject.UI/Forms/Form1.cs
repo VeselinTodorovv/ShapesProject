@@ -8,11 +8,11 @@ using ShapeProject.Application.Commands.Core;
 using ShapeProject.Application.Commands.Movement;
 using ShapeProject.Application.Commands.Selection;
 using ShapeProject.Application.Services;
-using ShapesProject.Domain.Primitives;
 using ShapesProject.Domain.Shapes;
 using ShapesProject.Utils;
 
 using ColorConverter=Infrastructure.Converters.ColorConverter;
+using PointConverter=Infrastructure.Converters.PointConverter;
 
 namespace ShapesProject.Forms;
 
@@ -39,11 +39,13 @@ public partial class Form1 : Form
         _shapeManager = new ShapeManager();
         _scene = new Scene(_shapeManager);
         
+        // TODO: (Bad Practice) Try to move these outside the UI project, so the ShapesProject.UI.Domain reference can be removed
         _editCommandFactories.Add(typeof(Circle), new CircleEditCommandFactory());
         _editCommandFactories.Add(typeof(Parallelogram), new ParallelogramEditCommandFactory());
         _editCommandFactories.Add(typeof(RectangleShape), new RectangleEditCommandFactory());
         _editCommandFactories.Add(typeof(Rhombus), new RhombusEditCommandFactory());
         _editCommandFactories.Add(typeof(Trapezoid), new TrapezoidEditCommandFactory());
+        _editCommandFactories.Add(typeof(Triangle), new TriangleEditCommandFactory());
         
         scenePanel.Paint += panel1_Paint;
         scenePanel.MouseDown += scenePanel_MouseDown;
@@ -141,7 +143,7 @@ public partial class Form1 : Form
 
         _shapeManager.ClearSelection();
 
-        var point = new CustomPoint(e.X, e.Y);
+        var point = PointConverter.ToDomainPoint(e.Location);
         var newSelection = _shapeManager.GetShapes()
             .FirstOrDefault(shape => shape.Contains(point));
 

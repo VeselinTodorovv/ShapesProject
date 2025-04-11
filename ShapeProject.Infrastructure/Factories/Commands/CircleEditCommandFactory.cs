@@ -15,12 +15,9 @@ public class CircleEditCommandFactory : IEditCommandFactory
         
         return new EditCircleCommand(
             current,
-            old.Radius,
-            current.Radius,
-            old.FillColor,
-            current.FillColor,
-            old.BorderColor,
-            current.BorderColor
+            old.Radius, current.Radius,
+            old.FillColor, current.FillColor,
+            old.BorderColor, current.BorderColor
         );
     }
 }

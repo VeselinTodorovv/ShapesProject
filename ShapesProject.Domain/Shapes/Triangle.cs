@@ -31,6 +31,14 @@ public class Triangle : Shape
             throw new ArgumentException("Invalid parameters for triangle.");
         }
     }
+
+    public void EditSize(CustomPoint point1, CustomPoint point2, CustomPoint point3)
+    {
+        Point1 = point1;
+        Point2 = point2;
+        Point3 = point3;
+    }
+    
     public override double CalculateArea()
     {
         return Math.Abs((Point1.X * (Point2.Y - Point3.Y) +
@@ -82,5 +90,4 @@ public class Triangle : Shape
 
         return clone;
     }
-
 }

@@ -9,23 +9,15 @@ public class EditTrapezoidCommand : CommandBase
 {
     private readonly Shape _trapezoid;
     
-    private readonly int _oldBase1;
-    private readonly int _newBase1;
+    private readonly int _oldBase1, _newBase1;
+    private readonly int _oldBase2, _newBase2;
+    private readonly int _oldHeight, _newHeight;
     
-    private readonly int _oldBase2;
-    private readonly int _newBase2;
-    
-    private readonly int _oldHeight;
-    private readonly int _newHeight;
-    
-    private readonly Color _oldFill;
-    private readonly Color _newFill;
-    
-    private readonly Color _oldBorder;
-    private readonly Color _newBorder;
+    private readonly CustomColor _oldFill, _newFill;
+    private readonly CustomColor _oldBorder, _newBorder;
 
     public EditTrapezoidCommand(Trapezoid trapezoid, int oldBase1, int newBase1, int oldBase2, int newBase2, int oldHeight, int newHeight,
-        Color oldFill, Color newFill, Color oldBorder, Color newBorder)
+        CustomColor oldFill, CustomColor newFill, CustomColor oldBorder, CustomColor newBorder)
     {
         _trapezoid = trapezoid
             ?? throw new ArgumentNullException(nameof(trapezoid));
@@ -50,22 +42,15 @@ public class EditTrapezoidCommand : CommandBase
     {
         _trapezoid.EditSize(_newBase1, _newBase2, _newHeight);
         
-        // TODO: Follow the example in EditCircleCommand and remove UI logic
-        var newFillColor = new CustomColor(_newFill.R, _newFill.G, _newFill.B, _newFill.A);
-        var newBorderColor = new CustomColor(_newBorder.R, _newBorder.G, _newBorder.B, _newBorder.A);
-        
-        _trapezoid.FillColor = newFillColor;
-        _trapezoid.BorderColor = newBorderColor;
+        _trapezoid.FillColor = _newFill;
+        _trapezoid.BorderColor = _newBorder;
     }
     
     public override void Undo()
     {
         _trapezoid.EditSize(_oldBase1, _oldBase2, _oldHeight);
         
-        var oldFillColor = new CustomColor(_oldFill.R, _oldFill.G, _oldFill.B, _oldFill.A);
-        var oldBorderColor = new CustomColor(_oldBorder.R, _oldBorder.G, _oldBorder.B, _oldBorder.A);
-        
-        _trapezoid.FillColor = oldFillColor;
-        _trapezoid.BorderColor = oldBorderColor;
+        _trapezoid.FillColor = _oldFill;
+        _trapezoid.BorderColor = _oldBorder;
     }
 }

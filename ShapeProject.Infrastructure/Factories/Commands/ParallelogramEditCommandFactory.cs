@@ -15,16 +15,11 @@ public class ParallelogramEditCommandFactory : IEditCommandFactory
         
         return new EditParallelogramCommand(
             current,
-            old.Base,
-            current.Base,
-            old.Height,
-            current.Height,
-            old.Side,
-            current.Side,
-            old.FillColor,
-            current.FillColor,
-            old.BorderColor,
-            current.BorderColor
+            old.Base, current.Base,
+            old.Height, current.Height,
+            old.Side, current.Side,
+            old.FillColor, current.FillColor,
+            old.BorderColor, current.BorderColor
         );
     }
 }
