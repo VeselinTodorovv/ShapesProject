@@ -39,7 +39,7 @@ public class EditTriangleCommand : CommandBase
 
     public override void Execute()
     {
-        _triangle.EditSize(_newPoint1, _newPoint2, _newPoint3);
+        _triangle.EditSize(_newPoint1.X, _newPoint1.Y, _newPoint2.X, _newPoint2.Y, _newPoint3.X, _newPoint3.Y);
         
         _triangle.FillColor = _newFill;
         _triangle.BorderColor = _newBorder;
@@ -47,7 +47,7 @@ public class EditTriangleCommand : CommandBase
     
     public override void Undo()
     {
-        _triangle.EditSize(_oldPoint1, _oldPoint2, _oldPoint3);
+        _triangle.EditSize(_oldPoint1.X, _oldPoint1.Y, _oldPoint2.X, _oldPoint2.Y, _oldPoint3.X, _oldPoint3.Y);
         
         _triangle.FillColor = _oldFill;
         _triangle.BorderColor = _oldBorder;

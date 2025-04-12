@@ -32,13 +32,6 @@ public class Triangle : Shape
         }
     }
 
-    public void EditSize(CustomPoint point1, CustomPoint point2, CustomPoint point3)
-    {
-        Point1 = point1;
-        Point2 = point2;
-        Point3 = point3;
-    }
-    
     public override double CalculateArea()
     {
         return Math.Abs((Point1.X * (Point2.Y - Point3.Y) +
@@ -80,7 +73,10 @@ public class Triangle : Shape
     
     public override Shape Clone()
     {
-        var clone = new Triangle(Point1, Point2, Point3)
+        var clone = new Triangle(
+            new CustomPoint(Point1.X, Point1.Y),
+            new CustomPoint(Point2.X, Point2.Y),
+            new CustomPoint(Point3.X, Point3.Y))
         {
             FillColor = FillColor,
             BorderColor = BorderColor,
