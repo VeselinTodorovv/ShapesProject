@@ -32,6 +32,7 @@ public class Rhombus : Shape
         }
     }
     public override double CalculateArea() => Diagonal1 * Diagonal2 / 2.0;
+
     public override void Accept(IRenderVisitor visitor)
     {
         visitor.VisitRhombus(this);
@@ -56,5 +57,4 @@ public class Rhombus : Shape
         
         return clone;
     }
-
 }

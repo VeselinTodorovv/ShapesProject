@@ -34,6 +34,7 @@ public class Trapezoid : Shape
         }
     }
     public override double CalculateArea() => (Base1 + Base2) * Height / 2.0;
+
     public override void Accept(IRenderVisitor visitor)
     {
         visitor.VisitTrapezoid(this);
@@ -44,6 +45,7 @@ public class Trapezoid : Shape
         return p.X >= X && p.X <= X + Math.Max(Base1, Base2) &&
                p.Y >= Y && p.Y <= Y + Height;
     }
+
     public override Shape Clone()
     {
         var clone = new Trapezoid(X, Y, Base1, Base2, Height)
@@ -57,5 +59,4 @@ public class Trapezoid : Shape
 
         return clone;
     }
-
 }

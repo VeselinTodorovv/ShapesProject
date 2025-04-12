@@ -11,7 +11,9 @@ public class RectangleShape : Shape
     public RectangleShape(int x, int y, int width, int height) : base(x, y)
     {
         if (width <= 0 || height <= 0)
+        {
             throw new ArgumentException("Width and Height must be positive.");
+        }
 
         Width = width;
         Height = height;

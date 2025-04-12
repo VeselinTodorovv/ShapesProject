@@ -2,9 +2,9 @@
 
 namespace ShapesProject.Utils;
 
-public class ShapeCustomTypeDescriptor : CustomTypeDescriptor
+public class ShapeTypeDescriptor : CustomTypeDescriptor
 {
-    public ShapeCustomTypeDescriptor(ICustomTypeDescriptor parent)
+    public ShapeTypeDescriptor(ICustomTypeDescriptor parent)
         : base(parent)
     {
     }
@@ -25,6 +25,8 @@ public class ShapeCustomTypeDescriptor : CustomTypeDescriptor
             .Where(pd => pd.Name != "TempOffsetX" &&
                          pd.Name != "TempOffsetY" &&
                          pd.Name != "IsSelected" &&
+                         pd.Name != "FillColor" &&
+                         pd.Name != "BorderColor" &&
                          pd.Name != "SelectionBorderWidth")
             .ToArray(), true);
     }

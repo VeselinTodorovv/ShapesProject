@@ -34,6 +34,7 @@ public class Parallelogram : Shape
         }
     }
     public override double CalculateArea() => Base * Height;
+
     public override void Accept(IRenderVisitor visitor)
     {
         visitor.VisitParallelogram(this);
@@ -58,5 +59,4 @@ public class Parallelogram : Shape
         
         return clone;
     }
-
 }

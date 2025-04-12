@@ -45,6 +45,7 @@ public class Triangle : Shape
                          Point2.X * (Point3.Y - Point1.Y) +
                          Point3.X * (Point1.Y - Point2.Y)) / 2.0);
     }
+
     public override void Accept(IRenderVisitor visitor)
     {
         visitor.VisitTriangle(this);

@@ -14,6 +14,6 @@ public class ShapeDescriptionProvider : TypeDescriptionProvider
         var descriptor = base.GetTypeDescriptor(objectType, instance)
                          ?? throw new InvalidOperationException();
 
-        return new ShapeCustomTypeDescriptor(descriptor);
+        return new ShapeTypeDescriptor(descriptor);
     }
 }

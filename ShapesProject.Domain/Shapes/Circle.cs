@@ -28,6 +28,7 @@ public class Circle : Shape
         }
     }
     public override double CalculateArea() => Math.PI * Radius * Radius;
+
     public override void Accept(IRenderVisitor visitor)
     {
         visitor.VisitCircle(this);
