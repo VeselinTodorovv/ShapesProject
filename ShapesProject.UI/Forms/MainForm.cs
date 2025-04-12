@@ -43,9 +43,6 @@ public partial class MainForm : Form
         scenePanel.MouseMove += scenePanel_MouseMove;
         scenePanel.MouseUp += scenePanel_MouseUp;
 
-        _shapeManager.ShapeAdded += (_, _) => scenePanel.Invalidate();
-        _shapeManager.ShapeDeleted += (_, _) => scenePanel.Invalidate();
-        _shapeManager.SelectionChanged += (_, _) => scenePanel.Invalidate();
         _shapeManager.CommandExecuted += (_, _) => scenePanel.Invalidate();
     }
     
@@ -189,6 +186,7 @@ public partial class MainForm : Form
 
         _dragStartPosition = e.Location;
 
+        // To visualize the shape's dragging
         scenePanel.Invalidate();
     }
 

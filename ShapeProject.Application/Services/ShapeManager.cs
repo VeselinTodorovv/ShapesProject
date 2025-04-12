@@ -13,9 +13,6 @@ public class ShapeManager
     private readonly Stack<ICommand> _redoStack = new();
 
     public event EventHandler? CommandExecuted;
-    public event EventHandler<ShapeEventArgs>? SelectionChanged;
-    public event EventHandler<ShapeEventArgs>? ShapeAdded;
-    public event EventHandler<ShapeEventArgs>? ShapeDeleted;
 
     public IReadOnlyList<Shape> GetShapes() => _shapes.AsReadOnly();
 
@@ -26,12 +23,7 @@ public class ShapeManager
         _undoStack.Push(command);
         _redoStack.Clear();
 
-        if (SelectedShape != null)
-        {
-            OnSelectionChanged(SelectedShape);
-        }
-
-        CommandExecuted?.Invoke(this, EventArgs.Empty);
+        OnCommandExecuted();
     }
 
     public void Undo()
@@ -68,20 +60,11 @@ public class ShapeManager
     internal void AddShape(Shape shape)
     {
         _shapes.Add(shape);
-        ShapeAdded?.Invoke(this, new ShapeEventArgs(shape));
     }
 
     internal void DeleteShape(Shape shape)
     {
-        if (_shapes.Remove(shape))
-        {
-            ShapeDeleted?.Invoke(this, new ShapeEventArgs(shape));
-        }
-    }
-
-    private void OnSelectionChanged(Shape shape)
-    {
-        SelectionChanged?.Invoke(this, new ShapeEventArgs(shape));
+        _shapes.Remove(shape);
     }
 
     public void ClearSelection()

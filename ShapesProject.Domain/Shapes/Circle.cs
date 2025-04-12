@@ -27,6 +27,7 @@ public class Circle : Shape
             throw new ArgumentException("Radius must be positive .");
         }
     }
+    
     public override double CalculateArea() => Math.PI * Radius * Radius;
 
     public override void Accept(IRenderVisitor visitor)
