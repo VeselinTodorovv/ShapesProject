@@ -30,8 +30,8 @@ public partial class MainForm : Form
         
         // Fix for flickering while moving shapes
         typeof(Panel).InvokeMember("DoubleBuffered",
-        BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-        null, scenePanel, new object[] { true });
+            BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+            null, scenePanel, new object[] { true });
         
         _shapeManager = new ShapeManager();
         _scene = new Scene(_shapeManager);
@@ -81,6 +81,8 @@ public partial class MainForm : Form
 
     private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        // TODO: Move shape creation to a new form
+        // TODO: Think of a way to allow creation of shapes with different sizes
         var rectangle = ShapeFactory.CreateShape(typeof(RectangleShape), 0, 0, 100, 50);
 
         var command = new AddShapeCommand(_shapeManager, rectangle);

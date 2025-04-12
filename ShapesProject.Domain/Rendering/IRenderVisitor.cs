@@ -1,6 +1,6 @@
 ﻿using ShapesProject.Domain.Shapes;
 
-namespace ShapesProject.Domain;
+namespace ShapesProject.Domain.Rendering;
 
 public interface IRenderVisitor
 {

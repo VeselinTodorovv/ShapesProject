@@ -1,4 +1,5 @@
 ﻿using ShapesProject.Domain.Primitives;
+using ShapesProject.Domain.Rendering;
 
 namespace ShapesProject.Domain.Shapes;
 

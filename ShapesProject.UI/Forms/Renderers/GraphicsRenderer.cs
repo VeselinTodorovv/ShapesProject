@@ -1,6 +1,6 @@
 ﻿using System.Drawing.Drawing2D;
 using Infrastructure.Converters;
-using ShapesProject.Domain;
+using ShapesProject.Domain.Rendering;
 using ShapesProject.Domain.Shapes;
 
 namespace ShapesProject.Forms.Renderers;

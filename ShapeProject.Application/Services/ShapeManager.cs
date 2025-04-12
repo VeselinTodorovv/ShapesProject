@@ -59,11 +59,21 @@ public class ShapeManager
 
     internal void AddShape(Shape shape)
     {
+        if (shape == null)
+        {
+            throw new ArgumentNullException(nameof(shape));
+        }
+
         _shapes.Add(shape);
     }
 
     internal void DeleteShape(Shape shape)
     {
+        if (shape == null)
+        {
+            throw new ArgumentNullException(nameof(shape));
+        }
+
         _shapes.Remove(shape);
     }
 
