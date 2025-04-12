@@ -21,7 +21,8 @@ public class ShapeTypeDescriptor : CustomTypeDescriptor
 
     private static PropertyDescriptorCollection FilterProperties(PropertyDescriptorCollection originalProperties)
     {
-        return new PropertyDescriptorCollection(originalProperties.Cast<PropertyDescriptor>()
+        return new PropertyDescriptorCollection(originalProperties
+            .Cast<PropertyDescriptor>()
             .Where(pd => pd.Name != "TempOffsetX" &&
                          pd.Name != "TempOffsetY" &&
                          pd.Name != "IsSelected" &&

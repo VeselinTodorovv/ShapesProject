@@ -3,7 +3,7 @@ using ShapesProject.Domain.Primitives;
 
 namespace Infrastructure.Converters;
 
-public static class ColorConverter
+public static class CustomColorConverter
 {
     public static CustomColor ToDomainColor(Color color) => new(color.R, color.G, color.B, color.A);
 

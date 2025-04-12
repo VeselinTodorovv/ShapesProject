@@ -1,7 +1,7 @@
 ﻿using System.Drawing.Drawing2D;
+using Infrastructure.Converters;
 using ShapesProject.Domain;
 using ShapesProject.Domain.Shapes;
-using ColorConverter=Infrastructure.Converters.ColorConverter;
 
 namespace ShapesProject.Forms.Renderers;
 
@@ -20,8 +20,8 @@ public class GraphicsRenderer : IRenderVisitor
         var pos = circle.GetDrawingPosition();
         int diameter = 2 * circle.Radius;
         
-        using var brush = new SolidBrush(ColorConverter.ToSystemColor(circle.FillColor));
-        using var pen = new Pen(ColorConverter.ToSystemColor(circle.BorderColor));
+        using var brush = new SolidBrush(CustomColorConverter.ToSystemColor(circle.FillColor));
+        using var pen = new Pen(CustomColorConverter.ToSystemColor(circle.BorderColor));
         
         _graphics.FillEllipse(brush, pos.X - circle.Radius, pos.Y - circle.Radius, diameter, diameter);
         _graphics.DrawEllipse(pen, pos.X - circle.Radius, pos.Y - circle.Radius, diameter, diameter);
@@ -42,8 +42,8 @@ public class GraphicsRenderer : IRenderVisitor
     {
         var pos = parallelogram.GetDrawingPosition();
         
-        using var brush = new SolidBrush(ColorConverter.ToSystemColor(parallelogram.FillColor));
-        using var pen = new Pen(ColorConverter.ToSystemColor(parallelogram.BorderColor));
+        using var brush = new SolidBrush(CustomColorConverter.ToSystemColor(parallelogram.FillColor));
+        using var pen = new Pen(CustomColorConverter.ToSystemColor(parallelogram.BorderColor));
         
         Point[] points =
         {
@@ -80,8 +80,8 @@ public class GraphicsRenderer : IRenderVisitor
     {
         var pos = rectangle.GetDrawingPosition();
         
-        using SolidBrush brush = new(ColorConverter.ToSystemColor(rectangle.FillColor));
-        using Pen pen = new(ColorConverter.ToSystemColor(rectangle.BorderColor));
+        using SolidBrush brush = new(CustomColorConverter.ToSystemColor(rectangle.FillColor));
+        using Pen pen = new(CustomColorConverter.ToSystemColor(rectangle.BorderColor));
 
         _graphics.FillRectangle(brush, pos.X, pos.Y, rectangle.Width, rectangle.Height);
         _graphics.DrawRectangle(pen, pos.X, pos.Y, rectangle.Width, rectangle.Height);
@@ -106,8 +106,8 @@ public class GraphicsRenderer : IRenderVisitor
     {
         var pos = rhombus.GetDrawingPosition();
         
-        using SolidBrush brush = new(ColorConverter.ToSystemColor(rhombus.FillColor));
-        using Pen pen = new(ColorConverter.ToSystemColor(rhombus.BorderColor));
+        using SolidBrush brush = new(CustomColorConverter.ToSystemColor(rhombus.FillColor));
+        using Pen pen = new(CustomColorConverter.ToSystemColor(rhombus.BorderColor));
         
         Point[] points =
         {
@@ -144,8 +144,8 @@ public class GraphicsRenderer : IRenderVisitor
     {
         var pos = trapezoid.GetDrawingPosition();
         
-        using SolidBrush brush = new(ColorConverter.ToSystemColor(trapezoid.FillColor));
-        using Pen pen = new(ColorConverter.ToSystemColor(trapezoid.BorderColor));
+        using SolidBrush brush = new(CustomColorConverter.ToSystemColor(trapezoid.FillColor));
+        using Pen pen = new(CustomColorConverter.ToSystemColor(trapezoid.BorderColor));
         
         Point[] points =
         {
@@ -180,8 +180,8 @@ public class GraphicsRenderer : IRenderVisitor
     
     public void VisitTriangle(Triangle triangle)
     {
-        using SolidBrush brush = new(ColorConverter.ToSystemColor(triangle.FillColor));
-        using Pen pen = new(ColorConverter.ToSystemColor(triangle.BorderColor));
+        using SolidBrush brush = new(CustomColorConverter.ToSystemColor(triangle.FillColor));
+        using Pen pen = new(CustomColorConverter.ToSystemColor(triangle.BorderColor));
         
         // Temporary offset
         Point[] points = 

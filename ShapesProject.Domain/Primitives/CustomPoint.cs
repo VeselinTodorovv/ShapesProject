@@ -1,9 +1,9 @@
 ﻿namespace ShapesProject.Domain.Primitives;
 
-public struct CustomPoint
+public class CustomPoint
 {
-    public int X { get; }
-    public int Y { get; }
+    public int X { get; set; }
+    public int Y { get; set; }
 
     public CustomPoint(int x, int y)
     {

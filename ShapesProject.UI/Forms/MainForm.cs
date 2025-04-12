@@ -1,5 +1,6 @@
 using System.Drawing.Drawing2D;
 using System.Reflection;
+using Infrastructure.Converters;
 using Infrastructure.Factories.Commands;
 using Infrastructure.Factories.Shapes;
 using ShapeProject.Application.Commands.AddRemove;
@@ -9,10 +10,6 @@ using ShapeProject.Application.Commands.Movement;
 using ShapeProject.Application.Commands.Selection;
 using ShapeProject.Application.Services;
 using ShapesProject.Domain.Shapes;
-using ShapesProject.Utils;
-
-using ColorConverter=Infrastructure.Converters.ColorConverter;
-using PointConverter=Infrastructure.Converters.PointConverter;
 
 namespace ShapesProject.Forms;
 
@@ -145,7 +142,7 @@ public partial class MainForm : Form
 
         _shapeManager.ClearSelection();
 
-        var point = PointConverter.ToDomainPoint(e.Location);
+        var point = CustomPointConverter.ToDomainPoint(e.Location);
         var newSelection = _shapeManager.GetShapes()
             .FirstOrDefault(shape => shape.Contains(point));
 
@@ -248,6 +245,7 @@ public partial class MainForm : Form
     {
         _shapeManager.Undo();
     }
+    
     private void redoToolStripButton_Click(object sender, EventArgs e)
     {
         _shapeManager.Redo();
@@ -279,7 +277,7 @@ public partial class MainForm : Form
             return;
         }
 
-        var customColor = ColorConverter.ToDomainColor(colorDialog.Color);
+        var customColor = CustomColorConverter.ToDomainColor(colorDialog.Color);
 
         var command = new ChangeFillColorCommand(selectedShape, customColor);
         _shapeManager.ExecuteCommand(command);
@@ -299,7 +297,7 @@ public partial class MainForm : Form
             return;
         }
 
-        var customColor = ColorConverter.ToDomainColor(colorDialog.Color);
+        var customColor = CustomColorConverter.ToDomainColor(colorDialog.Color);
 
         var command = new ChangeBorderColorCommand(selectedShape, customColor);
         _shapeManager.ExecuteCommand(command);

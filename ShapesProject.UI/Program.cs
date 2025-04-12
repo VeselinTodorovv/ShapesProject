@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using Infrastructure.Converters;
+using ShapesProject.Domain.Primitives;
 using ShapesProject.Forms;
 using ShapesProject.Utils;
 
@@ -15,6 +18,7 @@ internal static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         
+        TypeDescriptor.AddAttributes(typeof(CustomPoint), new TypeConverterAttribute(typeof(CustomPointConverter)));
         ProviderRegistration.RegisterProvider();
         
         Application.Run(new MainForm());
