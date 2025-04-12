@@ -9,6 +9,9 @@ public abstract class CommandBase : ICommand
 
     protected static void EnsureState(bool condition, string message)
     {
-        if (!condition) throw new InvalidOperationException(message);
+        if (!condition)
+        {
+            throw new InvalidOperationException(message);
+        }
     }
 }

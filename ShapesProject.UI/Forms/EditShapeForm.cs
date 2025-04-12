@@ -4,17 +4,14 @@ namespace ShapesProject.Forms;
 
 public partial class EditShapeForm : Form
 {
-    private readonly Shape _shape;
-
     public EditShapeForm(Shape shape)
     {
         InitializeComponent();
 
-        _shape = shape;
-        propertyGrid1.SelectedObject = _shape;
+        propertyGrid.SelectedObject = shape;
 
-        btnApply.Click += btnApply_Click!;
-        btnCancel.Click += btnCancel_Click!;
+        btnApply.Click += btnApply_Click;
+        btnCancel.Click += btnCancel_Click;
     }
 
     private void btnApply_Click(object? sender, EventArgs e)

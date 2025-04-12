@@ -1,6 +1,4 @@
-﻿using ShapeProject.Application.Commands.Core;
-
-namespace ShapeProject.Application.Commands.Selection;
+﻿namespace ShapeProject.Application.Commands.Core;
 
 public class BatchCommand : ICommand
 {

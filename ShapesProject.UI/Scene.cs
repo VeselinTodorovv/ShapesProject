@@ -1,7 +1,7 @@
 ﻿using ShapeProject.Application.Services;
 using ShapesProject.Forms.Renderers;
 
-namespace ShapesProject.Utils;
+namespace ShapesProject;
 
 public class Scene
 {

@@ -9,7 +9,7 @@ public class ShapeManager
     private readonly List<Shape> _shapes = new();
     public Shape? SelectedShape => _shapes.FirstOrDefault(s => s.IsSelected);
 
-    private readonly Stack<ICommand> _commandHistory = new();
+    private readonly Stack<ICommand> _undoStack = new();
     private readonly Stack<ICommand> _redoStack = new();
 
     public event EventHandler? CommandExecuted;
@@ -23,7 +23,7 @@ public class ShapeManager
     {
         command.Execute();
 
-        _commandHistory.Push(command);
+        _undoStack.Push(command);
         _redoStack.Clear();
 
         if (SelectedShape != null)
@@ -36,12 +36,12 @@ public class ShapeManager
 
     public void Undo()
     {
-        if (_commandHistory.Count == 0)
+        if (_undoStack.Count == 0)
         {
             return;
         }
 
-        var command = _commandHistory.Pop();
+        var command = _undoStack.Pop();
         command.Undo();
 
         _redoStack.Push(command);
@@ -58,7 +58,7 @@ public class ShapeManager
 
         var command = _redoStack.Pop();
         command.Redo();
-        _commandHistory.Push(command);
+        _undoStack.Push(command);
 
         OnCommandExecuted();
     }

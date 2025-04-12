@@ -31,20 +31,20 @@ partial class EditShapeForm
     /// </summary>
     private void InitializeComponent()
     {
-        propertyGrid1 = new PropertyGrid();
+        propertyGrid = new PropertyGrid();
         btnApply = new Button();
         btnCancel = new Button();
         SuspendLayout();
         // 
         // propertyGrid1
         // 
-        propertyGrid1.HelpVisible = false;
-        propertyGrid1.Location = new Point(12, 12);
-        propertyGrid1.Name = "propertyGrid1";
-        propertyGrid1.PropertySort = PropertySort.Categorized;
-        propertyGrid1.Size = new Size(324, 278);
-        propertyGrid1.TabIndex = 0;
-        propertyGrid1.ToolbarVisible = false;
+        propertyGrid.HelpVisible = false;
+        propertyGrid.Location = new Point(12, 12);
+        propertyGrid.Name = "propertyGrid";
+        propertyGrid.PropertySort = PropertySort.Categorized;
+        propertyGrid.Size = new Size(324, 278);
+        propertyGrid.TabIndex = 0;
+        propertyGrid.ToolbarVisible = false;
         // 
         // btnApply
         // 
@@ -75,7 +75,7 @@ partial class EditShapeForm
         ClientSize = new Size(348, 331);
         Controls.Add(btnCancel);
         Controls.Add(btnApply);
-        Controls.Add(propertyGrid1);
+        Controls.Add(propertyGrid);
         Name = "EditShapeForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "EditShapeForm";
@@ -84,7 +84,7 @@ partial class EditShapeForm
 
     #endregion
 
-    private PropertyGrid propertyGrid1;
+    private PropertyGrid propertyGrid;
     private Button btnApply;
     private Button btnCancel;
 }

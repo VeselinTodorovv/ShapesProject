@@ -1,6 +1,5 @@
 ﻿using System.Drawing.Drawing2D;
 using ShapesProject.Domain;
-using ShapesProject.Domain.Primitives;
 using ShapesProject.Domain.Shapes;
 using ColorConverter=Infrastructure.Converters.ColorConverter;
 

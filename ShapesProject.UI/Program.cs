@@ -1,4 +1,5 @@
 using ShapesProject.Forms;
+using ShapesProject.Utils;
 
 namespace ShapesProject;
 
@@ -13,6 +14,9 @@ internal static class Program
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
+        
+        ProviderRegistration.RegisterProvider();
+        
         Application.Run(new MainForm());
     }
 }

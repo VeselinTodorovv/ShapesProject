@@ -39,7 +39,6 @@ public partial class MainForm : Form
         _shapeManager = new ShapeManager();
         _scene = new Scene(_shapeManager);
         
-        // TODO: (Bad Practice) Try to move these outside the UI project
         RegisterCommandFactories();
         
         scenePanel.Paint += panel1_Paint;
@@ -174,18 +173,18 @@ public partial class MainForm : Form
         var dy = e.Y - _dragStartPosition.Y;
 
         var selectedShape = _shapeManager.SelectedShape;
-        if (dx == 0 && dy == 0)
+        if (selectedShape == null)
         {
             return;
         }
 
-        if (_currentMoveCommand == null)
+        if (_currentMoveCommand != null)
         {
-            _currentMoveCommand = new MoveCommand(selectedShape, dx, dy);
+            _currentMoveCommand.AccumulateMovement(dx, dy);
         }
         else
         {
-            _currentMoveCommand.AccumulateMovement(dx, dy);
+            _currentMoveCommand = new MoveCommand(selectedShape, dx, dy);
         }
 
         selectedShape.TempOffsetX = _currentMoveCommand.TotalDx;
