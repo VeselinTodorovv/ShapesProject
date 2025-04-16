@@ -23,12 +23,24 @@ public class ShapeTypeDescriptor : CustomTypeDescriptor
     {
         return new PropertyDescriptorCollection(originalProperties
             .Cast<PropertyDescriptor>()
-            .Where(pd => pd.Name != "TempOffsetX" &&
-                         pd.Name != "TempOffsetY" &&
-                         pd.Name != "IsSelected" &&
-                         pd.Name != "FillColor" &&
-                         pd.Name != "BorderColor" &&
-                         pd.Name != "SelectionBorderWidth")
+            .Where(pd =>!IsExcluded(pd)) 
             .ToArray(), true);
     }
+
+    private static bool IsExcluded(PropertyDescriptor property)
+    {
+        return ExcludedPropertyNames.Contains(property.Name);
+    }
+    
+    private static readonly HashSet<string> ExcludedPropertyNames = new()
+    {
+        "TempOffsetX",
+        "TempOffsetY",
+        "IsSelected",
+        "FillColor",
+        "BorderColor",
+        "SelectionBorderWidth",
+        "X",
+        "Y"
+    };
 }

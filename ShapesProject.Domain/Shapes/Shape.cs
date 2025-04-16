@@ -3,11 +3,12 @@ using ShapesProject.Domain.Rendering;
 
 namespace ShapesProject.Domain.Shapes;
 
+[Serializable]
 public abstract class Shape
 {
-    protected int X { get; set; }
+    public int X { get; set; }
 
-    protected int Y { get; set; }
+    public int Y { get; set; }
 
     public int TempOffsetX { get; set; }
 

@@ -305,7 +305,31 @@ public partial class MainForm : Form
 
     private void saveToolStripMenuItem_Click(object sender, EventArgs e)
     {
-
+        using var saveFileDialog = new SaveFileDialog();
+        saveFileDialog.Filter = "JSON files (*.json)|*.json";
+        saveFileDialog.DefaultExt = "json";
+        
+        if (saveFileDialog.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+        
+        _shapeManager.SaveToFile(saveFileDialog.FileName);
+    }
+    
+    private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        using var openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "JSON files (*.json)|*.json";
+        openFileDialog.DefaultExt = "json";
+        
+        if (openFileDialog.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+        
+        _shapeManager.LoadFromFile(openFileDialog.FileName);
+        scenePanel.Invalidate();
     }
 
     private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -313,10 +337,6 @@ public partial class MainForm : Form
 
     }
 
-    private void loadToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-
-    }
 
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {

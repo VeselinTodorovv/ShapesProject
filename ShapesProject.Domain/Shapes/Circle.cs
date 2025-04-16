@@ -3,6 +3,7 @@ using ShapesProject.Domain.Rendering;
 
 namespace ShapesProject.Domain.Shapes;
 
+[Serializable]
 public class Circle : Shape
 {
     public int Radius { get; set; }

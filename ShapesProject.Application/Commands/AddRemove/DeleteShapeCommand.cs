@@ -2,40 +2,39 @@
 using ShapeProject.Application.Services;
 using ShapesProject.Domain.Shapes;
 
-namespace ShapeProject.Application.Commands.AddRemove
+namespace ShapeProject.Application.Commands.AddRemove;
+
+public class DeleteShapeCommand : CommandBase
 {
-    public class DeleteShapeCommand : CommandBase
+    private readonly ShapeManager _manager;
+    private readonly Shape _shape;
+
+    private bool _executed;
+
+    public DeleteShapeCommand(ShapeManager manager, Shape shape)
     {
-        private readonly ShapeManager _manager;
-        private readonly Shape _shape;
+        _manager = manager
+                   ?? throw new ArgumentNullException(nameof(manager));
+        _shape = shape
+                 ?? throw new ArgumentNullException(nameof(shape));
+    }
 
-        private bool _executed;
-
-        public DeleteShapeCommand(ShapeManager manager, Shape shape)
+    public override void Execute()
+    {
+        if (_executed)
         {
-            _manager = manager
-                       ?? throw new ArgumentNullException(nameof(manager));
-            _shape = shape
-                     ?? throw new ArgumentNullException(nameof(shape));
+            return;
         }
 
-        public override void Execute()
-        {
-            if (_executed)
-            {
-                return;
-            }
+        _manager.DeleteShape(_shape);
+        _executed = true;
+    }
 
-            _manager.DeleteShape(_shape);
-            _executed = true;
-        }
+    public override void Undo()
+    {
+        EnsureState(_executed, "Cannot undo unexecuted command");
 
-        public override void Undo()
-        {
-            EnsureState(_executed, "Cannot undo unexecuted command");
-
-            _manager.AddShape(_shape);
-            _executed = false;
-        }
+        _manager.AddShape(_shape);
+        _executed = false;
     }
 }

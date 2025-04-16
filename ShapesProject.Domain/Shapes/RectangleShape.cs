@@ -3,6 +3,7 @@ using ShapesProject.Domain.Rendering;
 
 namespace ShapesProject.Domain.Shapes;
 
+[Serializable]
 public class RectangleShape : Shape
 {
     public int Width { get; set; }

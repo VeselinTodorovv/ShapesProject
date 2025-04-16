@@ -1,4 +1,5 @@
-﻿using ShapeProject.Application.Commands.Core;
+﻿using System.Text.Json;
+using ShapeProject.Application.Commands.Core;
 using ShapeProject.Application.Commands.Selection;
 using ShapesProject.Domain.Shapes;
 
@@ -88,5 +89,43 @@ public class ShapeManager
         {
             ExecuteCommand(new BatchCommand(commands));
         }
+    }
+
+    public void SaveToFile(string path)
+    {
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters = { new CustomShapeConverter() }
+        };
+        
+        var json = JsonSerializer.Serialize(_shapes, options);
+        
+        File.WriteAllText(path, json);
+    }
+
+    public void LoadFromFile(string path)
+    {
+        if (!File.Exists(path))
+        {
+            return;
+        }
+        
+        var options = new JsonSerializerOptions
+        {
+            Converters = { new CustomShapeConverter() } // Custom converter to handle shapes
+        };
+        
+        var json = File.ReadAllText(path);
+        var shapes = JsonSerializer.Deserialize<List<Shape>>(json, options);
+
+        if (shapes == null)
+        {
+            return;
+        }
+        _shapes.Clear();
+        _shapes.AddRange(shapes);
+        
+        OnCommandExecuted();
     }
 }
