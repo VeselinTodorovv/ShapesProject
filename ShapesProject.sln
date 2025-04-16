@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesProject.UI", "ShapesP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesProject.Domain", "ShapesProject.Domain\ShapesProject.Domain.csproj", "{B7AE5A39-A8CC-4265-86D1-52E7CA29C074}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeProject.Infrastructure", "ShapeProject.Infrastructure\ShapeProject.Infrastructure.csproj", "{49E95346-0B97-4B62-9AEF-0ADBE64E5DBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesProject.Infrastructure", "ShapesProject.Infrastructure\ShapesProject.Infrastructure.csproj", "{49E95346-0B97-4B62-9AEF-0ADBE64E5DBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeProject.Application", "ShapeProject.Application\ShapeProject.Application.csproj", "{4E0935B7-55B2-4645-BA7D-826A616FCF75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesProject.Application", "ShapesProject.Application\ShapesProject.Application.csproj", "{4E0935B7-55B2-4645-BA7D-826A616FCF75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

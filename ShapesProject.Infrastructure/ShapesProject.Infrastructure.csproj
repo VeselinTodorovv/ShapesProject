@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ShapeProject.Application\ShapeProject.Application.csproj" />
+      <ProjectReference Include="..\ShapesProject.Application\ShapesProject.Application.csproj" />
       <ProjectReference Include="..\ShapesProject.Domain\ShapesProject.Domain.csproj" />
     </ItemGroup>
 
