@@ -37,6 +37,7 @@ public partial class MainForm : Form
         _scene = new Scene(_shapeManager);
         
         RegisterCommandFactories();
+        RegisterShapeFactories();
         
         scenePanel.Paint += panel1_Paint;
         scenePanel.MouseDown += scenePanel_MouseDown;
@@ -54,6 +55,16 @@ public partial class MainForm : Form
         _editCommandFactories.Add(typeof(Rhombus), new RhombusEditCommandFactory());
         _editCommandFactories.Add(typeof(Trapezoid), new TrapezoidEditCommandFactory());
         _editCommandFactories.Add(typeof(Triangle), new TriangleEditCommandFactory());
+    }
+
+    private void RegisterShapeFactories()
+    {
+        ShapeFactory.RegisterFactory<Circle>(new CircleFactory());
+        ShapeFactory.RegisterFactory<Parallelogram>(new ParallelogramFactory());
+        ShapeFactory.RegisterFactory<RectangleShape>(new RectangleFactory());
+        ShapeFactory.RegisterFactory<Rhombus>(new RhombusFactory());
+        ShapeFactory.RegisterFactory<Trapezoid>(new TrapezoidFactory());
+        ShapeFactory.RegisterFactory<Triangle>(new TriangleFactory());
     }
 
     private void panel1_Paint(object? sender, PaintEventArgs e)
@@ -83,7 +94,7 @@ public partial class MainForm : Form
     {
         // TODO: Move shape creation to a new form
         // TODO: Think of a way to allow creation of shapes with different sizes
-        var rectangle = ShapeFactory.CreateShape(typeof(RectangleShape), 0, 0, 100, 50);
+        var rectangle = ShapeFactory.CreateShape<RectangleShape>(0, 0, 100, 50);
 
         var command = new AddShapeCommand(_shapeManager, rectangle);
         _shapeManager.ExecuteCommand(command);
@@ -91,7 +102,7 @@ public partial class MainForm : Form
 
     private void circleToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var circle = ShapeFactory.CreateShape(typeof(Circle), 200, 200, 50);
+        var circle = ShapeFactory.CreateShape<Circle>(200, 200, 50);
 
         var command = new AddShapeCommand(_shapeManager, circle);
         _shapeManager.ExecuteCommand(command);
@@ -99,7 +110,7 @@ public partial class MainForm : Form
 
     private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var triangle = ShapeFactory.CreateShape(typeof(Triangle),
+        var triangle = ShapeFactory.CreateShape<Triangle>(
                                                         300, 300,   //P1
                                                         350, 350,   //P2
                                                         250, 350);  //P3
@@ -110,7 +121,7 @@ public partial class MainForm : Form
 
     private void rhombusToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var rhombus = ShapeFactory.CreateShape(typeof(Rhombus), 250, 250, 120, 120);
+        var rhombus = ShapeFactory.CreateShape<Rhombus>(250, 250, 120, 120);
 
         var command = new AddShapeCommand(_shapeManager, rhombus);
         _shapeManager.ExecuteCommand(command);
@@ -118,7 +129,7 @@ public partial class MainForm : Form
 
     private void parallelogramToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var parallelogram = ShapeFactory.CreateShape(typeof(Parallelogram), 150, 150, 120, 120, 30);
+        var parallelogram = ShapeFactory.CreateShape<Parallelogram>(150, 150, 120, 120, 30);
 
         var command = new AddShapeCommand(_shapeManager, parallelogram);
         _shapeManager.ExecuteCommand(command);
@@ -126,7 +137,7 @@ public partial class MainForm : Form
 
     private void trapezoidToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var trapezoid = ShapeFactory.CreateShape(typeof(Trapezoid), 150, 250, 220, 180, 100);
+        var trapezoid = ShapeFactory.CreateShape<Trapezoid>(150, 250, 220, 180, 100);
 
         var command = new AddShapeCommand(_shapeManager, trapezoid);
         _shapeManager.ExecuteCommand(command);
@@ -304,9 +315,9 @@ public partial class MainForm : Form
     {
         using var saveFileDialog = new SaveFileDialog();
         
-        saveFileDialog.Filter = "JSON files (*.json)|*.json";
+        saveFileDialog.Filter = @"JSON files (*.json)|*.json";
         saveFileDialog.DefaultExt = "json";
-        saveFileDialog.Title = "Select a file to save";
+        saveFileDialog.Title = @"Select a file to save";
         
         if (saveFileDialog.ShowDialog() != DialogResult.OK)
         {
@@ -320,9 +331,9 @@ public partial class MainForm : Form
     {
         using var openFileDialog = new OpenFileDialog();
         
-        openFileDialog.Filter = "JSON files (*.json)|*.json";
+        openFileDialog.Filter = @"JSON files (*.json)|*.json";
         openFileDialog.DefaultExt = "json";
-        openFileDialog.Title = "Select a file to load";
+        openFileDialog.Title = @"Select a file to load";
         
         if (openFileDialog.ShowDialog() != DialogResult.OK)
         {
@@ -330,6 +341,7 @@ public partial class MainForm : Form
         }
         
         _shapeManager.LoadFromFile(openFileDialog.FileName);
+        _shapeManager.ClearSelection();
         
         scenePanel.Invalidate();
     }
