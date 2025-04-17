@@ -303,8 +303,10 @@ public partial class MainForm : Form
     private void saveToolStripMenuItem_Click(object sender, EventArgs e)
     {
         using var saveFileDialog = new SaveFileDialog();
+        
         saveFileDialog.Filter = "JSON files (*.json)|*.json";
         saveFileDialog.DefaultExt = "json";
+        saveFileDialog.Title = "Select a file to save";
         
         if (saveFileDialog.ShowDialog() != DialogResult.OK)
         {
@@ -317,8 +319,10 @@ public partial class MainForm : Form
     private void loadToolStripMenuItem_Click(object sender, EventArgs e)
     {
         using var openFileDialog = new OpenFileDialog();
+        
         openFileDialog.Filter = "JSON files (*.json)|*.json";
         openFileDialog.DefaultExt = "json";
+        openFileDialog.Title = "Select a file to load";
         
         if (openFileDialog.ShowDialog() != DialogResult.OK)
         {
@@ -326,6 +330,7 @@ public partial class MainForm : Form
         }
         
         _shapeManager.LoadFromFile(openFileDialog.FileName);
+        
         scenePanel.Invalidate();
     }
 

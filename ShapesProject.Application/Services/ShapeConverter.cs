@@ -35,7 +35,8 @@ public class ShapeConverter : JsonConverter<Shape>
         var json = JsonSerializer.Serialize(value, value.GetType(), options);
         using var jsonDocument = JsonDocument.Parse(json);
         
-        foreach (var property in jsonDocument.RootElement.EnumerateObject())
+        var objectEnumerator = jsonDocument.RootElement.EnumerateObject();
+        foreach (var property in objectEnumerator)
         {
             property.WriteTo(writer);
         }
