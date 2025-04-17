@@ -8,10 +8,10 @@ public class TriangleFactory : IShapeFactory
 {
     public Shape Create(params object[] args)
     {
-        return new Triangle(
-            (CustomPoint)args[0],
-            (CustomPoint)args[1],
-            (CustomPoint)args[2]
-        );
+        var point1 = new CustomPoint((int)args[0], (int)args[1]);
+        var point2 = new CustomPoint((int)args[2], (int)args[3]);
+        var point3 = new CustomPoint((int)args[4], (int)args[5]);
+        
+        return new Triangle(point1, point2, point3);
     }
 }

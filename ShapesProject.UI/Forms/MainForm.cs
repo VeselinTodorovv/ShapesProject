@@ -5,7 +5,6 @@ using Infrastructure.Factories.Commands;
 using Infrastructure.Factories.Shapes;
 using ShapeProject.Application.Commands.AddRemove;
 using ShapeProject.Application.Commands.Colors;
-using ShapeProject.Application.Commands.Core;
 using ShapeProject.Application.Commands.Movement;
 using ShapeProject.Application.Commands.Selection;
 using ShapeProject.Application.Services;
@@ -17,7 +16,7 @@ public partial class MainForm : Form
 {
     private readonly ShapeManager _shapeManager;
     private readonly Scene _scene;
-    private readonly Dictionary<Type, IEditCommandFactory> _editCommandFactories = new();
+    private readonly EditCommandFactoryRegistry _editCommandRegistry = new();
     
     private MoveCommand? _currentMoveCommand;
     private bool _isDragging;
@@ -49,15 +48,15 @@ public partial class MainForm : Form
     
     private void RegisterCommandFactories()
     {
-        _editCommandFactories.Add(typeof(Circle), new CircleEditCommandFactory());
-        _editCommandFactories.Add(typeof(Parallelogram), new ParallelogramEditCommandFactory());
-        _editCommandFactories.Add(typeof(RectangleShape), new RectangleEditCommandFactory());
-        _editCommandFactories.Add(typeof(Rhombus), new RhombusEditCommandFactory());
-        _editCommandFactories.Add(typeof(Trapezoid), new TrapezoidEditCommandFactory());
-        _editCommandFactories.Add(typeof(Triangle), new TriangleEditCommandFactory());
+        _editCommandRegistry.Register<Circle>(new CircleEditCommandFactory());
+        _editCommandRegistry.Register<Parallelogram>(new ParallelogramEditCommandFactory());
+        _editCommandRegistry.Register<RectangleShape>(new RectangleEditCommandFactory());
+        _editCommandRegistry.Register<Rhombus>(new RhombusEditCommandFactory());
+        _editCommandRegistry.Register<Trapezoid>(new TrapezoidEditCommandFactory());
+        _editCommandRegistry.Register<Triangle>(new TriangleEditCommandFactory());
     }
 
-    private void RegisterShapeFactories()
+    private static void RegisterShapeFactories()
     {
         ShapeFactory.RegisterFactory<Circle>(new CircleFactory());
         ShapeFactory.RegisterFactory<Parallelogram>(new ParallelogramFactory());
@@ -239,12 +238,7 @@ public partial class MainForm : Form
             return;
         }
         
-        var shapeType = selectedShape.GetType();
-        if (!_editCommandFactories.TryGetValue(shapeType, out var factory))
-        {
-            return;
-        }
-        
+        var factory = _editCommandRegistry.GetFactory(selectedShape.GetType());
         var command = factory.Create(selectedShape, oldState);
         _shapeManager.ExecuteCommand(command);
     }

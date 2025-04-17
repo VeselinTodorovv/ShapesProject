@@ -7,6 +7,10 @@ public class CircleFactory : IShapeFactory
 {
     public Shape Create(params object[] args)
     {
-        return new Circle((int)args[0], (int)args[1], (int)args[2]);
+        var x = (int)args[0];
+        var y = (int)args[1];
+        var radius = (int)args[2];
+        
+        return new Circle(x, y, radius);
     }
 }

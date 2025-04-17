@@ -7,12 +7,14 @@ public abstract class ShapeFactory
 {
     private static readonly Dictionary<Type, IShapeFactory> ShapeFactories = new();
 
-    public static void RegisterFactory<TShape>(IShapeFactory factory) where TShape : Shape
+    public static void RegisterFactory<TShape>(IShapeFactory factory)
+        where TShape : Shape
     {
         ShapeFactories[typeof(TShape)] = factory;
     }
 
-    public static Shape CreateShape<TShape>(params object[] parameters) where TShape : Shape
+    public static Shape CreateShape<TShape>(params object[] parameters)
+        where TShape : Shape
     {
         if (ShapeFactories.TryGetValue(typeof(TShape), out var factory))
         {

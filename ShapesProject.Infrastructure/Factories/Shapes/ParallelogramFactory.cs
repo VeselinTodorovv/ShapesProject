@@ -7,6 +7,12 @@ public class ParallelogramFactory : IShapeFactory
 {
     public Shape Create(params object[] args)
     {
-        return new Parallelogram((int)args[0], (int)args[1], (int)args[2], (int)args[3], (int)args[4]);
+        var x = (int)args[0];
+        var y = (int)args[1];
+        var baseLength = (int)args[2];
+        var height = (int)args[3];
+        var side = (int)args[4];
+        
+        return new Parallelogram(x, y, baseLength, height, side);
     }
 }
