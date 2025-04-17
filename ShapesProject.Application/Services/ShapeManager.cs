@@ -96,7 +96,7 @@ public class ShapeManager
         var options = new JsonSerializerOptions
         {
             WriteIndented = true,
-            Converters = { new CustomShapeConverter() }
+            Converters = { new ShapeConverter() }
         };
         
         var json = JsonSerializer.Serialize(_shapes, options);
@@ -113,7 +113,10 @@ public class ShapeManager
         
         var options = new JsonSerializerOptions
         {
-            Converters = { new CustomShapeConverter() } // Custom converter to handle shapes
+            Converters =
+            {
+                new ShapeConverter()
+            }
         };
         
         var json = File.ReadAllText(path);
@@ -123,6 +126,7 @@ public class ShapeManager
         {
             return;
         }
+        
         _shapes.Clear();
         _shapes.AddRange(shapes);
         

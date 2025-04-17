@@ -1,6 +1,6 @@
 ﻿namespace ShapesProject.Domain.Primitives;
 
-public struct CustomColor
+public class CustomColor
 {
     public byte R { get; }
     public byte G { get; }

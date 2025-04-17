@@ -160,7 +160,9 @@ public partial class MainForm : Form
 
     private void scenePanel_MouseMove(object? sender, MouseEventArgs e)
     {
-        if (!_isDragging || _shapeManager.SelectedShape == null || e.Button != MouseButtons.Left)
+        var selectedShape = _shapeManager.SelectedShape;
+
+        if (!_isDragging || selectedShape == null || e.Button != MouseButtons.Left)
         {
             return;
         }
@@ -168,11 +170,6 @@ public partial class MainForm : Form
         var dx = e.X - _dragStartPosition.X;
         var dy = e.Y - _dragStartPosition.Y;
 
-        var selectedShape = _shapeManager.SelectedShape;
-        if (selectedShape == null)
-        {
-            return;
-        }
 
         if (_currentMoveCommand != null)
         {
