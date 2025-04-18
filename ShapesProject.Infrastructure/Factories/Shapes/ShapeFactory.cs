@@ -1,30 +1,26 @@
-﻿using ShapesProject.Domain.Primitives;
+﻿using ShapeProject.Application.Commands.Core;
 using ShapesProject.Domain.Shapes;
 
 namespace Infrastructure.Factories.Shapes;
 
 public abstract class ShapeFactory
 {
-    private static readonly Dictionary<Type, Func<int[], Shape>> ShapeCreators = new()
-    {
-        { typeof(Circle), args => new Circle(args[0], args[1], args[2]) },
-        { typeof(Parallelogram), args => new Parallelogram(args[0], args[1], args[2], args[3], args[4]) },
-        { typeof(RectangleShape), args => new RectangleShape(args[0], args[1], args[2], args[3])},
-        { typeof(Rhombus), args => new Rhombus(args[0], args[1], args[2], args[3]) },
-        { typeof(Trapezoid), args => new Trapezoid(args[0], args[1], args[2], args[3], args[4]) },
-        { typeof(Triangle), args => new Triangle(
-        new CustomPoint(args[0], args[1]),
-        new CustomPoint(args[2], args[3]),
-        new CustomPoint(args[4], args[5])) }
-    };
+    private static readonly Dictionary<Type, IShapeFactory> ShapeFactories = new();
 
-    public static Shape CreateShape(Type shapeType, params int[] parameters)
+    public static void RegisterFactory<TShape>(IShapeFactory factory)
+        where TShape : Shape
     {
-        if (ShapeCreators.TryGetValue(shapeType, out var creator))
+        ShapeFactories[typeof(TShape)] = factory;
+    }
+
+    public static Shape CreateShape<TShape>(params object[] parameters)
+        where TShape : Shape
+    {
+        if (ShapeFactories.TryGetValue(typeof(TShape), out var factory))
         {
-            return creator(parameters);
+            return factory.Create(parameters);
         }
-        
-        throw new ArgumentException($"Invalid shape type: {shapeType}");
+
+        throw new ArgumentException($"No factory registered for shape type {typeof(TShape).Name}");
     }
 }

@@ -180,15 +180,16 @@ public class GraphicsRenderer : IRenderVisitor
     
     public void VisitTriangle(Triangle triangle)
     {
+        var pos = triangle.GetDrawingPosition();
+
         using SolidBrush brush = new(CustomColorConverter.ToSystemColor(triangle.FillColor));
         using Pen pen = new(CustomColorConverter.ToSystemColor(triangle.BorderColor));
         
-        // Temporary offset
-        Point[] points = 
+        Point[] points =
         {
-            new(triangle.Point1.X + triangle.TempOffsetX, triangle.Point1.Y + triangle.TempOffsetY),
-            new(triangle.Point2.X + triangle.TempOffsetX, triangle.Point2.Y + triangle.TempOffsetY),
-            new(triangle.Point3.X + triangle.TempOffsetX, triangle.Point3.Y + triangle.TempOffsetY)
+            new(pos.X + (triangle.Point1.X - triangle.X), pos.Y + (triangle.Point1.Y - triangle.Y)),
+            new(pos.X + (triangle.Point2.X - triangle.X), pos.Y + (triangle.Point2.Y - triangle.Y)),
+            new(pos.X + (triangle.Point3.X - triangle.X), pos.Y + (triangle.Point3.Y - triangle.Y))
         };
         
         _graphics.FillPolygon(brush, points);

@@ -6,13 +6,13 @@ namespace ShapesProject.Domain.Shapes;
 [Serializable]
 public abstract class Shape
 {
-    public int X { get; set; }
+    public int X { get; protected set; }
 
-    public int Y { get; set; }
+    public int Y { get; protected set; }
 
-    public int TempOffsetX { get; set; }
+    protected int TempOffsetX { get; set; }
 
-    public int TempOffsetY { get; set; }
+    protected int TempOffsetY { get; set; }
 
     public CustomColor FillColor { get; set; } = CustomColor.White;
 
@@ -29,6 +29,12 @@ public abstract class Shape
     public abstract void EditSize(params int[] parameters);
     
     public CustomPoint GetDrawingPosition() => new(X + TempOffsetX, Y + TempOffsetY);
+
+    public void ModifyTempOffset(int x, int y)
+    {
+        TempOffsetX = x;
+        TempOffsetY = y;
+    }
 
     public abstract double CalculateArea();
 
