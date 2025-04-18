@@ -76,7 +76,7 @@ public partial class MainForm : Form
 
     private void addToolStripButton_Click(object sender, EventArgs e)
     {
-        var createForm = new CreateShapeForm(_shapeManager);
+        using var createForm = new CreateShapeForm(_shapeManager);
         createForm.ShowDialog();
     }
 
