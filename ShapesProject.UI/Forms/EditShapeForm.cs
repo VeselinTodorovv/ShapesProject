@@ -1,4 +1,5 @@
-﻿using ShapesProject.Domain.Shapes;
+﻿using System.Reflection;
+using ShapesProject.Domain.Shapes;
 using ShapesProject.Forms.Renderers;
 
 namespace ShapesProject.Forms;
@@ -10,6 +11,10 @@ public partial class EditShapeForm : Form
     public EditShapeForm(Shape shape)
     {
         InitializeComponent();
+        
+        typeof(Panel).InvokeMember("DoubleBuffered",
+        BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+        null, previewPanel, new object[] { true });
 
         _shape = shape;
         propertyGrid.SelectedObject = _shape;
