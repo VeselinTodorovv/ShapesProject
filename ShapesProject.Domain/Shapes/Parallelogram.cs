@@ -10,14 +10,14 @@ public class Parallelogram : Shape
     public int Height { get; set; }
     public int Side { get; set; }
 
-    public Parallelogram(int x, int y, int baseLength, int height, int side) : base(x, y)
+    public Parallelogram(int x, int y, int @base, int height, int side) : base(x, y)
     {
-        if (baseLength <= 0 || height <= 0 || side <= 0)
+        if (@base <= 0 || height <= 0 || side <= 0)
         {
             throw new ArgumentException("Base, height, and side length must be positive.");
         }
 
-        Base = baseLength;
+        Base = @base;
         Height = height;
         Side = side;
     }
