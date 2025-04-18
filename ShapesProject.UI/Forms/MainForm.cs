@@ -190,8 +190,10 @@ public partial class MainForm : Form
             _currentMoveCommand = new MoveCommand(selectedShape, dx, dy);
         }
 
-        selectedShape.TempOffsetX = _currentMoveCommand.TotalDx;
-        selectedShape.TempOffsetY = _currentMoveCommand.TotalDy;
+        var totalDx = _currentMoveCommand.TotalDx;
+        var totalDy = _currentMoveCommand.TotalDy;
+        
+        selectedShape.ModifyTempOffset(totalDx, totalDy);
 
         _dragStartPosition = e.Location;
 
@@ -206,8 +208,7 @@ public partial class MainForm : Form
         if (_isDragging && selectedShape != null)
         {
             // Clear
-            selectedShape.TempOffsetX = 0;
-            selectedShape.TempOffsetY = 0;
+            selectedShape.ModifyTempOffset(0, 0);
 
             if (_currentMoveCommand != null)
             {
