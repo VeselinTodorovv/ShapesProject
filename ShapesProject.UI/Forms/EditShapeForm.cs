@@ -1,14 +1,20 @@
 ﻿using ShapesProject.Domain.Shapes;
+using ShapesProject.Forms.Renderers;
 
 namespace ShapesProject.Forms;
 
 public partial class EditShapeForm : Form
 {
+    private readonly Shape _shape;
+
     public EditShapeForm(Shape shape)
     {
         InitializeComponent();
 
-        propertyGrid.SelectedObject = shape;
+        _shape = shape;
+        propertyGrid.SelectedObject = _shape;
+
+        propertyGrid.PropertyValueChanged += (_, _) => previewPanel.Invalidate();
 
         btnApply.Click += btnApply_Click;
         btnCancel.Click += btnCancel_Click;
@@ -24,5 +30,13 @@ public partial class EditShapeForm : Form
     {
         DialogResult = DialogResult.Cancel;
         Close();
+    }
+
+    private void previewPanel_Paint(object sender, PaintEventArgs e)
+    {
+        e.Graphics.Clear(previewPanel.BackColor);
+
+        var renderer = new PreviewRenderer(e.Graphics, previewPanel.ClientSize);
+        _shape.Accept(renderer);
     }
 }

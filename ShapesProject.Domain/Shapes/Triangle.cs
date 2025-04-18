@@ -3,6 +3,7 @@ using ShapesProject.Domain.Rendering;
 
 namespace ShapesProject.Domain.Shapes;
 
+[Serializable]
 public class Triangle : Shape
 {
     public CustomPoint Point1 { get; set; }

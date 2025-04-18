@@ -3,6 +3,7 @@ using ShapesProject.Domain.Rendering;
 
 namespace ShapesProject.Domain.Shapes;
 
+[Serializable]
 public class Rhombus : Shape
 {
     public int Diagonal1 { get; set; }

@@ -17,27 +17,27 @@ public partial class MainForm : Form
     private readonly ShapeManager _shapeManager;
     private readonly Scene _scene;
     private readonly EditCommandFactoryRegistry _editCommandRegistry = new();
-    
+
     private MoveCommand? _currentMoveCommand;
     private bool _isDragging;
-    
+
     private Point _dragStartPosition;
-    
+
     public MainForm()
     {
         InitializeComponent();
-        
+
         // Fix for flickering while moving shapes
         typeof(Panel).InvokeMember("DoubleBuffered",
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
             null, scenePanel, new object[] { true });
-        
+
         _shapeManager = new ShapeManager();
         _scene = new Scene(_shapeManager);
-        
+
         RegisterCommandFactories();
         RegisterShapeFactories();
-        
+
         scenePanel.Paint += panel1_Paint;
         scenePanel.MouseDown += scenePanel_MouseDown;
         scenePanel.MouseMove += scenePanel_MouseMove;
@@ -45,7 +45,7 @@ public partial class MainForm : Form
 
         _shapeManager.CommandExecuted += (_, _) => scenePanel.Invalidate();
     }
-    
+
     private void RegisterCommandFactories()
     {
         _editCommandRegistry.Register<Circle>(new CircleEditCommandFactory());
@@ -177,7 +177,7 @@ public partial class MainForm : Form
 
         var totalDx = _currentMoveCommand.TotalDx;
         var totalDy = _currentMoveCommand.TotalDy;
-        
+
         selectedShape.ModifyTempOffset(totalDx, totalDy);
 
         _dragStartPosition = e.Location;
@@ -347,5 +347,13 @@ public partial class MainForm : Form
 
         var area = selectedShape.CalculateArea();
         MessageBox.Show(@$"Selected {selectedShape.GetType().Name} area: {area:f2}", @"Area", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    private void statsToolStripButton_Click(object sender, EventArgs e)
+    {
+        var shapes = _shapeManager.GetShapes();
+        using var statsForm = new StatisticsForm(shapes);
+        
+        statsForm.ShowDialog();
     }
 }

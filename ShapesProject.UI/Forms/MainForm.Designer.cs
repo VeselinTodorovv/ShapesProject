@@ -59,6 +59,10 @@ namespace ShapesProject.Forms
             toolStripSeparator2 = new ToolStripSeparator();
             borderColorToolStripButton = new ToolStripButton();
             calcAreaToolStripButton = new ToolStripButton();
+            toolStripSeparator4 = new ToolStripSeparator();
+            folderBrowserDialog1 = new FolderBrowserDialog();
+            toolStripSeparator5 = new ToolStripSeparator();
+            statstoolStripButton = new ToolStripButton();
             menuStrip.SuspendLayout();
             toolStrip.SuspendLayout();
             SuspendLayout();
@@ -119,7 +123,7 @@ namespace ShapesProject.Forms
             // 
             // toolStrip
             // 
-            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripSeparator3, undoToolStripButton, toolStripSeparator7, redoToolStripButton, toolStripSeparator8, editToolStripButton, toolStripSeparator6, deleteToolStripButton, toolStripSeparator1, fillColorToolStripButton, toolStripSeparator2, borderColorToolStripButton, calcAreaToolStripButton });
+            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripSeparator3, undoToolStripButton, toolStripSeparator7, redoToolStripButton, toolStripSeparator8, editToolStripButton, toolStripSeparator6, deleteToolStripButton, toolStripSeparator1, fillColorToolStripButton, toolStripSeparator2, borderColorToolStripButton, toolStripSeparator4, calcAreaToolStripButton, toolStripSeparator5, statstoolStripButton });
             toolStrip.Location = new Point(0, 24);
             toolStrip.Name = "toolStrip";
             toolStrip.RenderMode = ToolStripRenderMode.Professional;
@@ -140,42 +144,42 @@ namespace ShapesProject.Forms
             // rectangleToolStripMenuItem
             // 
             rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
-            rectangleToolStripMenuItem.Size = new Size(180, 22);
+            rectangleToolStripMenuItem.Size = new Size(147, 22);
             rectangleToolStripMenuItem.Text = "Rectangle";
             rectangleToolStripMenuItem.Click += rectangleToolStripMenuItem_Click;
             // 
             // circleToolStripMenuItem
             // 
             circleToolStripMenuItem.Name = "circleToolStripMenuItem";
-            circleToolStripMenuItem.Size = new Size(180, 22);
+            circleToolStripMenuItem.Size = new Size(147, 22);
             circleToolStripMenuItem.Text = "Circle";
             circleToolStripMenuItem.Click += circleToolStripMenuItem_Click;
             // 
             // triangleToolStripMenuItem
             // 
             triangleToolStripMenuItem.Name = "triangleToolStripMenuItem";
-            triangleToolStripMenuItem.Size = new Size(180, 22);
+            triangleToolStripMenuItem.Size = new Size(147, 22);
             triangleToolStripMenuItem.Text = "Triangle";
             triangleToolStripMenuItem.Click += triangleToolStripMenuItem_Click;
             // 
             // rhombusToolStripMenuItem
             // 
             rhombusToolStripMenuItem.Name = "rhombusToolStripMenuItem";
-            rhombusToolStripMenuItem.Size = new Size(180, 22);
+            rhombusToolStripMenuItem.Size = new Size(147, 22);
             rhombusToolStripMenuItem.Text = "Rhombus";
             rhombusToolStripMenuItem.Click += rhombusToolStripMenuItem_Click;
             // 
             // parallelogramToolStripMenuItem
             // 
             parallelogramToolStripMenuItem.Name = "parallelogramToolStripMenuItem";
-            parallelogramToolStripMenuItem.Size = new Size(180, 22);
+            parallelogramToolStripMenuItem.Size = new Size(147, 22);
             parallelogramToolStripMenuItem.Text = "Parallelogram";
             parallelogramToolStripMenuItem.Click += parallelogramToolStripMenuItem_Click;
             // 
             // trapezoidToolStripMenuItem
             // 
             trapezoidToolStripMenuItem.Name = "trapezoidToolStripMenuItem";
-            trapezoidToolStripMenuItem.Size = new Size(180, 22);
+            trapezoidToolStripMenuItem.Size = new Size(147, 22);
             trapezoidToolStripMenuItem.Text = "Trapezoid";
             trapezoidToolStripMenuItem.Click += trapezoidToolStripMenuItem_Click;
             // 
@@ -278,6 +282,26 @@ namespace ShapesProject.Forms
             calcAreaToolStripButton.ToolTipText = "Calculate Area";
             calcAreaToolStripButton.Click += calcAreaToolStripButton_Click;
             // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(6, 25);
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(6, 25);
+            // 
+            // statstoolStripButton
+            // 
+            statstoolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            statstoolStripButton.Image = (Image)resources.GetObject("statstoolStripButton.Image");
+            statstoolStripButton.ImageTransparentColor = Color.Magenta;
+            statstoolStripButton.Name = "statstoolStripButton";
+            statstoolStripButton.Size = new Size(57, 22);
+            statstoolStripButton.Text = "Statistics";
+            statstoolStripButton.Click += statsToolStripButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -327,5 +351,9 @@ namespace ShapesProject.Forms
         private ToolStripButton fillColorToolStripButton;
         private ToolStripButton borderColorToolStripButton;
         private ToolStripButton calcAreaToolStripButton;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripButton statstoolStripButton;
+        private FolderBrowserDialog folderBrowserDialog1;
     }
 }

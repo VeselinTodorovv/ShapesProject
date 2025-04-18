@@ -3,6 +3,7 @@ using ShapesProject.Domain.Rendering;
 
 namespace ShapesProject.Domain.Shapes;
 
+[Serializable]
 public class Trapezoid : Shape
 {
     public int Base1 { get; set; }

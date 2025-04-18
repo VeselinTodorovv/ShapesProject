@@ -34,12 +34,12 @@ partial class EditShapeForm
         propertyGrid = new PropertyGrid();
         btnApply = new Button();
         btnCancel = new Button();
+        previewPanel = new Panel();
         SuspendLayout();
         // 
         // propertyGrid
         // 
-        propertyGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom 
-            | AnchorStyles.Left | AnchorStyles.Right;
+        propertyGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         propertyGrid.BackColor = SystemColors.Window;
         propertyGrid.CategoryForeColor = Color.FromArgb(0, 51, 102);
         propertyGrid.CategorySplitterColor = Color.FromArgb(200, 200, 200);
@@ -49,13 +49,13 @@ partial class EditShapeForm
         propertyGrid.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
         propertyGrid.HelpVisible = false;
         propertyGrid.LineColor = Color.FromArgb(230, 230, 230);
-        propertyGrid.Location = new Point(12, 12);
+        propertyGrid.Location = new Point(24, 15);
         propertyGrid.Margin = new Padding(12);
         propertyGrid.Name = "propertyGrid";
         propertyGrid.PropertySort = PropertySort.Categorized;
         propertyGrid.SelectedItemWithFocusBackColor = Color.FromArgb(0, 102, 204);
         propertyGrid.SelectedItemWithFocusForeColor = Color.White;
-        propertyGrid.Size = new Size(360, 300);
+        propertyGrid.Size = new Size(250, 300);
         propertyGrid.TabIndex = 0;
         propertyGrid.ToolbarVisible = false;
         propertyGrid.ViewBackColor = Color.FromArgb(248, 248, 248);
@@ -69,7 +69,7 @@ partial class EditShapeForm
         btnApply.FlatStyle = FlatStyle.Flat;
         btnApply.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
         btnApply.ForeColor = Color.White;
-        btnApply.Location = new Point(216, 324);
+        btnApply.Location = new Point(403, 324);
         btnApply.Margin = new Padding(3, 3, 12, 12);
         btnApply.Name = "btnApply";
         btnApply.Size = new Size(75, 30);
@@ -86,7 +86,7 @@ partial class EditShapeForm
         btnCancel.FlatStyle = FlatStyle.Flat;
         btnCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
         btnCancel.ForeColor = Color.Black;
-        btnCancel.Location = new Point(297, 324);
+        btnCancel.Location = new Point(484, 324);
         btnCancel.Margin = new Padding(3, 3, 12, 12);
         btnCancel.Name = "btnCancel";
         btnCancel.Size = new Size(75, 30);
@@ -94,12 +94,21 @@ partial class EditShapeForm
         btnCancel.Text = "Cancel";
         btnCancel.UseVisualStyleBackColor = false;
         // 
+        // previewPanel
+        // 
+        previewPanel.Location = new Point(306, 15);
+        previewPanel.Name = "previewPanel";
+        previewPanel.Size = new Size(250, 300);
+        previewPanel.TabIndex = 3;
+        previewPanel.Paint += previewPanel_Paint;
+        // 
         // EditShapeForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = SystemColors.Control;
-        ClientSize = new Size(384, 366);
+        ClientSize = new Size(571, 366);
+        Controls.Add(previewPanel);
         Controls.Add(btnCancel);
         Controls.Add(btnApply);
         Controls.Add(propertyGrid);
@@ -120,4 +129,5 @@ partial class EditShapeForm
     private PropertyGrid propertyGrid;
     private Button btnApply;
     private Button btnCancel;
+    private Panel previewPanel;
 }
