@@ -24,6 +24,9 @@
     <Compile Update="Forms\StatisticsForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\CreateShapeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

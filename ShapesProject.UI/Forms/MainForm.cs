@@ -74,57 +74,10 @@ public partial class MainForm : Form
         _scene.DrawShapes(e.Graphics);
     }
 
-    private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
+    private void addToolStripButton_Click(object sender, EventArgs e)
     {
-        // TODO: Move shape creation to a new form
-        // TODO: Think of a way to allow creation of shapes with different sizes
-        var rectangle = ShapeFactory.CreateShape<RectangleShape>(0, 0, 100, 50);
-
-        var command = new AddShapeCommand(_shapeManager, rectangle);
-        _shapeManager.ExecuteCommand(command);
-    }
-
-    private void circleToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        var circle = ShapeFactory.CreateShape<Circle>(200, 200, 50);
-
-        var command = new AddShapeCommand(_shapeManager, circle);
-        _shapeManager.ExecuteCommand(command);
-    }
-
-    private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        var triangle = ShapeFactory.CreateShape<Triangle>(
-                                                        300, 300,   //P1
-                                                        350, 350,   //P2
-                                                        250, 350);  //P3
-
-        var command = new AddShapeCommand(_shapeManager, triangle);
-        _shapeManager.ExecuteCommand(command);
-    }
-
-    private void rhombusToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        var rhombus = ShapeFactory.CreateShape<Rhombus>(250, 250, 120, 120);
-
-        var command = new AddShapeCommand(_shapeManager, rhombus);
-        _shapeManager.ExecuteCommand(command);
-    }
-
-    private void parallelogramToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        var parallelogram = ShapeFactory.CreateShape<Parallelogram>(150, 150, 120, 120, 30);
-
-        var command = new AddShapeCommand(_shapeManager, parallelogram);
-        _shapeManager.ExecuteCommand(command);
-    }
-
-    private void trapezoidToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        var trapezoid = ShapeFactory.CreateShape<Trapezoid>(150, 250, 220, 180, 100);
-
-        var command = new AddShapeCommand(_shapeManager, trapezoid);
-        _shapeManager.ExecuteCommand(command);
+        var createForm = new CreateShapeForm(_shapeManager);
+        createForm.ShowDialog();
     }
 
     private void scenePanel_MouseDown(object? sender, MouseEventArgs e)
@@ -256,6 +209,7 @@ public partial class MainForm : Form
         var selectedShape = _shapeManager.SelectedShape;
         if (selectedShape == null)
         {
+            MessageBox.Show(@"Please select a color.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -276,6 +230,7 @@ public partial class MainForm : Form
         var selectedShape = _shapeManager.SelectedShape;
         if (selectedShape == null)
         {
+            MessageBox.Show(@"Please select a shape.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -353,7 +308,8 @@ public partial class MainForm : Form
     {
         var shapes = _shapeManager.GetShapes();
         using var statsForm = new StatisticsForm(shapes);
-        
+
         statsForm.ShowDialog();
     }
+
 }
