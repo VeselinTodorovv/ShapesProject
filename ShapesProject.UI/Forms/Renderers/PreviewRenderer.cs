@@ -24,7 +24,18 @@ public class PreviewRenderer : IRenderVisitor
     
     public void VisitParallelogram(Parallelogram parallelogram)
     {
+        var offsetX = _previewSize.Width / 2;
+        var offsetY = _previewSize.Height / 2;
 
+        Point[] points =
+        {
+            new(offsetX, offsetY),
+            new(offsetX + parallelogram.Base, offsetY),
+            new(offsetX + parallelogram.Base - parallelogram.Side, offsetY - parallelogram.Height),
+            new(offsetX - parallelogram.Side, offsetY - parallelogram.Height)
+        };
+        
+        _graphics.DrawPolygon(Pens.Black, points);
     }
     
     public void VisitRectangle(RectangleShape rectangle)
@@ -37,7 +48,19 @@ public class PreviewRenderer : IRenderVisitor
     
     public void VisitRhombus(Rhombus rhombus)
     {
-        throw new NotImplementedException();
+        var offsetX = _previewSize.Width / 2;
+        var offsetY = _previewSize.Height / 2;
+
+        Point[] points =
+        {
+            new(offsetX, offsetY - rhombus.Diagonal1 / 2),
+            new(offsetX + rhombus.Diagonal2 / 2, offsetY),
+            new(offsetX, offsetY + rhombus.Diagonal1 / 2),
+            new(offsetX - rhombus.Diagonal2 / 2, offsetY)
+        };
+
+        _graphics.DrawPolygon(Pens.Black, points);
+
     }
     
     public void VisitTrapezoid(Trapezoid trapezoid)
@@ -47,5 +70,6 @@ public class PreviewRenderer : IRenderVisitor
     
     public void VisitTriangle(Triangle triangle)
     {
+        throw new NotImplementedException();
     }
 }
