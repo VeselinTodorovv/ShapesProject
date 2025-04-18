@@ -53,11 +53,12 @@ namespace ShapesProject.Forms
             toolStripSeparator8 = new ToolStripSeparator();
             editToolStripButton = new ToolStripButton();
             toolStripSeparator6 = new ToolStripSeparator();
-            deleteStripButton = new ToolStripButton();
+            deleteToolStripButton = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
-            fillColorButton = new ToolStripButton();
+            fillColorToolStripButton = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
-            borderColorToolStripComboBox = new ToolStripButton();
+            borderColorToolStripButton = new ToolStripButton();
+            calcAreaToolStripButton = new ToolStripButton();
             menuStrip.SuspendLayout();
             toolStrip.SuspendLayout();
             SuspendLayout();
@@ -80,7 +81,6 @@ namespace ShapesProject.Forms
             menuStrip.Size = new Size(899, 24);
             menuStrip.TabIndex = 3;
             menuStrip.Text = "menuStrip1";
-            menuStrip.ItemClicked += menuStrip1_ItemClicked;
             // 
             // file
             // 
@@ -88,7 +88,6 @@ namespace ShapesProject.Forms
             file.Name = "file";
             file.Size = new Size(37, 20);
             file.Text = "File";
-            file.Click += fileToolStripMenuItem_Click;
             // 
             // newToolStripMenuItem
             // 
@@ -120,7 +119,7 @@ namespace ShapesProject.Forms
             // 
             // toolStrip
             // 
-            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripSeparator3, undoToolStripButton, toolStripSeparator7, redoToolStripButton, toolStripSeparator8, editToolStripButton, toolStripSeparator6, deleteStripButton, toolStripSeparator1, fillColorButton, toolStripSeparator2, borderColorToolStripComboBox });
+            toolStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripSeparator3, undoToolStripButton, toolStripSeparator7, redoToolStripButton, toolStripSeparator8, editToolStripButton, toolStripSeparator6, deleteToolStripButton, toolStripSeparator1, fillColorToolStripButton, toolStripSeparator2, borderColorToolStripButton, calcAreaToolStripButton });
             toolStrip.Location = new Point(0, 24);
             toolStrip.Name = "toolStrip";
             toolStrip.RenderMode = ToolStripRenderMode.Professional;
@@ -137,47 +136,46 @@ namespace ShapesProject.Forms
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             toolStripDropDownButton1.Size = new Size(57, 22);
             toolStripDropDownButton1.Text = "Shapes";
-            toolStripDropDownButton1.Click += toolStripDropDownButton1_Click;
             // 
             // rectangleToolStripMenuItem
             // 
             rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
-            rectangleToolStripMenuItem.Size = new Size(147, 22);
+            rectangleToolStripMenuItem.Size = new Size(180, 22);
             rectangleToolStripMenuItem.Text = "Rectangle";
             rectangleToolStripMenuItem.Click += rectangleToolStripMenuItem_Click;
             // 
             // circleToolStripMenuItem
             // 
             circleToolStripMenuItem.Name = "circleToolStripMenuItem";
-            circleToolStripMenuItem.Size = new Size(147, 22);
+            circleToolStripMenuItem.Size = new Size(180, 22);
             circleToolStripMenuItem.Text = "Circle";
             circleToolStripMenuItem.Click += circleToolStripMenuItem_Click;
             // 
             // triangleToolStripMenuItem
             // 
             triangleToolStripMenuItem.Name = "triangleToolStripMenuItem";
-            triangleToolStripMenuItem.Size = new Size(147, 22);
+            triangleToolStripMenuItem.Size = new Size(180, 22);
             triangleToolStripMenuItem.Text = "Triangle";
             triangleToolStripMenuItem.Click += triangleToolStripMenuItem_Click;
             // 
             // rhombusToolStripMenuItem
             // 
             rhombusToolStripMenuItem.Name = "rhombusToolStripMenuItem";
-            rhombusToolStripMenuItem.Size = new Size(147, 22);
+            rhombusToolStripMenuItem.Size = new Size(180, 22);
             rhombusToolStripMenuItem.Text = "Rhombus";
             rhombusToolStripMenuItem.Click += rhombusToolStripMenuItem_Click;
             // 
             // parallelogramToolStripMenuItem
             // 
             parallelogramToolStripMenuItem.Name = "parallelogramToolStripMenuItem";
-            parallelogramToolStripMenuItem.Size = new Size(147, 22);
+            parallelogramToolStripMenuItem.Size = new Size(180, 22);
             parallelogramToolStripMenuItem.Text = "Parallelogram";
             parallelogramToolStripMenuItem.Click += parallelogramToolStripMenuItem_Click;
             // 
             // trapezoidToolStripMenuItem
             // 
             trapezoidToolStripMenuItem.Name = "trapezoidToolStripMenuItem";
-            trapezoidToolStripMenuItem.Size = new Size(147, 22);
+            trapezoidToolStripMenuItem.Size = new Size(180, 22);
             trapezoidToolStripMenuItem.Text = "Trapezoid";
             trapezoidToolStripMenuItem.Click += trapezoidToolStripMenuItem_Click;
             // 
@@ -229,45 +227,56 @@ namespace ShapesProject.Forms
             toolStripSeparator6.Name = "toolStripSeparator6";
             toolStripSeparator6.Size = new Size(6, 25);
             // 
-            // deleteStripButton
+            // deleteToolStripButton
             // 
-            deleteStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            deleteStripButton.Image = (Image)resources.GetObject("deleteStripButton.Image");
-            deleteStripButton.ImageTransparentColor = Color.Magenta;
-            deleteStripButton.Name = "deleteStripButton";
-            deleteStripButton.Size = new Size(79, 22);
-            deleteStripButton.Text = "Delete Shape";
-            deleteStripButton.Click += deleteStripButton_Click;
+            deleteToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            deleteToolStripButton.Image = (Image)resources.GetObject("deleteToolStripButton.Image");
+            deleteToolStripButton.ImageTransparentColor = Color.Magenta;
+            deleteToolStripButton.Name = "deleteToolStripButton";
+            deleteToolStripButton.Size = new Size(79, 22);
+            deleteToolStripButton.Text = "Delete Shape";
+            deleteToolStripButton.Click += deleteStripButton_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 25);
             // 
-            // fillColorButton
+            // fillColorToolStripButton
             // 
-            fillColorButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            fillColorButton.Image = (Image)resources.GetObject("fillColorButton.Image");
-            fillColorButton.ImageTransparentColor = Color.Magenta;
-            fillColorButton.Name = "fillColorButton";
-            fillColorButton.Size = new Size(58, 22);
-            fillColorButton.Text = "Fill Color";
-            fillColorButton.Click += fillColorButton_Click;
+            fillColorToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            fillColorToolStripButton.Image = (Image)resources.GetObject("fillColorToolStripButton.Image");
+            fillColorToolStripButton.ImageTransparentColor = Color.Magenta;
+            fillColorToolStripButton.Name = "fillColorToolStripButton";
+            fillColorToolStripButton.Size = new Size(58, 22);
+            fillColorToolStripButton.Text = "Fill Color";
+            fillColorToolStripButton.Click += fillColorButton_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new Size(6, 25);
             // 
-            // borderColorToolStripComboBox
+            // borderColorToolStripButton
             // 
-            borderColorToolStripComboBox.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            borderColorToolStripComboBox.Image = (Image)resources.GetObject("borderColorToolStripComboBox.Image");
-            borderColorToolStripComboBox.ImageTransparentColor = Color.Magenta;
-            borderColorToolStripComboBox.Name = "borderColorToolStripComboBox";
-            borderColorToolStripComboBox.Size = new Size(78, 22);
-            borderColorToolStripComboBox.Text = "Border Color";
-            borderColorToolStripComboBox.Click += borderColorToolStripComboBox_Click;
+            borderColorToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            borderColorToolStripButton.Image = (Image)resources.GetObject("borderColorToolStripButton.Image");
+            borderColorToolStripButton.ImageTransparentColor = Color.Magenta;
+            borderColorToolStripButton.Name = "borderColorToolStripButton";
+            borderColorToolStripButton.Size = new Size(78, 22);
+            borderColorToolStripButton.Text = "Border Color";
+            borderColorToolStripButton.Click += borderColorToolStripComboBox_Click;
+            // 
+            // calcAreaToolStripButton
+            // 
+            calcAreaToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            calcAreaToolStripButton.Image = (Image)resources.GetObject("calcAreaToolStripButton.Image");
+            calcAreaToolStripButton.ImageTransparentColor = Color.Magenta;
+            calcAreaToolStripButton.Name = "calcAreaToolStripButton";
+            calcAreaToolStripButton.Size = new Size(87, 22);
+            calcAreaToolStripButton.Text = "Calculate Area";
+            calcAreaToolStripButton.ToolTipText = "Calculate Area";
+            calcAreaToolStripButton.Click += calcAreaToolStripButton_Click;
             // 
             // MainForm
             // 
@@ -304,7 +313,7 @@ namespace ShapesProject.Forms
         private ToolStripMenuItem triangleToolStripMenuItem;
         private ToolStripButton undoToolStripButton;
         private ToolStripButton redoToolStripButton;
-        private ToolStripButton deleteStripButton;
+        private ToolStripButton deleteToolStripButton;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripSeparator toolStripSeparator7;
         private ToolStripSeparator toolStripSeparator6;
@@ -315,7 +324,8 @@ namespace ShapesProject.Forms
         private ToolStripMenuItem trapezoidToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripButton editToolStripButton;
-        private ToolStripButton fillColorButton;
-        private ToolStripButton borderColorToolStripComboBox;
+        private ToolStripButton fillColorToolStripButton;
+        private ToolStripButton borderColorToolStripButton;
+        private ToolStripButton calcAreaToolStripButton;
     }
 }

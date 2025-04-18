@@ -74,21 +74,6 @@ public partial class MainForm : Form
         _scene.DrawShapes(e.Graphics);
     }
 
-    private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-    {
-
-    }
-
-    private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void toolStripDropDownButton1_Click(object sender, EventArgs e)
-    {
-
-    }
-
     private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
     {
         // TODO: Move shape creation to a new form
@@ -226,7 +211,7 @@ public partial class MainForm : Form
         var selectedShape = _shapeManager.SelectedShape;
         if (selectedShape == null)
         {
-            MessageBox.Show(@"Please select a shape to edit.");
+            MessageBox.Show(@"Please select a shape to edit.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -349,5 +334,18 @@ public partial class MainForm : Form
 
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
+    }
+
+    private void calcAreaToolStripButton_Click(object sender, EventArgs e)
+    {
+        var selectedShape = _shapeManager.SelectedShape;
+        if (selectedShape == null)
+        {
+            MessageBox.Show(@"Please select a shape to calculate area.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
+        var area = selectedShape.CalculateArea();
+        MessageBox.Show(@$"Selected {selectedShape.GetType().Name} area: {area:f2}", @"Area", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 }
