@@ -43,7 +43,11 @@ public partial class MainForm : Form
         scenePanel.MouseMove += scenePanel_MouseMove;
         scenePanel.MouseUp += scenePanel_MouseUp;
 
-        _shapeManager.CommandExecuted += (_, _) => scenePanel.Invalidate();
+        _shapeManager.CommandExecuted += (_, _) =>
+        {
+            UpdateUndoRedoButtons();
+            scenePanel.Invalidate();
+        };
     }
 
     private void RegisterCommandFactories()
@@ -191,6 +195,12 @@ public partial class MainForm : Form
     {
         _shapeManager.Redo();
     }
+    
+    private void UpdateUndoRedoButtons()
+    {
+        undoToolStripButton.Enabled = _shapeManager.CanUndo;
+        redoToolStripButton.Enabled = _shapeManager.CanRedo;
+    }
 
     private void deleteStripButton_Click(object sender, EventArgs e)
     {
@@ -277,18 +287,20 @@ public partial class MainForm : Form
         
         _shapeManager.LoadFromFile(openFileDialog.FileName);
         _shapeManager.ClearSelection();
+        UpdateUndoRedoButtons();
         
         scenePanel.Invalidate();
     }
 
     private void newToolStripMenuItem_Click(object sender, EventArgs e)
     {
-
+        // TODO: Implement
     }
 
 
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        // TODO: Implement
     }
 
     private void calcAreaToolStripButton_Click(object sender, EventArgs e)

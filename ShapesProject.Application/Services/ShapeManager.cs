@@ -12,6 +12,9 @@ public class ShapeManager
 
     private readonly Stack<ICommand> _undoStack = new();
     private readonly Stack<ICommand> _redoStack = new();
+    
+    public bool CanUndo => _undoStack.Count > 0;
+    public bool CanRedo => _redoStack.Count > 0;
 
     public event EventHandler? CommandExecuted;
 

@@ -132,6 +132,7 @@ namespace ShapesProject.Forms
             // 
             // undoToolStripButton
             // 
+            undoToolStripButton.Enabled = false;
             undoToolStripButton.Image = (Image)resources.GetObject("undoToolStripButton.Image");
             undoToolStripButton.ImageTransparentColor = Color.Magenta;
             undoToolStripButton.Name = "undoToolStripButton";
@@ -146,6 +147,7 @@ namespace ShapesProject.Forms
             // 
             // redoToolStripButton
             // 
+            redoToolStripButton.Enabled = false;
             redoToolStripButton.Image = (Image)resources.GetObject("redoToolStripButton.Image");
             redoToolStripButton.ImageTransparentColor = Color.Magenta;
             redoToolStripButton.Name = "redoToolStripButton";

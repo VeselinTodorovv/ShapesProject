@@ -6,7 +6,6 @@ namespace ShapeProject.Application.Services;
 
 public class ShapeConverter : JsonConverter<Shape>
 {
-
     public override Shape? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var jsonDocument = JsonDocument.ParseValue(ref reader);
