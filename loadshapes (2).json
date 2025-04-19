@@ -1,0 +1,35 @@
+[
+  {
+    "Type": "Trapezoid",
+    "Base1": 200,
+    "Base2": 100,
+    "Height": 80,
+    "X": 50,
+    "Y": 300,
+    "FillColor": { "R": 0,   "G": 255, "B": 255, "A": 255 },
+    "BorderColor": { "R": 0,   "G": 0,   "B": 0,   "A": 255 },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Rhombus",
+    "Diagonal1": 100,
+    "Diagonal2": 150,
+    "X": 300,
+    "Y": 300,
+    "FillColor": { "R": 255, "G": 0,   "B": 0,   "A": 150 },
+    "BorderColor": { "R": 0,   "G": 0,   "B": 0,   "A": 255 },
+    "IsSelected": true,
+    "SelectionBorderWidth": 6
+  },
+  {
+    "Type": "Circle",
+    "Radius": 70,
+    "X": 500,
+    "Y": 250,
+    "FillColor": { "R": 100, "G": 100, "B": 100, "A": 255 },
+    "BorderColor": { "R": 255, "G": 255, "B": 255, "A": 255 },
+    "IsSelected": false,
+    "SelectionBorderWidth": 3
+  }
+]

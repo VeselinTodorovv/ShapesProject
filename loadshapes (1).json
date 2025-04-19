@@ -1,0 +1,117 @@
+[
+  {
+    "Type": "RectangleShape",
+    "Width": 100,
+    "Height": 50,
+    "X": 0,
+    "Y": 0,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Circle",
+    "Radius": 50,
+    "X": 200,
+    "Y": 200,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Triangle",
+    "Point1": {
+      "X": 300,
+      "Y": 300
+    },
+    "Point2": {
+      "X": 350,
+      "Y": 350
+    },
+    "Point3": {
+      "X": 250,
+      "Y": 350
+    },
+    "X": 300,
+    "Y": 300,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Rhombus",
+    "Diagonal1": 120,
+    "Diagonal2": 120,
+    "X": 250,
+    "Y": 250,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Trapezoid",
+    "Base1": 220,
+    "Base2": 180,
+    "Height": 100,
+    "X": 150,
+    "Y": 250,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  }
+]

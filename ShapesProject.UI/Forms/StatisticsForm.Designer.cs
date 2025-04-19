@@ -171,7 +171,7 @@ partial class StatisticsForm
         labelAllAboveMin.Name = "labelAllAboveMin";
         labelAllAboveMin.Size = new Size(134, 15);
         labelAllAboveMin.TabIndex = 4;
-        labelAllAboveMin.Text = "Types where all area > 5:";
+        labelAllAboveMin.Text = "Types where all area > 100:";
         // 
         // listBoxAllAboveMin
         // 

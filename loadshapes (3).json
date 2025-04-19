@@ -1,0 +1,137 @@
+[
+  {
+    "Type": "RectangleShape",
+    "Width": 100,
+    "Height": 50,
+    "X": 0,
+    "Y": 0,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Circle",
+    "Radius": 50,
+    "X": 456,
+    "Y": 132,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Triangle",
+    "Point1": {
+      "X": 444,
+      "Y": 357
+    },
+    "Point2": {
+      "X": 494,
+      "Y": 407
+    },
+    "Point3": {
+      "X": 394,
+      "Y": 407
+    },
+    "X": 444,
+    "Y": 357,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": true,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Rhombus",
+    "Diagonal1": 120,
+    "Diagonal2": 120,
+    "X": 533,
+    "Y": 294,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Trapezoid",
+    "Base1": 220,
+    "Base2": 180,
+    "Height": 100,
+    "X": 38,
+    "Y": 258,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  },
+  {
+    "Type": "Circle",
+    "Radius": 50,
+    "X": 200,
+    "Y": 200,
+    "FillColor": {
+      "R": 255,
+      "G": 255,
+      "B": 255,
+      "A": 255
+    },
+    "BorderColor": {
+      "R": 0,
+      "G": 0,
+      "B": 0,
+      "A": 255
+    },
+    "IsSelected": false,
+    "SelectionBorderWidth": 2
+  }
+]
