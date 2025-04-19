@@ -186,7 +186,7 @@ partial class StatisticsForm
         // labelMostCommonTypeTitle
         // 
         labelMostCommonTypeTitle.AutoSize = true;
-        labelMostCommonTypeTitle.Location = new Point(306, 90);
+        labelMostCommonTypeTitle.Location = new Point(13, 167);
         labelMostCommonTypeTitle.Name = "labelMostCommonTypeTitle";
         labelMostCommonTypeTitle.Size = new Size(126, 15);
         labelMostCommonTypeTitle.TabIndex = 6;
@@ -196,7 +196,7 @@ partial class StatisticsForm
         // 
         labelMostCommonType.AutoSize = true;
         labelMostCommonType.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-        labelMostCommonType.Location = new Point(446, 90);
+        labelMostCommonType.Location = new Point(145, 167);
         labelMostCommonType.Name = "labelMostCommonType";
         labelMostCommonType.Size = new Size(12, 15);
         labelMostCommonType.TabIndex = 7;

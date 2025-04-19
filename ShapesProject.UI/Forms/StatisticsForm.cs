@@ -103,13 +103,29 @@ public partial class StatisticsForm : Form
 
     private void LoadMostCommonType()
     {
-        var mostCommonType = _shapes
+        var groups = _shapes
             .GroupBy(s => s.GetType().Name)
-            .OrderByDescending(g => g.Count())
-            .Select(g => g.Key)
-            .FirstOrDefault() ?? "None";
+            .Select(g => new
+            {
+                Type = g.Key,
+                Count = g.Count()
+            })
+            .ToList();
 
-        labelMostCommonType.Text = mostCommonType;
+        if (groups.Count == 0)
+        {
+            labelMostCommonType.Text = @"None";
+        }
+
+        int max = groups.Max(g => g.Count);
+
+        var mostCommonTypes = groups
+            .Where(g => g.Count == max)
+            .Select(g => g.Type)
+            .ToList();
+
+        labelMostCommonType.AutoSize = true;
+        labelMostCommonType.Text = string.Join(", ", mostCommonTypes);
     }
 
     private static string FormatTypeArea(string type, double area) => $"{type}: {area:F2}";

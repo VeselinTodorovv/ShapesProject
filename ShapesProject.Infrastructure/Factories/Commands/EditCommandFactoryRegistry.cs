@@ -7,10 +7,10 @@ public class EditCommandFactoryRegistry
 {
     private readonly Dictionary<Type, IEditCommandFactory> _factories = new();
     
-    public void Register<TShape>(IEditCommandFactory factory)
-        where TShape : Shape
+    public void Register<T>(IEditCommandFactory factory)
+        where T : Shape
     {
-        _factories.Add(typeof(TShape), factory);
+        _factories.Add(typeof(T), factory);
     }
     
     public IEditCommandFactory GetFactory(Type shapeType)
