@@ -33,6 +33,14 @@ public class Rhombus : Shape
             throw new ArgumentException("Invalid parameters");
         }
     }
+
+    public override string? Validate()
+    {
+        return Diagonal1 <= 0 || Diagonal2 <= 0
+            ? "Diagonals must be positive"
+            : null;
+    }
+    
     public override double CalculateArea() => Diagonal1 * Diagonal2 / 2.0;
 
     public override void Accept(IRenderVisitor visitor)

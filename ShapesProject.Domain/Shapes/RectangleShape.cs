@@ -33,7 +33,16 @@ public class RectangleShape : Shape
             throw new ArgumentException("Width and Height must be positive.");
         }
     }
+
+    public override string? Validate()
+    {
+        return Width <= 0 || Height <= 0
+            ? "Width and Height must be positive."
+            : null;
+    }
+    
     public override double CalculateArea() => Width * Height;
+    
     public override void Accept(IRenderVisitor visitor)
     {
         visitor.VisitRectangle(this);

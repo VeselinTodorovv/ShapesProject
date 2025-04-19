@@ -36,6 +36,8 @@ public abstract class Shape
         TempOffsetY = y;
     }
 
+    public virtual string? Validate() => null;
+
     public abstract double CalculateArea();
 
     public abstract void Accept(IRenderVisitor visitor);

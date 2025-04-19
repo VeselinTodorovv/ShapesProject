@@ -19,7 +19,19 @@ public partial class EditShapeForm : Form
         _shape = shape;
         propertyGrid.SelectedObject = _shape;
 
-        propertyGrid.PropertyValueChanged += (_, _) => previewPanel.Invalidate();
+        propertyGrid.PropertyValueChanged += (_, _) =>
+        {
+            var error = shape.Validate();
+            if (error != null)
+            {
+                MessageBox.Show(error, @"Invalid value",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
+                return;
+            }
+            
+            previewPanel.Invalidate();
+        };
 
         btnApply.Click += btnApply_Click;
         btnCancel.Click += btnCancel_Click;
@@ -27,6 +39,15 @@ public partial class EditShapeForm : Form
 
     private void btnApply_Click(object? sender, EventArgs e)
     {
+        var error = _shape.Validate();
+        if (error != null)
+        {
+            MessageBox.Show(error, @"Invalid value",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            
+            return;
+        }
+        
         DialogResult = DialogResult.OK;
         Close();
     }

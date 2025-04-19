@@ -35,6 +35,14 @@ public class Trapezoid : Shape
             throw new ArgumentException("Values must be positive.");
         }
     }
+
+    public override string? Validate()
+    {
+        return Base1 <= 0 || Base2 <= 0 || Height <= 0
+            ? "Base lengths and height must be positive."
+            : null;
+    }
+    
     public override double CalculateArea() => (Base1 + Base2) * Height / 2.0;
 
     public override void Accept(IRenderVisitor visitor)

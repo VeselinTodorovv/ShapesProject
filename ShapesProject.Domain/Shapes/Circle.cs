@@ -30,6 +30,13 @@ public class Circle : Shape
         }
     }
     
+    public override string? Validate()
+    {
+        return Radius <= 0
+            ? "Radius must be positive."
+            : null;
+    }
+    
     public override double CalculateArea() => Math.PI * Radius * Radius;
 
     public override void Accept(IRenderVisitor visitor)

@@ -35,6 +35,14 @@ public class Parallelogram : Shape
             throw new ArgumentException("Invalid parameters for parallelogram. Provide base, height, and side length.");
         }
     }
+
+    public override string? Validate()
+    {
+        return Base <= 0 || Height <= 0 || Side <= 0
+            ? "Base, height, and side length must be positive."
+            : null;
+    }
+    
     public override double CalculateArea() => Base * Height;
 
     public override void Accept(IRenderVisitor visitor)

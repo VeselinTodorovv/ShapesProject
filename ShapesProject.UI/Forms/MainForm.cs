@@ -192,8 +192,8 @@ public partial class MainForm : Form
         }
         catch (ArgumentException ex)
         {
-            MessageBox.Show($@"{ex.Message}", @"Error", MessageBoxButtons.OK);
-            throw;
+            MessageBox.Show($@"{ex.Message}", @"Error",
+                MessageBoxButtons.OK);
         }
     }
 
