@@ -168,7 +168,9 @@ public partial class MainForm : Form
         var selectedShape = _shapeManager.SelectedShape;
         if (selectedShape == null)
         {
-            MessageBox.Show(@"Please select a shape to edit.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(@"Please select a shape to edit.", @"Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             return;
         }
 
@@ -182,8 +184,17 @@ public partial class MainForm : Form
         }
         
         var factory = _editCommandRegistry.GetFactory(selectedShape.GetType());
-        var command = factory.Create(selectedShape, oldState);
-        _shapeManager.ExecuteCommand(command);
+        
+        try
+        {
+            var command = factory.Create(selectedShape, oldState);
+            _shapeManager.ExecuteCommand(command);
+        }
+        catch (ArgumentException ex)
+        {
+            MessageBox.Show($@"{ex.Message}", @"Error", MessageBoxButtons.OK);
+            throw;
+        }
     }
 
     private void undoToolStripButton_Click(object sender, EventArgs e)
@@ -219,7 +230,9 @@ public partial class MainForm : Form
         var selectedShape = _shapeManager.SelectedShape;
         if (selectedShape == null)
         {
-            MessageBox.Show(@"Please select a color.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(@"Please select a color.", @"Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             return;
         }
 
@@ -240,7 +253,9 @@ public partial class MainForm : Form
         var selectedShape = _shapeManager.SelectedShape;
         if (selectedShape == null)
         {
-            MessageBox.Show(@"Please select a shape.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(@"Please select a shape.", @"Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             return;
         }
 
@@ -269,7 +284,15 @@ public partial class MainForm : Form
             return;
         }
         
-        _shapeManager.SaveToFile(saveFileDialog.FileName);
+        try
+        {
+            _shapeManager.SaveToFile(saveFileDialog.FileName);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(@$"Failed to save file: {ex.Message}", @"Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
     
     private void loadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -284,8 +307,17 @@ public partial class MainForm : Form
         {
             return;
         }
-        
-        _shapeManager.LoadFromFile(openFileDialog.FileName);
+
+        try
+        {
+            _shapeManager.LoadFromFile(openFileDialog.FileName);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(@$"Failed to load file: {ex.Message}", @"Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         _shapeManager.ClearSelection();
         UpdateUndoRedoButtons();
         
@@ -295,7 +327,7 @@ public partial class MainForm : Form
     private void newToolStripMenuItem_Click(object sender, EventArgs e)
     {
         var result = MessageBox.Show(@"Do you want to save before starting a new canvas?", @"Confirm Action",
-        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
         if (result == DialogResult.Cancel)
         {
@@ -322,14 +354,10 @@ public partial class MainForm : Form
         scenePanel.Invalidate();
     }
 
-
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var result = MessageBox.Show(
-        @"Do you want to save before exiting?", 
-        @"Confirm Exit",
-        MessageBoxButtons.YesNoCancel, 
-        MessageBoxIcon.Warning);
+        var result = MessageBox.Show(@"Do you want to save before exiting?", @"Confirm Exit",
+            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
         if (result == DialogResult.Cancel)
         {
@@ -360,20 +388,26 @@ public partial class MainForm : Form
         var selectedShape = _shapeManager.SelectedShape;
         if (selectedShape == null)
         {
-            MessageBox.Show(@"Please select a shape to calculate area.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(@"Please select a shape to calculate area.", @"Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
         var area = selectedShape.CalculateArea();
-        MessageBox.Show(@$"Selected {selectedShape.GetType().Name} area: {area:f2}", @"Area", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show(@$"Selected {selectedShape.GetType().Name} area: {area:f2}", @"Area",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private void statsToolStripButton_Click(object sender, EventArgs e)
     {
         var shapes = _shapeManager.GetShapes();
+        if (shapes.Count == 0)
+        {
+            return;
+        }
+        
         using var statsForm = new StatisticsForm(shapes);
 
         statsForm.ShowDialog();
     }
-
 }
