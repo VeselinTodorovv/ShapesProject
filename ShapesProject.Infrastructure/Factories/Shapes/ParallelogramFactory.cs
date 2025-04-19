@@ -5,13 +5,13 @@ namespace Infrastructure.Factories.Shapes;
 
 public class ParallelogramFactory : IShapeFactory
 {
-    public Shape Create(params object[] args)
+    public Shape Create(params int[] args)
     {
-        var x = (int)args[0];
-        var y = (int)args[1];
-        var baseLength = (int)args[2];
-        var height = (int)args[3];
-        var side = (int)args[4];
+        var x = args[0];
+        var y = args[1];
+        var baseLength = args[2];
+        var height = args[3];
+        var side = args[4];
         
         return new Parallelogram(x, y, baseLength, height, side);
     }

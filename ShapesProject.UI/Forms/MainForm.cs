@@ -174,7 +174,7 @@ public partial class MainForm : Form
             return;
         }
 
-        var oldState = selectedShape.Clone();
+        var oldState = (Shape)selectedShape.Clone();
 
         using var editForm = new EditShapeForm(selectedShape);
 

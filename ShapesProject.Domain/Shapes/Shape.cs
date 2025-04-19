@@ -4,7 +4,7 @@ using ShapesProject.Domain.Rendering;
 namespace ShapesProject.Domain.Shapes;
 
 [Serializable]
-public abstract class Shape
+public abstract class Shape : ICloneable
 {
     public int X { get; protected set; }
 
@@ -52,5 +52,5 @@ public abstract class Shape
 
     public virtual int SelectionBorderWidth => 2;
     
-    public abstract Shape Clone();
+    public abstract object Clone();
 }

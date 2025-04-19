@@ -6,11 +6,11 @@ namespace Infrastructure.Factories.Shapes;
 
 public class TriangleFactory : IShapeFactory
 {
-    public Shape Create(params object[] args)
+    public Shape Create(params int[] args)
     {
-        var point1 = new CustomPoint((int)args[0], (int)args[1]);
-        var point2 = new CustomPoint((int)args[2], (int)args[3]);
-        var point3 = new CustomPoint((int)args[4], (int)args[5]);
+        var point1 = new CustomPoint(args[0], args[1]);
+        var point2 = new CustomPoint(args[2], args[3]);
+        var point3 = new CustomPoint(args[4], args[5]);
         
         return new Triangle(point1, point2, point3);
     }

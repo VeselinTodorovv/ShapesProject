@@ -13,7 +13,7 @@ public abstract class ShapeFactory
         ShapeFactories[typeof(T)] = factory;
     }
 
-    public static Shape CreateShape<T>(params object[] parameters)
+    public static Shape CreateShape<T>(params int[] parameters)
         where T : Shape
     {
         if (ShapeFactories.TryGetValue(typeof(T), out var factory))
