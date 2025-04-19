@@ -294,13 +294,65 @@ public partial class MainForm : Form
 
     private void newToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        // TODO: Implement
+        var result = MessageBox.Show(@"Do you want to save before starting a new canvas?", @"Confirm Action",
+        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+        if (result == DialogResult.Cancel)
+        {
+            return;
+        }
+        
+        if (result == DialogResult.Yes)
+        {
+            using var saveFileDialog = new SaveFileDialog();
+            
+            saveFileDialog.Filter = @"JSON files (*.json)|*.json";
+            saveFileDialog.DefaultExt = "json";
+            saveFileDialog.Title = @"Save your work";
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            
+            _shapeManager.SaveToFile(saveFileDialog.FileName);
+        }
+
+        _shapeManager.Clear();
+        scenePanel.Invalidate();
     }
 
 
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        // TODO: Implement
+        var result = MessageBox.Show(
+        @"Do you want to save before exiting?", 
+        @"Confirm Exit",
+        MessageBoxButtons.YesNoCancel, 
+        MessageBoxIcon.Warning);
+
+        if (result == DialogResult.Cancel)
+        {
+            return;
+        }
+        
+        if (result == DialogResult.Yes)
+        {
+            using var saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Filter = @"JSON files (*.json)|*.json";
+            saveFileDialog.DefaultExt = "json";
+            saveFileDialog.Title = @"Select a file to save";
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            
+            _shapeManager.SaveToFile(saveFileDialog.FileName);
+        }
+
+        Application.Exit();
     }
 
     private void calcAreaToolStripButton_Click(object sender, EventArgs e)

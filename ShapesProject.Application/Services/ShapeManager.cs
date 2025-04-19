@@ -59,6 +59,13 @@ public class ShapeManager
         OnCommandExecuted();
     }
 
+    public void Clear()
+    {
+        _shapes.Clear();
+        _undoStack.Clear();
+        _redoStack.Clear();
+    }
+
     private void OnCommandExecuted() => CommandExecuted?.Invoke(this, EventArgs.Empty);
 
     internal void AddShape(Shape shape)
@@ -132,7 +139,7 @@ public class ShapeManager
         
         _shapes.Clear();
         _shapes.AddRange(shapes);
-        
+
         OnCommandExecuted();
     }
 }
