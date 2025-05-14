@@ -16,7 +16,6 @@ public partial class MainForm : Form
 {
     private readonly ShapeManager _shapeManager;
     private readonly Scene _scene;
-    private readonly EditCommandFactoryRegistry _editCommandRegistry = new();
 
     private MoveCommand? _currentMoveCommand;
     private bool _isDragging;
@@ -50,14 +49,14 @@ public partial class MainForm : Form
         };
     }
 
-    private void RegisterCommandFactories()
+    private static void RegisterCommandFactories()
     {
-        _editCommandRegistry.Register<Circle>(new CircleEditCommandFactory());
-        _editCommandRegistry.Register<Parallelogram>(new ParallelogramEditCommandFactory());
-        _editCommandRegistry.Register<RectangleShape>(new RectangleEditCommandFactory());
-        _editCommandRegistry.Register<Rhombus>(new RhombusEditCommandFactory());
-        _editCommandRegistry.Register<Trapezoid>(new TrapezoidEditCommandFactory());
-        _editCommandRegistry.Register<Triangle>(new TriangleEditCommandFactory());
+        EditCommandFactoryRegistry.Register<Circle>(new CircleEditCommandFactory());
+        EditCommandFactoryRegistry.Register<Parallelogram>(new ParallelogramEditCommandFactory());
+        EditCommandFactoryRegistry.Register<RectangleShape>(new RectangleEditCommandFactory());
+        EditCommandFactoryRegistry.Register<Rhombus>(new RhombusEditCommandFactory());
+        EditCommandFactoryRegistry.Register<Trapezoid>(new TrapezoidEditCommandFactory());
+        EditCommandFactoryRegistry.Register<Triangle>(new TriangleEditCommandFactory());
     }
 
     private static void RegisterShapeFactories()
@@ -183,7 +182,7 @@ public partial class MainForm : Form
             return;
         }
         
-        var factory = _editCommandRegistry.GetFactory(selectedShape.GetType());
+        var factory = EditCommandFactoryRegistry.GetFactory(selectedShape.GetType());
         
         try
         {

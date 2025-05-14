@@ -23,8 +23,7 @@ public partial class CreateShapeForm : Form
         var command = new AddShapeCommand(_shapeManager, rectangle);
         _shapeManager.ExecuteCommand(command);
 
-        DialogResult = DialogResult.OK;
-        Close();
+        CloseForm();
     }
 
     private void btnCircle_Click(object? sender, EventArgs e)
@@ -34,8 +33,7 @@ public partial class CreateShapeForm : Form
         var command = new AddShapeCommand(_shapeManager, circle);
         _shapeManager.ExecuteCommand(command);
 
-        DialogResult = DialogResult.OK;
-        Close();
+        CloseForm();
     }
 
     private void btnTriangle_Click(object? sender, EventArgs e)
@@ -48,8 +46,7 @@ public partial class CreateShapeForm : Form
         var command = new AddShapeCommand(_shapeManager, triangle);
         _shapeManager.ExecuteCommand(command);
 
-        DialogResult = DialogResult.OK;
-        Close();
+        CloseForm();
     }
 
     private void btnRhombus_Click(object? sender, EventArgs e)
@@ -59,8 +56,7 @@ public partial class CreateShapeForm : Form
         var command = new AddShapeCommand(_shapeManager, rhombus);
         _shapeManager.ExecuteCommand(command);
 
-        DialogResult = DialogResult.OK;
-        Close();
+        CloseForm();
     }
 
     private void btnParallelogram_Click(object? sender, EventArgs e)
@@ -70,8 +66,7 @@ public partial class CreateShapeForm : Form
         var command = new AddShapeCommand(_shapeManager, parallelogram);
         _shapeManager.ExecuteCommand(command);
 
-        DialogResult = DialogResult.OK;
-        Close();
+        CloseForm();
     }
 
     private void btnTrapezoid_Click(object? sender, EventArgs e)
@@ -81,6 +76,11 @@ public partial class CreateShapeForm : Form
         var command = new AddShapeCommand(_shapeManager, trapezoid);
         _shapeManager.ExecuteCommand(command);
 
+        CloseForm();
+    }
+    
+    private void CloseForm()
+    {
         DialogResult = DialogResult.OK;
         Close();
     }

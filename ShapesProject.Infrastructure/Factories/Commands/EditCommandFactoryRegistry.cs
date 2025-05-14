@@ -3,19 +3,19 @@ using ShapesProject.Domain.Shapes;
 
 namespace Infrastructure.Factories.Commands;
 
-public class EditCommandFactoryRegistry
+public abstract class EditCommandFactoryRegistry
 {
-    private readonly Dictionary<Type, IEditCommandFactory> _factories = new();
+    private static readonly Dictionary<Type, IEditCommandFactory> Factories = new();
     
-    public void Register<T>(IEditCommandFactory factory)
+    public static void Register<T>(IEditCommandFactory factory)
         where T : Shape
     {
-        _factories.Add(typeof(T), factory);
+        Factories[typeof(T)] = factory;
     }
     
-    public IEditCommandFactory GetFactory(Type shapeType)
+    public static IEditCommandFactory GetFactory(Type shapeType)
     {
-        if (!_factories.TryGetValue(shapeType, out var factory))
+        if (!Factories.TryGetValue(shapeType, out var factory))
         {
             throw new ArgumentException($"No factory registered for shape type {shapeType.Name}");
         }
