@@ -51,7 +51,11 @@ public partial class StatisticsForm : Form
     private void LoadTopThreeLargest()
     {
         var topThreeLargest = _shapes
-            .Select(s => new { Type = s.GetType().Name, Area = s.CalculateArea() })
+            .Select(s => new
+            {
+                Type = s.GetType().Name,
+                Area = s.CalculateArea()
+            })
             .OrderByDescending(s => s.Area)
             .Take(TopLargestShapesCount)
             .ToList();
